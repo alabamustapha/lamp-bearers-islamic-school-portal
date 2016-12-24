@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Paystack;
 
 class PaymentController extends Controller
 {
@@ -12,6 +13,7 @@ class PaymentController extends Controller
      */
     public function redirectToGateway()
     {
+        return Paystack::getAuthorizationUrl()->redirectNow();
     }
 
     /**
@@ -20,6 +22,7 @@ class PaymentController extends Controller
      */
     public function handleGatewayCallback(Request $request)
     {
+        $paymentDetails = Paystack::getPaymentData();
 
         var_dump($request->all());
 

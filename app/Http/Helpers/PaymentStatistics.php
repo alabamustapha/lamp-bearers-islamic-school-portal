@@ -8,7 +8,7 @@ function expected_term_payment($session, $term){
     $total = 0;
 
     foreach($classrooms as $classroom){
-        $students_count = $classroom->students->where('status', '=', 'active')->count();
+        $students_count = $classroom->students->whereIn('status', ['active', 'promoting', 'promoted', 'repeating', 'repeated', 'graduating'])->count();
 
         if($students_count > 0){
 
@@ -27,4 +27,38 @@ function expected_term_payment($session, $term){
     }
 
     return $total;
+}
+
+
+function term_payment($session_id, $term){
+
+    $school_fee_payments = \App\SchoolFeePayment::where('session_id', '=', $session_id)->where('term', '=', $term)->sum('amount');
+
+    return $school_fee_payments;
+
+}
+
+function term_debt($session_id, $term){
+
+    $school_fee_payments = \App\SchoolFeePayment::where('session_id', '=', $session_id)->where('term', '=', $term)->whereStatus('debt')->sum('amount');
+
+    return $school_fee_payments;
+
+}
+
+
+function term_part_payment($session_id, $term){
+
+    $school_fee_payments = \App\SchoolFeePayment::where('session_id', '=', $session_id)->where('term', '=', $term)->whereStatus('part')->sum('amount');
+
+    return $school_fee_payments;
+
+}
+
+function term_full_payment($session_id, $term){
+
+    $school_fee_payments = \App\SchoolFeePayment::where('session_id', '=', $session_id)->where('term', '=', $term)->whereStatus('payed')->sum('amount');
+
+    return $school_fee_payments;
+
 }
