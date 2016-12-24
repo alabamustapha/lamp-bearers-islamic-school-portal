@@ -13,6 +13,12 @@
 
 
 
+Route::get('paystack_test', 'PaymentController@testForm');
+
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
+
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+
 
 Route::get('/install', 'HomeController@install')->name("install");
 Route::post('/install', 'HomeController@setup');
@@ -52,7 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-
     Route::group(['middleware' => 'admin'], function () {
 
         Route::get('add_licence', 'AdminController@licencePage')->name('Licence_page');
@@ -66,14 +71,14 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::put('admin/sessions/{session_id}/close', 'SessionController@closeSession')->name('close_session');
 
-        Route::put('admin/sessions/{session_id}/start_first_term', 'SessionController@startFirstTerm')->name('start_first_term')->middleware('licenced');
-        Route::put('admin/sessions/{session_id}/close_first_term', 'SessionController@closeFirstTerm')->name('close_first_term')->middleware('licenced');
+        Route::put('admin/sessions/{session_id}/start_first_term', 'SessionController@startFirstTerm')->name('start_first_term');
+        Route::put('admin/sessions/{session_id}/close_first_term', 'SessionController@closeFirstTerm')->name('close_first_term');
 
-        Route::put('admin/sessions/{session_id}/start_second_term', 'SessionController@startSecondTerm')->name('start_second_term')->middleware('licenced');
-        Route::put('admin/sessions/{session_id}/close_second_term', 'SessionController@closeSecondTerm')->name('close_second_term')->middleware('licenced');
+        Route::put('admin/sessions/{session_id}/start_second_term', 'SessionController@startSecondTerm')->name('start_second_term');
+        Route::put('admin/sessions/{session_id}/close_second_term', 'SessionController@closeSecondTerm')->name('close_second_term');
 
-        Route::put('admin/sessions/{session_id}/start_third_term', 'SessionController@startThirdTerm')->name('start_third_term')->middleware('licenced');
-        Route::put('admin/sessions/{session_id}/close_third_term', 'SessionController@closeThirdTerm')->name('close_third_term')->middleware('licenced');
+        Route::put('admin/sessions/{session_id}/start_third_term', 'SessionController@startThirdTerm')->name('start_third_term');
+        Route::put('admin/sessions/{session_id}/close_third_term', 'SessionController@closeThirdTerm')->name('close_third_term');
 
 
         Route::get('admin/houses', 'HouseController@index')->name('admin_houses');
@@ -138,6 +143,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('admin/profile', 'AdminController@showProfile')->name('admin_profile');
         Route::put('admin/profile/reset_password', 'AdminController@resetPassword')->name('admin_reset_password');
 
+        Route::get('admin/payments/upcoming', 'SchoolFeePaymentController@showUpcomingSchoolFee')->name('upcoming_payments');
+
     });
 
 
@@ -171,6 +178,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('guardian', 'GuardianController@dashboard');
     Route::get('guardian/wards', 'GuardianController@showWards');
     Route::get('guardian/wards/{student_id}', 'GuardianController@showWard');
+
+    //Route::post('guardian/wards/{ward_id}/pay_school_fee', 'PaymentController@redirectToGateway')->name('pay');
+    //Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
+
     //Route::get('guardian/wards/{student_id}/results', 'GuardianController@showResult');
 
     Route::put('users/{user_id}/reset_password', 'UserController@resetPassword');

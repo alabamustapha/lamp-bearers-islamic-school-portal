@@ -41,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         require_once __DIR__ . '/../Http/Helpers/SessionStatistics.php';
         require_once __DIR__ . '/../Http/Helpers/Licence.php';
         require_once __DIR__ . '/../Http/Helpers/Profile.php';
+        require_once __DIR__ . '/../Http/Helpers/PaystackPayment.php';
 
     }
 }

@@ -81,7 +81,19 @@
                 </li>
 
                  <li class="<?php echo e(isActiveRoute('admin_payment')); ?>">
-                    <a href="<?php echo e(url('admin/payments')); ?>"><i class="fa fa-money"></i> <span class="nav-label">Payments History</span></a>
+                    <a href="#"><i class="fa fa-money"></i> <span class="nav-label">Finances</span><span class="fa arrow"></span></a>
+
+                    <ul class="nav nav-second-level collapse">
+                        <li>
+                            <a href="<?php echo e(url('admin/payments/upcoming')); ?>"><i class="fa fa-money"></i> <span class="nav-label">Upcoming payments</span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo e(url('admin/payments/debts')); ?>"><i class="fa fa-money"></i> <span class="nav-label">Debts</span></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo e(url('admin/payments/history')); ?>"><i class="fa fa-money"></i> <span class="nav-label">Payments History</span></a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="<?php echo e(isActiveRoute('admin_notifications')); ?>">
                     <a href="<?php echo e(url('admin/notifications')); ?>"><i class="fa fa-bell"></i> <span class="nav-label">Notifications</span></a>

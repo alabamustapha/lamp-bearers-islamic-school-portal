@@ -8413,7 +8413,7 @@ body.result-page::after{
     height: 400px;
     z-index: 1;
     opacity: 0.1;
-    background-image: url('../img/logo.jpg');
+    background-image: url('../img/logo.png');
     background-repeat: no-repeat;
     background-position: center;
     background-position: 50%, 0;
@@ -8433,7 +8433,7 @@ body.result-page::after{
     body.result-page::after{
         top: 35%;
         left: 40%;
-        content: url('../img/logo.jpg');
+        content: url('../img/logo.png');
 
 
     }

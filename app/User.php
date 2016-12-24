@@ -85,7 +85,7 @@ class User extends Authenticatable
         $link = null;
 
         if($this->isAdmin()){
-            $link = 'images/logo.jpg';
+            $link = 'images/logo.png';
         }elseif($this->isTeacher()){
             if(has_image($this->teacher)){
                 $link =  $this->teacher->image;
@@ -105,7 +105,7 @@ class User extends Authenticatable
                 $link =  'images/' . strtolower($this->guardian->sex) . '.png';
             }
         }else{
-            $link = "images/logo.jpg";
+            $link = "images/logo.png";
         }
 
 

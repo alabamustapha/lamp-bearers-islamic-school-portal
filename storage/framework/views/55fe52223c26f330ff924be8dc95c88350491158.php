@@ -266,7 +266,7 @@
                 <div class="col-lg-5">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Academic history  - <?php echo e($student->name); ?></h5>
+                            <h5>Academic history</h5>
                         </div>
                         <div class="ibox-content">
 
@@ -286,6 +286,50 @@
                                             <td><?php echo e($student->session_classroom($session->id)->level->name); ?></td>
                                             <td class="text-left">
 
+                                                <div class="btn-group">
+                                                    
+                                                    <a class="btn btn-primary" type="button" href="<?php echo e(url('admin/students/'. $student->id .'/results/session/'.$session->id.'/view')); ?>">View</a>
+                                                    
+                                                </div>
+                                            </td>
+                                        </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+
+                                    </tbody>
+                                </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>School Fees Payment history</h5>
+                        </div>
+                        <div class="ibox-content">
+
+
+                                <table class="table" >
+                                        <thead>
+                                        <tr>
+                                            <th>Session</th>
+                                            <th>Class</th>
+                                            <th>First term</th>
+                                            <th>Second term</th>
+                                            <th>Third term</th>
+                                           <th>action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                <?php $__currentLoopData = $sessions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $session): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                        <tr>
+                                            <td><?php echo e($session->name); ?></td>
+                                            <td><?php echo e($student->session_classroom($session->id)->name); ?></td>
+                                            <td><?php echo e('1'); ?></td>
+                                            <td><?php echo e('2'); ?></td>
+                                            <td><?php echo e('3'); ?></td>
+                                            <td class="text-left">
                                                 <div class="btn-group">
                                                     
                                                     <a class="btn btn-primary" type="button" href="<?php echo e(url('admin/students/'. $student->id .'/results/session/'.$session->id.'/view')); ?>">View</a>

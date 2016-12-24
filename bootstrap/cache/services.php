@@ -27,7 +27,8 @@
     23 => 'App\\Providers\\AuthServiceProvider',
     24 => 'App\\Providers\\EventServiceProvider',
     25 => 'App\\Providers\\RouteServiceProvider',
-    26 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    26 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
+    27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -45,7 +46,8 @@
     11 => 'App\\Providers\\AuthServiceProvider',
     12 => 'App\\Providers\\EventServiceProvider',
     13 => 'App\\Providers\\RouteServiceProvider',
-    14 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    14 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
+    15 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (

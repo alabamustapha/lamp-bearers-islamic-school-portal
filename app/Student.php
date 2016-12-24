@@ -17,6 +17,11 @@ class Student extends Model
         return $this->belongsTo('App\Classroom', 'classroom_id', 'id');
     }
 
+    public function school_fee_payment(){
+
+        return $this->hasMany('App\SchoolFeePayment');
+    }
+
 
     /**
      * Get all classrooms a student has results for

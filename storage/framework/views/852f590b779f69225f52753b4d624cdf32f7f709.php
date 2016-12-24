@@ -54,7 +54,8 @@
                         <h5>Expected Payment</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="text-center"><?php if(isset($session) && !is_null($session)): ?> <?php echo e(expected_term_payment($session, $session->term() )); ?><?php else: ?><?php echo e('No session'); ?> <?php endif; ?></h1>
+
+                        <h1 class="text-center"><?php if(isset($session) && !is_null($session)): ?> <?php echo e('N' . number_format(expected_term_payment($session, $session->term()))); ?><?php else: ?><?php echo e('No session'); ?> <?php endif; ?></h1>
                         
                         
                     </div>

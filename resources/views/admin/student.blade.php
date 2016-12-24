@@ -266,7 +266,7 @@
                 <div class="col-lg-5">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Academic history  - {{ $student->name }}</h5>
+                            <h5>Academic history</h5>
                         </div>
                         <div class="ibox-content">
 
@@ -286,6 +286,50 @@
                                             <td>{{ $student->session_classroom($session->id)->level->name }}</td>
                                             <td class="text-left">
 
+                                                <div class="btn-group">
+                                                    {{--<a class="btn btn-white" type="button" href="{{ url('admin/students/'. $student->id .'/results/session/'.$session->id.'/edit') }}">Edit</a>--}}
+                                                    <a class="btn btn-primary" type="button" href="{{ url('admin/students/'. $student->id .'/results/session/'.$session->id.'/view') }}">View</a>
+                                                    {{--<a class="btn btn-white" type="button" href="{{ url('admin/students/'.$student->id.'/results/session/'.$session->id.'/print') }}">Print</a>--}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                @endforeach
+
+                                    </tbody>
+                                </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>School Fees Payment history</h5>
+                        </div>
+                        <div class="ibox-content">
+
+
+                                <table class="table" >
+                                        <thead>
+                                        <tr>
+                                            <th>Session</th>
+                                            <th>Class</th>
+                                            <th>First term</th>
+                                            <th>Second term</th>
+                                            <th>Third term</th>
+                                           <th>action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                @foreach($sessions as $session)
+                                        <tr>
+                                            <td>{{ $session->name }}</td>
+                                            <td>{{ $student->session_classroom($session->id)->name }}</td>
+                                            <td>{{ '1' }}</td>
+                                            <td>{{ '2' }}</td>
+                                            <td>{{ '3' }}</td>
+                                            <td class="text-left">
                                                 <div class="btn-group">
                                                     {{--<a class="btn btn-white" type="button" href="{{ url('admin/students/'. $student->id .'/results/session/'.$session->id.'/edit') }}">Edit</a>--}}
                                                     <a class="btn btn-primary" type="button" href="{{ url('admin/students/'. $student->id .'/results/session/'.$session->id.'/view') }}">View</a>

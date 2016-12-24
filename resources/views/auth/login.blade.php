@@ -19,12 +19,10 @@
         <div>
             <div>
 
-                <img src="{{ asset('img/logo.jpg') }}" class="img-circle circle-border m-b-md" alt="logo" width="200px">
+                <img src="{{ asset('img/logo.png') }}" class="img-circle circle-border m-b-md" alt="logo" width="200px">
 
             </div>
-            <h3>Welcome to Alhikmah Islamic Academy</h3>
-            <p>School management portal
-            </p>
+            <h3>Welcome to Lamp Bearers Islamic School's Portal</h3>
             <p>Login in. To continue.</p>
             @if (count($errors) > 0)
                 <!-- Form Error List -->
