@@ -24,7 +24,6 @@ class CreateSchoolFeePaymentsTable extends Migration
             $table->double('amount');
             $table->double('balance');
             $table->enum('status', ['payed', 'debt', 'part']);
-            $table->string('trans_ref');
             $table->string('reference');
             $table->dateTime('transaction_date');
             $table->foreign('user_id')->references('id')->on('users');

@@ -80,7 +80,24 @@ class GuardianController extends Controller
 
     public function dashboard(){
         $guardian = Guardian::with('students')->findOrFail(Auth::user()->guardian->id);
-        return view('guardian.dashboard')->with('guardian', $guardian );
+
+        $total_outstanding_payments = 0;
+
+        $session = session_on();
+        $term = term_on();
+        if($session  && $term ){
+            foreach($guardian->active_students as $student){
+
+                if(!has_term_payment($student, $session->id, $term))
+
+                    if($term == 'first'){ $total_outstanding_payments += $student->classroom->first_term_charges; }
+                    elseif($term == 'second'){ $total_outstanding_payments += $student->classroom->second_term_charges; }
+                    elseif($term == 'third'){ $total_outstanding_payments += $student->classroom->third_term_charges; }
+
+            }
+        }
+
+        return view('guardian.dashboard')->with('guardian', $guardian )->with('total_outstanding_payments', $total_outstanding_payments);
     }
 
     public function showWards(){
@@ -117,6 +134,85 @@ class GuardianController extends Controller
 
 
     }
+
+    public function payments(){
+        $guardian = Guardian::with('students')->findOrFail(Auth::user()->guardian->id);
+
+        $current_term_payments = [];
+        $part_payments = [];
+        $debts = [];
+        $email = $guardian->email;
+
+        $session = session_on();
+        $term = term_on();
+
+        if($session  && $term ){
+            foreach($guardian->active_students as $student){
+                if(!has_term_payment($student, $session->id, $term))
+
+                if($term == 'first'){
+                    $amount =  $student->classroom->first_term_charges;
+                    $array = ['custom_fields' =>[
+                            ['display_name' => "Term", "variable_name"         => "term", "value" => "first"],
+                            ['display_name' => "User ID", "variable_name"      => "user_id", "value" => Auth::user()->id],
+                            ['display_name' => "Student ID", "variable_name"   => "student_id", "value" => $student->id],
+                            ['display_name' => "Guardian ID", "variable_name"  => "guardian_id", "value" => $guardian->id],
+                            ['display_name' => "Session ID", "variable_name"   => "session_id", "value" => $session->id],
+                            ['display_name' => "Classroom ID", "variable_name" => "classroom_id", "value" => $student->classroom->id],
+                            ['display_name' => "Amount", "variable_name"       => "amount", "value" => $amount],
+                        ]
+                    ];
+
+                    $metadata = json_encode($array);
+
+                    $current_term_payments[] = ['student' => $student, 'amount' => $amount, 'email' => $email, 'metadata' => $metadata, 'term' => 'first'];
+
+                    }elseif($term == 'second'){
+
+                    $amount =  $student->classroom->second_term_charges;
+                    $array = ['custom_fields' =>[
+                        ['display_name' => "Term", "variable_name"         => "term", "value" => "second"],
+                        ['display_name' => "User ID", "variable_name"      => "user_id", "value" => Auth::user()->id],
+                        ['display_name' => "Student ID", "variable_name"   => "student_id", "value" => $student->id],
+                        ['display_name' => "Guardian ID", "variable_name"  => "guardian_id", "value" => $guardian->id],
+                        ['display_name' => "Session ID", "variable_name"   => "session_id", "value" => $session->id],
+                        ['display_name' => "Classroom ID", "variable_name" => "classroom_id", "value" => $student->classroom->id],
+                        ['display_name' => "Amount", "variable_name"       => "amount", "value" => $amount],
+                    ]
+                    ];
+
+                    $metadata = json_encode($array);
+
+                    $current_term_payments[] = ['student' => $student, 'amount' => $amount, 'email' => $email, 'metadata' => $metadata, 'term' => 'second'];
+
+                    }elseif($term == 'third'){
+
+                    $amount =  $student->classroom->third_term_charges;
+                    $array = ['custom_fields' =>[
+                        ['display_name' => "Term", "variable_name"         => "term", "value" => "third"],
+                        ['display_name' => "User ID", "variable_name"      => "user_id", "value" => Auth::user()->id],
+                        ['display_name' => "Student ID", "variable_name"   => "student_id", "value" => $student->id],
+                        ['display_name' => "Guardian ID", "variable_name"  => "guardian_id", "value" => $guardian->id],
+                        ['display_name' => "Session ID", "variable_name"   => "session_id", "value" => $session->id],
+                        ['display_name' => "Classroom ID", "variable_name" => "classroom_id", "value" => $student->classroom->id],
+                        ['display_name' => "Amount", "variable_name"       => "amount", "value" => $amount],
+                    ]
+                    ];
+
+                    $metadata = json_encode($array);
+
+                    $current_term_payments[] = ['student' => $student, 'amount' => $amount, 'email' => $email, 'metadata' => $metadata, 'term' => 'third'];
+                    }
+
+            }
+        }
+
+
+        //dd($current_term_payments);
+
+        return view('guardian.payments', compact(['guardian', 'current_term_payments']));
+    }
+
 
 
 }

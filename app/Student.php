@@ -18,8 +18,12 @@ class Student extends Model
     }
 
     public function school_fee_payment(){
-
         return $this->hasMany('App\SchoolFeePayment');
+    }
+
+
+    public function debts(){
+        return $this->school_fee_payment()->whereIn('status', ['debt', 'part']);
     }
 
 

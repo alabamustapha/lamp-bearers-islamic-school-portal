@@ -176,6 +176,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('guardian', 'GuardianController@dashboard');
+    Route::get('guardian/payments', 'GuardianController@payments');
+    Route::post('guardian/payments/current_school_fees', 'PaymentController@redirectToPaystackGateway')->name('pay_paystack');
+    Route::get('guardian/payments/current_school_fee/callback', 'PaymentController@handleGatewayCallbackForCurrentSchoolFee');
+
     Route::get('guardian/wards', 'GuardianController@showWards');
     Route::get('guardian/wards/{student_id}', 'GuardianController@showWard');
 

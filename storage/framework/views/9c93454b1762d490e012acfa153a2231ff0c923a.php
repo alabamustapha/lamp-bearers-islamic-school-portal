@@ -25,7 +25,7 @@
             </p>
             <input type="hidden" name="email" value="<?php echo e('alabamustapha@gmail.com'); ?> ">
             <input type="hidden" name="amount" value="800">
-            <input type="hidden" name="callback_url" value="<?php echo e(url('payment/callbacks')); ?>">
+            <input type="hidden" name="callback_url" value="<?php echo e(url('payment/callback')); ?>">
             <input type="hidden" name="metadata" value='<?php echo e(json_encode($array)); ?>'>
             <input type="hidden" name="reference" value="<?php echo e(Paystack::genTranxRef()); ?>">
             <input type="hidden" name="key" value="<?php echo e(config('paystack.secretKey')); ?>">

@@ -24,4 +24,8 @@ class Guardian extends Model
         return $this->belongsTo('App\Lga');
     }
 
+    public function active_students(){
+        return $this->students()->whereIn('status', ['active', 'promoting', 'graduating', 'repeating', 'repeated', 'promoted']);
+    }
+
 }

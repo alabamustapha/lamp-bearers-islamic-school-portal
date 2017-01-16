@@ -49,3 +49,35 @@ function generate_guardian_id(){
     }
 
 }
+
+function session_on(){
+    $session = \App\Session::where('status', '=', 'active')->first();
+
+
+
+    if($session){
+        return $session;
+    }else{
+        return false;
+    }
+}
+
+function term_on(){
+
+    if($session = session_on()){
+
+        if($session->term() == 'first'){
+            return 'first';
+        }elseif($session->term() == 'second'){
+            return 'second';
+        }elseif($session->term() == 'third'){
+            return 'third';
+        }else{
+            return false;
+        }
+
+    }else{
+        return false;
+    }
+
+}
