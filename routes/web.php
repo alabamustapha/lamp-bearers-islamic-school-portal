@@ -12,7 +12,7 @@
 */
 
 
-
+//testing paystack payment gateway
 Route::get('paystack_test', 'PaymentController@testForm');
 
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
