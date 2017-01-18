@@ -1,2 +1,1 @@
-# Schoolite offline version 1
-
+# Schoolite for Lamp Bearers Islamic School #
