@@ -19,13 +19,12 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-//        if(Schema::hasTable('sessions') && $session = Session::where('status', 'active')->first()) {
-//            View::share('session', Session::where('status', 'active')->first());
-//        }else{
-//            View::share('session', null);
-//        }
+       if(Schema::hasTable('sessions') && $session = Session::where('status', 'active')->first()) {
+           View::share('session', Session::where('status', 'active')->first());
+       }else{
+           View::share('session', null);
+       }
 
-        View::share('session', null);
     }
 
     /**
