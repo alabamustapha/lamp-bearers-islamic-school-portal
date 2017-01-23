@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'redehubng@gmail.com',
-        'name' => 'Redehubng E-Basic',
+        'address' => 'portal@lampbearers.com',
+        'name' => 'Lamp Bearers Islamic School Portal',
     ],
 
     /*

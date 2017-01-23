@@ -295,17 +295,17 @@
   ),
   'mail' => 
   array (
-    'driver' => 'smtp',
-    'host' => 'smtp.gmail.com',
-    'port' => '587',
+    'driver' => 'mailgun',
+    'host' => 'smtp.mailgun.org',
+    'port' => 587,
     'from' => 
     array (
-      'address' => 'redehubng@gmail.com',
-      'name' => 'Redehubng E-Basic',
+      'address' => 'portal@lampbearers.com',
+      'name' => 'Lamp Bearers Islamic School Portal',
     ),
     'encryption' => 'tls',
-    'username' => 'alabamustapha@gmail.com',
-    'password' => 'Islam4you',
+    'username' => NULL,
+    'password' => NULL,
     'sendmail' => '/usr/sbin/sendmail -bs',
   ),
   'paystack' => 
@@ -365,8 +365,8 @@
   array (
     'mailgun' => 
     array (
-      'domain' => NULL,
-      'secret' => NULL,
+      'domain' => 'mg.lampbearers.com',
+      'secret' => 'key-3b2b1e896edca8461b1d8a1db259eb06',
     ),
     'ses' => 
     array (
