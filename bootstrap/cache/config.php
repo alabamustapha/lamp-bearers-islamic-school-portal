@@ -172,7 +172,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\storage\\framework/cache',
+        'path' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/storage/framework/cache',
       ),
       'memcached' => 
       array (
@@ -275,12 +275,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\storage\\app',
+        'root' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\storage\\app/public',
+        'root' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/storage/app/public',
         'visibility' => 'public',
       ),
       's3' => 
@@ -317,7 +317,7 @@
   ),
   'queue' => 
   array (
-    'default' => 'sync',
+    'default' => 'beanstalkd',
     'connections' => 
     array (
       'sync' => 
@@ -391,7 +391,7 @@
     'lifetime' => 120,
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\storage\\framework/sessions',
+    'files' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -410,9 +410,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\resources\\views',
+      0 => '/home/vagrant/htdocs/lamp-bearers-islamic-school/resources/views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\storage\\framework\\views',
+    'compiled' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/storage/framework/views',
   ),
   'excel' => 
   array (
@@ -430,7 +430,7 @@
         'host' => 'localhost',
         'port' => 11211,
       ),
-      'dir' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\storage\\cache',
+      'dir' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/storage/cache',
     ),
     'properties' => 
     array (
@@ -496,7 +496,7 @@
       ),
       'store' => 
       array (
-        'path' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\storage\\exports',
+        'path' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/storage/exports',
         'returnInfo' => false,
       ),
       'pdf' => 
@@ -506,15 +506,15 @@
         array (
           'DomPDF' => 
           array (
-            'path' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\vendor/dompdf/dompdf/',
+            'path' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/vendor/dompdf/dompdf/',
           ),
           'tcPDF' => 
           array (
-            'path' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\vendor/tecnick.com/tcpdf/',
+            'path' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/vendor/tecnick.com/tcpdf/',
           ),
           'mPDF' => 
           array (
-            'path' => 'C:\\xampp\\htdocs\\lamp-bearers-islamic-school\\vendor/mpdf/mpdf/',
+            'path' => '/home/vagrant/htdocs/lamp-bearers-islamic-school/vendor/mpdf/mpdf/',
           ),
         ),
       ),

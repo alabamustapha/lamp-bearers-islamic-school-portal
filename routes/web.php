@@ -12,6 +12,9 @@
 */
 
 
+Route::get('queue', function(){
+    dispatch(new \App\Jobs\TestJob());
+});
 //testing paystack payment gateway
 Route::get('paystack_test', 'PaymentController@testForm');
 
