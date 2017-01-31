@@ -5,3 +5,16 @@
 Homestead.json
 Homestead.yaml
 .env
+/bootstrap/compiled.php
+/build/logs
+/build/coverage
+/app/tests/_log
+.DS_Store
+/_ide_helper.php
+/app/config/packages
+/public/packages
+public/storage
+storage/*.key
+.env.*.php
+.env.php
+.env.*
