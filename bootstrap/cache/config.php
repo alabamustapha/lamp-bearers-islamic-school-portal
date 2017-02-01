@@ -2,9 +2,9 @@
   'app' => 
   array (
     'name' => 'Redehubng Schoolite',
-    'env' => 'local',
+    'env' => 'production',
     'debug' => true,
-    'url' => 'http://schoolite-offline.dev',
+    'url' => 'http://portal.lampbearers.com',
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
@@ -128,9 +128,9 @@
       'pusher' => 
       array (
         'driver' => 'pusher',
-        'key' => '',
-        'secret' => '',
-        'app_id' => '',
+        'key' => NULL,
+        'secret' => NULL,
+        'app_id' => NULL,
         'options' => 
         array (
         ),
@@ -222,17 +222,17 @@
       'sqlite' => 
       array (
         'driver' => 'sqlite',
-        'database' => 'labis',
+        'database' => 'lampbearers_schoolite',
         'prefix' => '',
       ),
       'mysql' => 
       array (
         'driver' => 'mysql',
-        'host' => '127.0.0.1',
+        'host' => 'localhost',
         'port' => '3306',
-        'database' => 'labis',
-        'username' => 'redehubng',
-        'password' => 'Islam4you',
+        'database' => 'lampbearers_schoolite',
+        'username' => 'forge',
+        'password' => 'c9dkD9A5j74ge8nCm0ls',
         'charset' => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix' => '',
@@ -242,11 +242,11 @@
       'pgsql' => 
       array (
         'driver' => 'pgsql',
-        'host' => '127.0.0.1',
+        'host' => 'localhost',
         'port' => '3306',
-        'database' => 'labis',
-        'username' => 'redehubng',
-        'password' => 'Islam4you',
+        'database' => 'lampbearers_schoolite',
+        'username' => 'forge',
+        'password' => 'c9dkD9A5j74ge8nCm0ls',
         'charset' => 'utf8',
         'prefix' => '',
         'schema' => 'public',
@@ -259,9 +259,9 @@
       'cluster' => false,
       'default' => 
       array (
-        'host' => '127.0.0.1',
+        'host' => 'localhost',
         'password' => NULL,
-        'port' => '6379',
+        'port' => 6379,
         'database' => 0,
       ),
     ),
