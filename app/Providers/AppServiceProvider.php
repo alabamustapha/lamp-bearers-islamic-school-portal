@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
            View::share('session', null);
        }
 
+
     }
 
     /**
