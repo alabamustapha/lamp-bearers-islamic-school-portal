@@ -36,13 +36,13 @@ class StoreNewTeacher extends FormRequest
             'address'       => 'required|min:10',
             'marital_status'=> 'required|in:Married,Single,Other',
             'salary'        => 'required|numeric',
-            'description'   => 'required|min:10',
+            'description'   => 'nullable|min:10',
             'sex'           => 'required|in:Male,Female',
             'user_id'       => 'integer|exists:users,id',
             'country_id'    => 'required|integer|exists:countries,id',
             'state_id'      => 'required|integer|exists:states,id',
             'lga_id'        => 'required|integer|exists:lgas,id',
-            'image'         => 'required|mimes:jpeg,jpg,png|max:70|unique:teachers,image',
+            'image'         => 'mimes:jpeg,jpg,png|max:70|unique:teachers,image',
         ];
     }
 }

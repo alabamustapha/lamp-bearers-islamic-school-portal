@@ -4,6 +4,7 @@
 
 @section('styles')
      <link href="{{ asset('css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
+     <link href="{{ asset('css/plugins/jasny/jasny-bootstrap.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('page-heading')
@@ -84,7 +85,7 @@
                                         </div>
                                         <div class="col-lg-2">
                                             <div class="form-group">
-                                                <label class="control-label">Middle name *</label>
+                                                <label class="control-label">Middle name </label>
                                                 <input placeholder="middle name" class="form-control input-lg" type="text" name="middle_name" value="{{ old('middle_name') }}" >
                                             </div>
                                         </div>
@@ -148,9 +149,11 @@
 
                                     <div class="row">
                                         <div class=" col-md-offset-2 col-md-6">
-                                            <hr style="margin: 5px 0;">
-                                            <div class="form-group">
-                                                <input type="file" name="image" class="form-control input-lg" id="inputFile" value="{{ old('image') }}">
+
+                                            <div class="fileinput fileinput-new form-group m-t-sm m-b-xs" data-provides="fileinput">
+                                                <span class="btn btn-default btn-file"><span class="fileinput-new">upload passport</span><span class="fileinput-exists">Change</span><input type="file" name="image" id="inputFile" value="{{ old('image') }}"></span>
+                                                <span class="fileinput-filename"></span>
+                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                                             </div>
                                         </div>
                                     </div>
@@ -232,7 +235,7 @@
                            <div class="row">
                                <div class="col-lg-12">
                                    <div class="form-group">
-                                       <label class="control-label">Description *</label>
+                                       <label class="control-label">Description </label>
                                        <textarea class="form-control" name="description" placeholder="brief description">{{ old('description') }}</textarea>
                                    </div>
                                </div>
@@ -263,6 +266,7 @@
 @section('scripts')
 <!-- Data picker -->
 <script src="{{ asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+<script src="{{ asset('js/plugins/jasny/jasny-bootstrap.min.js')}}"></script>
 
 <script>
     $(document).ready(function(){

@@ -172,7 +172,7 @@
                 <div class="col-md-6">
 
                     <div class="profile-image">
-                        <img src="{{ asset("storage/" . $teacher->image) }}" class="img-circle circle-border m-b-md" alt="profile">
+                        <img src="{{ has_image($teacher) ? asset('storage/' . $teacher->image) : asset('storage/images/' . strtolower($teacher->sex) . '.png') }}" class="img-circle circle-border m-b-md" alt="profile">
                     </div>
                     <div class="profile-info">
                         <div class="">
