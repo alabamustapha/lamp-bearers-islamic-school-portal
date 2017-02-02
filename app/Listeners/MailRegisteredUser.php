@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Listeners;
-
+use App\Mail\NewUserRegistration;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MailRegisteredUser
+class MailRegisteredUser implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -26,6 +27,6 @@ class MailRegisteredUser
      */
     public function handle(Registered $event)
     {
-        //
+        Mail::to($event->user->username)->send(new NewUserRegistration($event->user));
     }
 }

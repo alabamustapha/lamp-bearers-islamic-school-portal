@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUserRegistration;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Role;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -51,19 +53,25 @@ class HomeController extends Controller
                 'password'=>bcrypt($request->password)
             ]);
 
-            event(new Registered($user));
+
+
+            //event(new Registered($user));
 
             $user->addRole(Role::where('name', '=', 'admin')->first()->id);
 
-            $this->guard()->login($user);
 
-            return redirect('/');
+
+            Mail::to($user->username)->send(new NewUserRegistration($user));
+
+            //$this->guard()->login($user);
+
+            return redirect('/')->with('message', 'Log in to continue');
 
         }
 
 
 
-        redirect('install')->with('message', 'Something was not right');
+        return redirect('install')->with('message', 'Something was not right');
     }
 
 

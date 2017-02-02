@@ -26,7 +26,7 @@ class AdminExist
             }
         }
 
-        redirect('install');
+        //return redirect('install');
 
         return $next($request);
     }
