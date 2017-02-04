@@ -17,6 +17,10 @@ class EventServiceProvider extends ServiceProvider
 //            'App\Listeners\EventListener',
 //        ],
 
+        'App\Events\TeacherRegistration' => [
+            'App\Listeners\NotifyTeacherForRegistration',
+        ],
+
         'Illuminate\Auth\Events\Registered' => [
             'App\Listeners\LogRegisteredUser',
             'App\Listeners\MailRegisteredUser',

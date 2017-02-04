@@ -6,7 +6,6 @@ use App\Classroom;
 use App\ClassroomSubject;
 use App\Country;
 use App\Level;
-use App\Mail\NewTeacherRegistration;
 use App\Result;
 use App\Role;
 use App\Session;
@@ -16,7 +15,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Teacher;
 use App\Http\Requests;
-use Illuminate\Auth\Events\Registered;
+use App\Events\TeacherRegistration;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -57,8 +56,6 @@ class TeacherController extends Controller
 
         $user->save();
 
-        //event(new Registered($user));
-
         $user->addRole(Role::where('name', '=', 'teacher')->first()->id);
 
 
@@ -82,7 +79,9 @@ class TeacherController extends Controller
         ]);
 
         //dd($request->file('image')->isValid());
-       Mail::to($teacher)->send(new NewTeacherRegistration($teacher, $user));
+
+        event(new TeacherRegistration($teacher, $user));
+
 
         if ($request->hasFile('image')) {
 
@@ -91,11 +90,12 @@ class TeacherController extends Controller
                 $teacher->image = str_replace('public/', null, $path);
                 $teacher->save();
 
-                return back()->with('Message', 'Teacher record created successfully');
+                return back()->with('message', 'Teacher record created successfully');
             }
         }
 
-        return back()->with('Message', 'Teacher record created successfully, upload image again');
+
+        return back()->with('message', 'Teacher record created successfully, upload image again');
 
     }
 
