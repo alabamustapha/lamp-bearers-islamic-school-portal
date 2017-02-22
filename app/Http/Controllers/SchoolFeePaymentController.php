@@ -15,6 +15,7 @@ class SchoolFeePaymentController extends Controller
 
         $session = Session::where('status', '=', 'active')->first();
 
+
         if($session){
 
             $student_has_pay_ids = SchoolFeePayment::where('session_id', '=', $session->id)->where('term', '=', $session->term())->pluck('student_id')->toArray();
@@ -44,8 +45,9 @@ class SchoolFeePaymentController extends Controller
                 $total_amount = 0;
             }
         }else{
-
-            $students = new Student();
+            $term = 'N/A';
+            $total_amount = 0;
+            $students = null;
         }
 
 

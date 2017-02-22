@@ -1,12 +1,10 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', 'Upcoming Payments'); ?>
 
-@section('title', 'Upcoming Payments')
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(asset('css/plugins/dataTables/datatables.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
-@endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="wrapper wrapper-content">
 <div class="row">
@@ -16,9 +14,9 @@
                        <h5 class="pull-left">Students yet to pay</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="text-center">{{ $students ? $students->count() : 'N/A' }}</h1>
-                        {{--<div class="pull-left font-bold text-success">{{ $total_male_students }} <i class="fa fa-male"></i></div>--}}
-                        {{--<div class="pull-right font-bold text-success">{{ $total_female_students }} <i class="fa fa-female"></i></div>--}}
+                        <h1 class="text-center"><?php echo e($students ? $students->count() : 'N/A'); ?></h1>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -29,9 +27,9 @@
                        <h5 class="pull-left">Upcoming revenue</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="text-center">{{ 'N' . number_format($total_amount) }}</h1>
-                        {{--<div class="pull-left font-bold text-success">{{ $total_male_teachers }} <i class="fa fa-male"></i></div>--}}
-                        {{--<div class="pull-right font-bold text-success">{{ $total_female_teachers }} <i class="fa fa-female"></i></div>--}}
+                        <h1 class="text-center"><?php echo e('N' . number_format($total_amount)); ?></h1>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -42,9 +40,9 @@
                        <h5 class="pull-left">Paid revenue</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="text-center">{{ $session ?  'N' . number_format(expected_term_payment($session->id, $term) - $total_amount) : 'N/A'}}</h1>
-                        {{--<div class="pull-left font-bold text-success">{{ $total_male_teachers }} <i class="fa fa-male"></i></div>--}}
-                        {{--<div class="pull-right font-bold text-success">{{ $total_female_teachers }} <i class="fa fa-female"></i></div>--}}
+                        <h1 class="text-center"><?php echo e($session ?  'N' . number_format(expected_term_payment($session->id, $term) - $total_amount) : 'N/A'); ?></h1>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -55,9 +53,9 @@
                        <h5 class="pull-left">Upcoming Percentage</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="text-center">{{ $session ? $total_amount * 100 / expected_term_payment($session->id, $term) . '%': 'N/A'}}</h1>
-                        {{--<div class="pull-left font-bold text-success">{{ $total_male_teachers }} <i class="fa fa-male"></i></div>--}}
-                        {{--<div class="pull-right font-bold text-success">{{ $total_female_teachers }} <i class="fa fa-female"></i></div>--}}
+                        <h1 class="text-center"><?php echo e($session ? $total_amount * 100 / expected_term_payment($session->id, $term) . '%': 'N/A'); ?></h1>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -91,25 +89,25 @@
                     </thead>
                    <tbody>
 
-                    @if($students)
-                       @foreach($students as $student)
+                    <?php if($students): ?>
+                       <?php $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                        <tr>
-                           <td>{{ $student->admin_number }}</td>
-                           <td>{{ $student->name }}</td>
-                           <td>{{ $student->classroom->name }}</td>
-                           @if($term == 'first')
-                           <td>{{ number_format($student->classroom->first_term_charges) }}</td>
-                           @elseif($term == 'second')
-                           <td>{{ number_format($student->classroom->second_term_charges) }}</td>
-                           @elseif($term == 'third')
-                           <td>{{ number_format($student->classroom->third_term_charges) }}</td>
-                           @endif
-                           <td>{{ $student->guardian->name }}</td>
-                           <td>{{ $student->guardian->phone }}</td>
+                           <td><?php echo e($student->admin_number); ?></td>
+                           <td><?php echo e($student->name); ?></td>
+                           <td><?php echo e($student->classroom->name); ?></td>
+                           <?php if($term == 'first'): ?>
+                           <td><?php echo e(number_format($student->classroom->first_term_charges)); ?></td>
+                           <?php elseif($term == 'second'): ?>
+                           <td><?php echo e(number_format($student->classroom->second_term_charges)); ?></td>
+                           <?php elseif($term == 'third'): ?>
+                           <td><?php echo e(number_format($student->classroom->third_term_charges)); ?></td>
+                           <?php endif; ?>
+                           <td><?php echo e($student->guardian->name); ?></td>
+                           <td><?php echo e($student->guardian->phone); ?></td>
                            <td><button>Pay</button></td>
                        </tr>
-                       @endforeach
-                    @endif
+                       <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                    <?php endif; ?>
 
                    </tbody>
 
@@ -120,11 +118,11 @@
 </div>
 </div>
                  
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('scripts')
-<script src=" {{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+<?php $__env->startSection('scripts'); ?>
+<script src=" <?php echo e(asset('js/plugins/dataTables/datatables.min.js')); ?>"></script>
 
 <script>
  $(document).ready(function(){
@@ -160,4 +158,5 @@
 
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
