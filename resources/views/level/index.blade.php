@@ -131,7 +131,7 @@
                                       <select name="teacher_id" class="form-control">
                                           <option>--select--</option>
                                            @foreach($teachers as $teacher)
-                                              <option value="{{ $teacher->id }} ">{{ $teacher->name }}</option>
+                                              <option value="{{ $teacher->id }} ">{{ $teacher->name() }}</option>
                                           @endforeach
                                       </select><span class="help-block m-b-none">a teacher in charge of the level</span>
                                   </div>

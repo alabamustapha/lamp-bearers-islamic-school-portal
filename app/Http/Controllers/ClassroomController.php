@@ -74,6 +74,7 @@ class ClassroomController extends Controller
     {
         $classroom = Classroom::find($id);
 
+        $classroom->name = $request->name;
         $classroom->teacher_id = $request->teacher_id;
         $classroom->first_term_charges = $request->first_term_charges;
         $classroom->second_term_charges = $request->second_term_charges;

@@ -60,7 +60,7 @@
                                             <tr class="gradeX">
                                                 <td><?php echo e($teacher->staff_id); ?></td>
                                                 <td>
-                                                    <a class="link-info" href="<?php echo e(url('admin/teachers/' . $teacher->id)); ?>" target="_blank" title="<?php echo e("View " . $teacher->name . ' details'); ?>"><?php echo e($teacher->name); ?></a>
+                                                    <a class="link-info" href="<?php echo e(url('admin/teachers/' . $teacher->id)); ?>" target="_blank" title="<?php echo e("View " . $teacher->name() . ' details'); ?>"><?php echo e($teacher->name()); ?></a>
                                                  </td>
                                                 <td><?php echo e($teacher->sex); ?></td>
                                                 <td class="center"><?php echo e($teacher->address); ?></td>

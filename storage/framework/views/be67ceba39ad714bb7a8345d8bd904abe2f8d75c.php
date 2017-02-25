@@ -20,7 +20,7 @@
                 </li>
             </ol>
         </div>
-               <div class="col-lg-2">
+          <div class="col-lg-2">
             <button type="button" class="btn btn-primary m-t-md" data-toggle="modal" data-target="#edit-student-info">
                 Edit classroom
             </button>
@@ -86,7 +86,7 @@
                                       <select name="teacher_id" class="form-control">
                                           <option>--select--</option>
                                            <?php $__currentLoopData = $teachers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teacher): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                              <option value="<?php echo e($teacher->id); ?>" <?php echo e($classroom->teacher->id == $teacher->id ? 'selected' : ''); ?>><?php echo e($teacher->name); ?></option>
+                                              <option value="<?php echo e($teacher->id); ?>" <?php echo e($classroom->teacher->id == $teacher->id ? 'selected' : ''); ?>><?php echo e($teacher->name()); ?></option>
                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                       </select><span class="help-block m-b-none">a teacher in charge of the class</span>
                                   </div>
@@ -376,7 +376,7 @@
                                                                       <select name="teacher_id" class="form-control">
                                                                           <option>--select--</option>
                                                                            <?php $__currentLoopData = $teachers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teacher): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                                                              <option value="<?php echo e($teacher->id); ?>" <?php echo e($subject->teacher->id == $teacher->id ? 'selected' : ''); ?>><?php echo e($teacher->name); ?></option>
+                                                                              <option value="<?php echo e($teacher->id); ?>" <?php echo e($subject->teacher->id == $teacher->id ? 'selected' : ''); ?>><?php echo e($teacher->name()); ?></option>
                                                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                                                       </select><span class="help-block m-b-none">a teacher in charge of the class</span>
                                                                   </div>
@@ -464,7 +464,7 @@
                                 <select name="teacher_id" class="form-control">
                                 <option value="">--select--</option>
                                 <?php $__currentLoopData = $teachers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teacher): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                    <option value="<?php echo e($teacher->id); ?>"><?php echo e($teacher->name); ?></option>
+                                    <option value="<?php echo e($teacher->id); ?>"><?php echo e($teacher->name()); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                 </select><span class="help-block m-b-none">a teacher taking the subject</span>
                             </div>

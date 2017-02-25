@@ -9,7 +9,7 @@
 @section('page-heading')
 <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>School Classrooms</h2>
+            <h2>Classrooms</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ url('admin') }}">Home</a>
@@ -19,9 +19,94 @@
                 </li>
             </ol>
         </div>
-        <div class="col-lg-2">
+                  <div class="col-lg-2">
+                    <button type="button" class="btn btn-primary m-t-md" data-toggle="modal" data-target="#add-classroom">
+                        <span class="glyphicon glyphicon-plus"></span> Add Classroom
+                    </button>
+                     <div class="modal inmodal" id="add-classroom" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated bounceInRight">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title">Add new classroom</h4>
+                                    </div>
 
-        </div>
+
+                                    <form class="form-horizontal" method="POST" action="{{ url('admin/classrooms') }}  ">
+                                     {{ csrf_field() }}
+
+                                    <div class="modal-body">
+                                        @if (count($errors) > 0)
+                                          <div class="alert alert-danger">
+                                              <ul>
+                                                  @foreach ($errors->all() as $error)
+                                                      <li> {{ $error }} </li>
+                                                  @endforeach
+                                              </ul>
+                                          </div>
+                                       @endif
+
+                                          <div class="form-group">
+                                              <label class="col-lg-4 control-label">Class Name *</label>
+                                              <div class="col-lg-8">
+                                                  <input placeholder="classroom name" class="form-control" type="text" name="name" autofocus="" required="">
+                                              </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <label class="col-lg-4 control-label">First term charges *</label>
+                                              <div class="col-lg-8">
+                                                  <input placeholder="fee for first term" class="form-control" type="number" name="first_term_charges" required="">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="col-lg-4 control-label">Second term charges *</label>
+                                              <div class="col-lg-8">
+                                                  <input placeholder="fee for second term" class="form-control" type="number" name="second_term_charges" required="">
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="col-lg-4 control-label">Third term charges *</label>
+                                              <div class="col-lg-8">
+                                                  <input placeholder="fee for third term" class="form-control" type="number" name="third_term_charges" required="">
+                                              </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                              <label class="col-lg-4 control-label">Class teacher</label>
+                                              <div class="col-lg-8">
+                                                  <select name="teacher_id" class="form-control">
+                                                      <option>--select--</option>
+                                                       @foreach($teachers as $teacher)
+                                                          <option value="{{ $teacher->id }} ">{{ $teacher->name() }}</option>
+                                                      @endforeach
+                                                  </select><span class="help-block m-b-none">a teacher in charge of the class</span>
+                                              </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="col-lg-4 control-label">Level</label>
+                                              <div class="col-lg-8">
+                                                  <select name="level_id" class="form-control">
+                                                      <option>--select--</option>
+                                                       @foreach($levels as $level)
+                                                          <option value="{{ $level->id }} ">{{ $level->name }}</option>
+                                                      @endforeach
+                                                  </select><span class="help-block m-b-none">class level</span>
+                                              </div>
+                                          </div>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Add classroom</button>
+                                    </div>
+
+                                    </form>
+                             </div>
+                        </div>
+                    </div>
+                </div>
  </div>
 @endsection
 
@@ -92,93 +177,93 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-                  <div class="ibox float-e-margins">
-                      <div class="ibox-title">
-                          <h5>Create New Classroom</h5>
-                          <div class="ibox-tools">
-                              <a class="collapse-link">
-                                  <i class="fa fa-chevron-up"></i>
-                              </a>
-                              <a class="close-link">
-                                  <i class="fa fa-times"></i>
-                              </a>
-                          </div>
-                      </div>
-                      <div class="ibox-content">
-                      @if (count($errors) > 0)
-                          <div class="alert alert-danger">
-                              <ul>
-                                  @foreach ($errors->all() as $error)
-                                      <li> {{ $error }} </li>
-                                  @endforeach
-                              </ul>
-                          </div>
-                       @endif
-                          <form class="form-horizontal" method="POST" action="{{ url('admin/classrooms') }}  ">
-                            {{ csrf_field() }}
+    {{--<div class="row">--}}
+        {{--<div class="col-lg-12">--}}
+                  {{--<div class="ibox float-e-margins">--}}
+                      {{--<div class="ibox-title">--}}
+                          {{--<h5>Create New Classroom</h5>--}}
+                          {{--<div class="ibox-tools">--}}
+                              {{--<a class="collapse-link">--}}
+                                  {{--<i class="fa fa-chevron-up"></i>--}}
+                              {{--</a>--}}
+                              {{--<a class="close-link">--}}
+                                  {{--<i class="fa fa-times"></i>--}}
+                              {{--</a>--}}
+                          {{--</div>--}}
+                      {{--</div>--}}
+                      {{--<div class="ibox-content">--}}
+                      {{--@if (count($errors) > 0)--}}
+                          {{--<div class="alert alert-danger">--}}
+                              {{--<ul>--}}
+                                  {{--@foreach ($errors->all() as $error)--}}
+                                      {{--<li> {{ $error }} </li>--}}
+                                  {{--@endforeach--}}
+                              {{--</ul>--}}
+                          {{--</div>--}}
+                       {{--@endif--}}
+                          {{--<form class="form-horizontal" method="POST" action="{{ url('admin/classrooms') }}  ">--}}
+                            {{--{{ csrf_field() }}--}}
 
-                              <div class="form-group">
-                                  <label class="col-lg-2 control-label">Class Name *</label>
-                                  <div class="col-lg-8">
-                                      <input placeholder="classroom name" class="form-control" type="text" name="name" autofocus="" required="">
-                                  </div>
-                              </div>
+                              {{--<div class="form-group">--}}
+                                  {{--<label class="col-lg-2 control-label">Class Name *</label>--}}
+                                  {{--<div class="col-lg-8">--}}
+                                      {{--<input placeholder="classroom name" class="form-control" type="text" name="name" autofocus="" required="">--}}
+                                  {{--</div>--}}
+                              {{--</div>--}}
 
-                              <div class="form-group">
-                                  <label class="col-lg-2 control-label">First term charges *</label>
-                                  <div class="col-lg-8">
-                                      <input placeholder="fee for first term" class="form-control" type="number" name="first_term_charges" required="">
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-lg-2 control-label">Second term charges *</label>
-                                  <div class="col-lg-8">
-                                      <input placeholder="fee for second term" class="form-control" type="number" name="second_term_charges" required="">
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-lg-2 control-label">Third term charges *</label>
-                                  <div class="col-lg-8">
-                                      <input placeholder="fee for third term" class="form-control" type="number" name="third_term_charges" required="">
-                                  </div>
-                              </div>
+                              {{--<div class="form-group">--}}
+                                  {{--<label class="col-lg-2 control-label">First term charges *</label>--}}
+                                  {{--<div class="col-lg-8">--}}
+                                      {{--<input placeholder="fee for first term" class="form-control" type="number" name="first_term_charges" required="">--}}
+                                  {{--</div>--}}
+                              {{--</div>--}}
+                              {{--<div class="form-group">--}}
+                                  {{--<label class="col-lg-2 control-label">Second term charges *</label>--}}
+                                  {{--<div class="col-lg-8">--}}
+                                      {{--<input placeholder="fee for second term" class="form-control" type="number" name="second_term_charges" required="">--}}
+                                  {{--</div>--}}
+                              {{--</div>--}}
+                              {{--<div class="form-group">--}}
+                                  {{--<label class="col-lg-2 control-label">Third term charges *</label>--}}
+                                  {{--<div class="col-lg-8">--}}
+                                      {{--<input placeholder="fee for third term" class="form-control" type="number" name="third_term_charges" required="">--}}
+                                  {{--</div>--}}
+                              {{--</div>--}}
 
-                                <div class="form-group">
-                                  <label class="col-lg-2 control-label">Class teacher</label>
-                                  <div class="col-lg-8">
-                                      <select name="teacher_id" class="form-control">
-                                          <option>--select--</option>
-                                           @foreach($teachers as $teacher)
-                                              <option value="{{ $teacher->id }} ">{{ $teacher->name }}</option>
-                                          @endforeach
-                                      </select><span class="help-block m-b-none">a teacher in charge of the class</span>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-lg-2 control-label">Level</label>
-                                  <div class="col-lg-8">
-                                      <select name="level_id" class="form-control">
-                                          <option>--select--</option>
-                                           @foreach($levels as $level)
-                                              <option value="{{ $level->id }} ">{{ $level->name }}</option>
-                                          @endforeach
-                                      </select><span class="help-block m-b-none">class level</span>
-                                  </div>
-                              </div>
+                                {{--<div class="form-group">--}}
+                                  {{--<label class="col-lg-2 control-label">Class teacher</label>--}}
+                                  {{--<div class="col-lg-8">--}}
+                                      {{--<select name="teacher_id" class="form-control">--}}
+                                          {{--<option>--select--</option>--}}
+                                           {{--@foreach($teachers as $teacher)--}}
+                                              {{--<option value="{{ $teacher->id }} ">{{ $teacher->name }}</option>--}}
+                                          {{--@endforeach--}}
+                                      {{--</select><span class="help-block m-b-none">a teacher in charge of the class</span>--}}
+                                  {{--</div>--}}
+                              {{--</div>--}}
+                              {{--<div class="form-group">--}}
+                                  {{--<label class="col-lg-2 control-label">Level</label>--}}
+                                  {{--<div class="col-lg-8">--}}
+                                      {{--<select name="level_id" class="form-control">--}}
+                                          {{--<option>--select--</option>--}}
+                                           {{--@foreach($levels as $level)--}}
+                                              {{--<option value="{{ $level->id }} ">{{ $level->name }}</option>--}}
+                                          {{--@endforeach--}}
+                                      {{--</select><span class="help-block m-b-none">class level</span>--}}
+                                  {{--</div>--}}
+                              {{--</div>--}}
 
-                              <div class="form-group">
-                                  <div class="col-lg-offset-2 col-lg-8">
-                                      <button class="btn btn-sm btn-white" type="submit">Add level</button>
-                                  </div>
-                              </div>
-                          </form>
+                              {{--<div class="form-group">--}}
+                                  {{--<div class="col-lg-offset-2 col-lg-8">--}}
+                                      {{--<button class="btn btn-sm btn-white" type="submit">Add classroom</button>--}}
+                                  {{--</div>--}}
+                              {{--</div>--}}
+                          {{--</form>--}}
 
-                      </div>
-                  </div>
-              </div>
-    </div>
+                      {{--</div>--}}
+                  {{--</div>--}}
+              {{--</div>--}}
+    {{--</div>--}}
 </div>
 @endsection
 

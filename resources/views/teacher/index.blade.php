@@ -62,7 +62,7 @@
                                             <tr class="gradeX">
                                                 <td>{{ $teacher->staff_id }}</td>
                                                 <td>
-                                                    <a class="link-info" href="{{ url('admin/teachers/' . $teacher->id) }}" target="_blank" title="{{ "View " . $teacher->name . ' details'}}">{{ $teacher->name }}</a>
+                                                    <a class="link-info" href="{{ url('admin/teachers/' . $teacher->id) }}" target="_blank" title="{{ "View " . $teacher->name() . ' details'}}">{{ $teacher->name() }}</a>
                                                  </td>
                                                 <td>{{ $teacher->sex }}</td>
                                                 <td class="center">{{ $teacher->address }}</td>

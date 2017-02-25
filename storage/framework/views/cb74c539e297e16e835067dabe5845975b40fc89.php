@@ -1,9 +1,9 @@
-<?php $__env->startSection('title', $teacher->name); ?>
+<?php $__env->startSection('title', $teacher->name()); ?>
 
 <?php $__env->startSection('page-heading'); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2><?php echo e($teacher->name . ' ' . $teacher->staff_id); ?></h2>
+            <h2><?php echo e($teacher->name() . ' ' . $teacher->staff_id); ?></h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="<?php echo e(url('admin')); ?>">Home</a>
@@ -12,7 +12,7 @@
                     <a href="<?php echo e(url('admin/teachers/')); ?>">Teachers</a>
                 </li>
                 <li class="active">
-                    <a href="<?php echo e(url('#')); ?>"><?php echo e($teacher->name . ' - ' . $teacher->staff_id); ?></a>
+                    <a href="<?php echo e(url('#')); ?>"><?php echo e($teacher->name() . ' - ' . $teacher->staff_id); ?></a>
                 </li>
             </ol>
         </div>
@@ -28,7 +28,7 @@
 
                                 <img id="image_upload_preview" data-holder-rendered="true" src="<?php echo e(asset('storage/' . $teacher->image)); ?>"  class="img-circle circle-border m-b-md" alt="student passport" width="100px">
 
-                                <h4 class="modal-title"><?php echo e($teacher->name); ?></h4>
+                                <h4 class="modal-title"><?php echo e($teacher->name()); ?></h4>
 
                             </div>
                             <form method="POST" class="form" enctype="multipart/form-data" action="<?php echo e(url('admin/teachers/' . $teacher->id)); ?>">
@@ -178,7 +178,7 @@
                         <div class="">
                             <div>
                                 <h3 class="no-margins">
-                                    <?php echo e($teacher->name); ?>
+                                    <?php echo e($teacher->name()); ?>
 
                                 </h3>
                                 <h4><?php echo e($teacher->email); ?>( <?php echo e($teacher->staff_id); ?> )</h4>
@@ -237,7 +237,7 @@
                 <div class="col-md-5">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><?php echo e($teacher->name  . ' - '); ?>Subject(s) in charge</h5>
+                            <h5><?php echo e($teacher->name()  . ' - '); ?>Subject(s) in charge</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -277,7 +277,7 @@
                 <div class="col-md-7">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5><?php echo e($teacher->name . ' - '); ?> Classroom(s) in charge</h5>
+                            <h5><?php echo e($teacher->name() . ' - '); ?> Classroom(s) in charge</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -331,7 +331,7 @@
                  <div class="col-md-5">
                                     <div class="ibox float-e-margins">
                                         <div class="ibox-title">
-                                            <h5><?php echo e($teacher->name  . ' - '); ?>Level(s) in charge</h5>
+                                            <h5><?php echo e($teacher->name()  . ' - '); ?>Level(s) in charge</h5>
                                             <div class="ibox-tools">
                                                 <a class="collapse-link">
                                                     <i class="fa fa-chevron-up"></i>
@@ -367,7 +367,7 @@
                                 <div class="col-md-7">
                                     <div class="ibox float-e-margins">
                                         <div class="ibox-title">
-                                            <h5><?php echo e($teacher->name . ' - '); ?> House(s) in charge</h5>
+                                            <h5><?php echo e($teacher->name() . ' - '); ?> House(s) in charge</h5>
                                             <div class="ibox-tools">
                                                 <a class="collapse-link">
                                                     <i class="fa fa-chevron-up"></i>

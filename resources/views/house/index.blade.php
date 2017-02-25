@@ -144,7 +144,7 @@
                                                <option value="">No teacher available</option>
                                                @else
                                                    @foreach($teachers as $teacher)
-                                                       <option value="{{ $teacher->id }}">{{ $teacher->name . '(' . $teacher->staff_id . ')' }}</option>
+                                                       <option value="{{ $teacher->id }}">{{ $teacher->name() . '(' . $teacher->staff_id . ')' }}</option>
                                                    @endforeach
                                                @endif
                                                </select><span class="help-block m-b-none">a teacher in charge of the house</span>

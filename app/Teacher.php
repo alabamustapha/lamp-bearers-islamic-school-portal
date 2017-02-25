@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
+
+
     protected $table = 'teachers';
+
     protected $fillable = ['title','name','email','phone','dob',
                             'date_employed','date_left','staff_id',
                             'address','marital_status','salary','description',
@@ -15,6 +18,7 @@ class Teacher extends Model
 
 
     protected $dates = ['created_at', 'updated_at', 'dob', 'date_employed'];
+
 
     public function user(){
         return $this->belongsTo('App\User');
@@ -46,5 +50,9 @@ class Teacher extends Model
 
     public function lga(){
         return $this->belongsTo('App\Lga');
+    }
+
+    public function name(){
+        return $this->title . ' ' .$this->name;
     }
 }

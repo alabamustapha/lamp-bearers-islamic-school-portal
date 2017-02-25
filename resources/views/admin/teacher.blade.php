@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', $teacher->name)
+@section('title', $teacher->name())
 
 @section('page-heading')
 <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>{{ $teacher->name . ' ' . $teacher->staff_id }}</h2>
+            <h2>{{ $teacher->name() . ' ' . $teacher->staff_id }}</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="{{ url('admin') }}">Home</a>
@@ -14,7 +14,7 @@
                     <a href="{{ url('admin/teachers/') }}">Teachers</a>
                 </li>
                 <li class="active">
-                    <a href="{{ url('#') }}">{{ $teacher->name . ' - ' . $teacher->staff_id  }}</a>
+                    <a href="{{ url('#') }}">{{ $teacher->name() . ' - ' . $teacher->staff_id  }}</a>
                 </li>
             </ol>
         </div>
@@ -30,7 +30,7 @@
 
                                 <img id="image_upload_preview" data-holder-rendered="true" src="{{ asset('storage/' . $teacher->image) }}"  class="img-circle circle-border m-b-md" alt="student passport" width="100px">
 
-                                <h4 class="modal-title">{{ $teacher->name }}</h4>
+                                <h4 class="modal-title">{{ $teacher->name() }}</h4>
 
                             </div>
                             <form method="POST" class="form" enctype="multipart/form-data" action="{{ url('admin/teachers/' . $teacher->id) }}">
@@ -178,7 +178,7 @@
                         <div class="">
                             <div>
                                 <h3 class="no-margins">
-                                    {{ $teacher->name }}
+                                    {{ $teacher->name() }}
                                 </h3>
                                 <h4>{{ $teacher->email }}( {{ $teacher->staff_id }} )</h4>
                                 <h5 class="text-success">Status: {{ $teacher->status }}  Current Salary: #{{ $teacher->salary }}</h5>
@@ -232,7 +232,7 @@
                 <div class="col-md-5">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>{{ $teacher->name  . ' - '}}Subject(s) in charge</h5>
+                            <h5>{{ $teacher->name()  . ' - '}}Subject(s) in charge</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -272,7 +272,7 @@
                 <div class="col-md-7">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>{{ $teacher->name . ' - '}} Classroom(s) in charge</h5>
+                            <h5>{{ $teacher->name() . ' - '}} Classroom(s) in charge</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -326,7 +326,7 @@
                  <div class="col-md-5">
                                     <div class="ibox float-e-margins">
                                         <div class="ibox-title">
-                                            <h5>{{ $teacher->name  . ' - '}}Level(s) in charge</h5>
+                                            <h5>{{ $teacher->name()  . ' - '}}Level(s) in charge</h5>
                                             <div class="ibox-tools">
                                                 <a class="collapse-link">
                                                     <i class="fa fa-chevron-up"></i>
@@ -362,7 +362,7 @@
                                 <div class="col-md-7">
                                     <div class="ibox float-e-margins">
                                         <div class="ibox-title">
-                                            <h5>{{ $teacher->name . ' - '}} House(s) in charge</h5>
+                                            <h5>{{ $teacher->name() . ' - '}} House(s) in charge</h5>
                                             <div class="ibox-tools">
                                                 <a class="collapse-link">
                                                     <i class="fa fa-chevron-up"></i>

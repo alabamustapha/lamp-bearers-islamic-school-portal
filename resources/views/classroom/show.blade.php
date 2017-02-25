@@ -22,7 +22,7 @@
                 </li>
             </ol>
         </div>
-               <div class="col-lg-2">
+          <div class="col-lg-2">
             <button type="button" class="btn btn-primary m-t-md" data-toggle="modal" data-target="#edit-student-info">
                 Edit classroom
             </button>
@@ -85,7 +85,7 @@
                                       <select name="teacher_id" class="form-control">
                                           <option>--select--</option>
                                            @foreach($teachers as $teacher)
-                                              <option value="{{ $teacher->id }}" {{ $classroom->teacher->id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
+                                              <option value="{{ $teacher->id }}" {{ $classroom->teacher->id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name() }}</option>
                                           @endforeach
                                       </select><span class="help-block m-b-none">a teacher in charge of the class</span>
                                   </div>
@@ -369,7 +369,7 @@
                                                                       <select name="teacher_id" class="form-control">
                                                                           <option>--select--</option>
                                                                            @foreach($teachers as $teacher)
-                                                                              <option value="{{ $teacher->id }}" {{ $subject->teacher->id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
+                                                                              <option value="{{ $teacher->id }}" {{ $subject->teacher->id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name() }}</option>
                                                                           @endforeach
                                                                       </select><span class="help-block m-b-none">a teacher in charge of the class</span>
                                                                   </div>
@@ -456,7 +456,7 @@
                                 <select name="teacher_id" class="form-control">
                                 <option value="">--select--</option>
                                 @foreach($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                    <option value="{{ $teacher->id }}">{{ $teacher->name() }}</option>
                                 @endforeach
                                 </select><span class="help-block m-b-none">a teacher taking the subject</span>
                             </div>
