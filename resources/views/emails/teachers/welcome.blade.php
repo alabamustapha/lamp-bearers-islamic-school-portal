@@ -5,7 +5,7 @@
     </p>
 
     User name: {{ $user->username }}<br>
-    Password:  [your phone number]<br>
+    Password:  [your surname as spelt above]<br>
 
     <em>Login here: <a href="http://portal.lampbearers.com" target="_blank" title="http://portal.lampbearers.com">Login</a></em>
 </div>
