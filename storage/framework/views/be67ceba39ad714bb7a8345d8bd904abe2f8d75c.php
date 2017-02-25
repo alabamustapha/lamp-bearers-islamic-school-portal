@@ -7,7 +7,7 @@
 <?php $__env->startSection('page-heading'); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>School Class - <?php echo e($classroom->name); ?></h2>
+            <h2> <?php echo e($classroom->level->name . ' - ' . $classroom->name); ?></h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="<?php echo e(url('admin')); ?>">Home</a>

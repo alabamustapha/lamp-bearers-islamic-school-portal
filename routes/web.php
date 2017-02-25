@@ -12,11 +12,11 @@
 */
 
 
-Route::get('queue', function(){
-    dispatch(new \App\Jobs\TestJob());
-});
+//Route::get('queue', function(){
+//    dispatch(new \App\Jobs\TestJob());
+//});
 //testing paystack payment gateway
-Route::get('paystack_test', 'PaymentController@testForm');
+//Route::get('paystack_test', 'PaymentController@testForm');
 
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 
