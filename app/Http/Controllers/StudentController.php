@@ -44,7 +44,7 @@ class StudentController extends Controller
         $classrooms = Classroom::all();
         $guardians = Guardian::where('status', '=', 'active')->get();
         $countries = Country::all();
-        $admin_number = generate_student_admin_number('AIA/C/' . substr(explode('/', $session->name)[0], 2));
+        $admin_number = generate_student_admin_number('LBS/' . substr(explode('/', $session->name)[0], 2));
 
         return view('student.create')
             ->with('houses', $houses)
@@ -55,7 +55,8 @@ class StudentController extends Controller
     public function store(Requests\StoreNewStudent $request){
 
 
-//        dd($request->all());
+      //  dd($request->all());
+
         $user = new User;
 
         $user->username = $request->admin_number;

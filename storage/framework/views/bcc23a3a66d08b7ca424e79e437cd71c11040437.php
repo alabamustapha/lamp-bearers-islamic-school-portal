@@ -128,9 +128,9 @@
 
                                          <div class="col-lg-3">
                                             <div class="form-group">
-                                                <label class="font-normal control-label">Occupation *</label>
+                                                <label class="font-normal control-label">Occupation </label>
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-key"></i></span><input type="text" class="form-control input-lg" name="occupation" required="" value="<?php echo e(old('occupation')); ?>">
+                                                    <span class="input-group-addon"><i class="fa fa-key"></i></span><input type="text" class="form-control input-lg" name="occupation" value="<?php echo e(old('occupation')); ?>">
                                                 </div>
                                             </div>
                                         </div>

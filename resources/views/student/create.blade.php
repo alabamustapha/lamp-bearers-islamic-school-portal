@@ -196,7 +196,7 @@
                                            <select class="form-control input-lg" name="classroom_id" required="">
                                            <option>--select--</option>
                                            @foreach($classrooms as $classroom)
-                                               <option value="{{ $classroom->id }}" {{ old('classroom_id') == $classroom->id ? 'selected' : ''}}>{{ $classroom->name }}</option>
+                                               <option value="{{ $classroom->id }}" {{ old('classroom_id') == $classroom->id ? 'selected' : ''}}>{{ $classroom->level->name . ' ' . $classroom->name }}</option>
                                            @endforeach
                                            </select>
                                        </div>
@@ -224,7 +224,7 @@
                                     <div class="col-lg-4">
                                        <div class="form-group">
                                            <label class="control-label">Guardian </label>
-                                           <select class="form-control input-lg" name="guardian_id" disabled>
+                                           <select class="form-control input-lg" name="guardian_id" readonly="readonly">
 
                                            </select>
                                        </div>

@@ -32,7 +32,7 @@ class StoreNewGuardian extends FormRequest
             'phone'         => 'required|unique:guardians,phone',
             'guardian_id'   => 'required|unique:guardians,guardian_id',
             'address'       => 'required|min:10',
-            'occupation'    => 'required',
+            'occupation'    => 'nullable|string|min:3',
             'sex'           => 'required|in:Male,Female',
             'user_id'       => 'integer|exists:users,id',
             'country_id'    => 'required|integer|exists:countries,id',

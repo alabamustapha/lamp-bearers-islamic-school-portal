@@ -21,7 +21,7 @@ class CreateGuardiansTable extends Migration
             $table->string('phone')->unique();
             $table->string('guardian_id')->unique();
             $table->string('address');
-            $table->string('occupation');
+            $table->string('occupation')->nullable();
             $table->string('image')->nullable()->unique();
             $table->enum('sex', ["Male", "Female"]);
             $table->enum('status', ["active", "inactive"])->default('active');

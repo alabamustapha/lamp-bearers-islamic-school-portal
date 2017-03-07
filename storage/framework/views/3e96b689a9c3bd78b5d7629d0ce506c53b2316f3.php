@@ -195,7 +195,7 @@
                                            <select class="form-control input-lg" name="classroom_id" required="">
                                            <option>--select--</option>
                                            <?php $__currentLoopData = $classrooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $classroom): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                               <option value="<?php echo e($classroom->id); ?>" <?php echo e(old('classroom_id') == $classroom->id ? 'selected' : ''); ?>><?php echo e($classroom->name); ?></option>
+                                               <option value="<?php echo e($classroom->id); ?>" <?php echo e(old('classroom_id') == $classroom->id ? 'selected' : ''); ?>><?php echo e($classroom->level->name . ' ' . $classroom->name); ?></option>
                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                            </select>
                                        </div>
@@ -223,7 +223,7 @@
                                     <div class="col-lg-4">
                                        <div class="form-group">
                                            <label class="control-label">Guardian </label>
-                                           <select class="form-control input-lg" name="guardian_id" disabled>
+                                           <select class="form-control input-lg" name="guardian_id" readonly="readonly">
 
                                            </select>
                                        </div>
