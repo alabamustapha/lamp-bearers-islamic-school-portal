@@ -200,7 +200,7 @@
                                     <td>{{ $student->sex }}</td>
                                     <td>{{ $student->dob->format('d/m/Y') }}</td>
                                     <td>{{ $student->house->name }}</td>
-                                    <td>{{ $student->guardian->name }}</td>
+                                    <td>{{ $student->guardian->name or 'N/A' }}</td>
                                     <td class="center">
                                         <div class="btn-group">
                                             <a type="button" class="btn btn-outline btn-xs btn-primary" href="{{ url('admin/students/' . $student->id) }}" target="_blank">View</a>
