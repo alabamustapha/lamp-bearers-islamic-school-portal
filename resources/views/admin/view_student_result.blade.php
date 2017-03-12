@@ -327,7 +327,7 @@
 
                     $student_score.change(function(){
 
-                       alert($(this).val());
+                       //alert($(this).val());
                       $update_score = $(this);
                       $form = $(this).closest('tr').children('form');
                       $form_url = $form.attr('action');
