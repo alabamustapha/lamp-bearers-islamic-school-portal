@@ -37,9 +37,9 @@ class FirstTermResultsSeeder extends Seeder
                             'subject_id' => $subject->id,
                             'classroom_id' => $student->classroom->id,
                             'teacher_id' => $subject->pivot->teacher_id,
-                            'first_ca' => rand(5,19),
-                            'second_ca' => rand(3,17),
-                            'exam' => rand(10,54),
+                            'first_ca' => 0,
+                            'second_ca' => 0,
+                            'exam' => 0,
                             'term' => 'first'
                         ]);
                     }
