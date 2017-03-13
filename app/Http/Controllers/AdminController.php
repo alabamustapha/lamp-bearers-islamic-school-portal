@@ -122,7 +122,8 @@ class AdminController extends Controller
 
             $subject_id = Subject::where('name', $row->subject)->first()->id;
 
-            $result = Result::where('student_id', $student_id)->where('session_id', $session_id)->where('classroom_id', $request->classroom_id)->where('subject_id', $subject_id)->first();
+            $result = Result::where('student_id', $student_id)->where('session_id', $session_id)->where('classroom_id', $request->classroom_id)->where('subject_id', $subject_id)->where('term', $request->term)->first();
+            
 
                 if(isset($result) || !is_null($result) ){
 
