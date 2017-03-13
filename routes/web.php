@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('admin/students/{student_id}', 'AdminController@showStudent')->name('admin_students_show');
         Route::get('admin/students/{student_id}/results/session/{session_id}/view', 'AdminController@showStudentResult')->name('admin_students_show_results');
         Route::post('admin/students/{student_id}/results/session/{session_id}/update', 'AdminController@updateStudentResult')->name('admin_students_update_results');
+        Route::post('admin/students/{student_id}/results/session/{session_id}/update_student_term_results_excel', 'AdminController@updateStudentTermResultsExcel')->name('admin_students_update_results');
         Route::get('admin/students/{student_id}/results', 'StudentController@showResults')->name('admin_students_print_results');
         Route::get('admin/students/{student_id}/results/session/{session_id}/edit', 'AdminController@editStudentResult')->name('admin_students_show_edit_results');
         Route::get('admin/students/{student_id}/edit', 'StudentController@edit')->name('admin_students_edit');

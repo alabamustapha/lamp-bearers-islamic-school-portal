@@ -82,7 +82,7 @@
                                             </td>
                                             <td>
                                                 @if($student->guardian)
-                                                    <a class="link-info" href="{{ url('admin/guardians/' . $student->guardian->id) }}" target="_blank" title="{{ "View" . ' ' . $student->name . ' guardian details' }}">{{ $student->guardian->name }}</a>
+                                                    <a class="link-info" href="{{ url('admin/guardians/' . $student->guardian->id) }}" target="_blank" title="{{ "View" . ' ' . $student->name . ' guardian details' }}">{{ $student->guardian->name or 'N/A'}}</a>
                                                 @endif
                                             </td>
                                             {{--<td class="center">--}}

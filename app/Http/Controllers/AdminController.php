@@ -9,12 +9,14 @@ use App\House;
 use App\Result;
 use App\Session;
 use App\Student;
+use App\Subject;
 use App\Teacher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class AdminController extends Controller
@@ -109,6 +111,34 @@ class AdminController extends Controller
         $score['position'] = $result->position();
 
         return $score;
+
+    }
+
+    public function updateStudentTermResultsExcel(Requests\AdminUpdateStudentTermResultsExcel $request, $student_id, $session_id){
+
+        $excel_results = Excel::load($request->student_term_results)->get();
+        $error_counts = 0;
+        foreach($excel_results as $row){
+
+            $subject_id = Subject::where('name', $row->subject)->first()->id;
+
+            $result = Result::where('student_id', $student_id)->where('session_id', $session_id)->where('classroom_id', $request->classroom_id)->where('subject_id', $subject_id)->first();
+
+                if(isset($result) || !is_null($result) ){
+
+                    if((int)$row->ca1 <= 20 && (int)$row->ca2 <= 20 && (int)$row->exam <= 60){
+                        $result->first_ca = (int)$row->ca1;
+                        $result->second_ca = (int)$row->ca2;
+                        $result->exam = (int)$row->exam;
+                        $result->save();
+                    }else{
+                        $error_counts++;
+                    }
+            }
+        }
+
+        $message = $error_counts > 0 ? 'Student results updated, ' . $error_counts . ' scores not updated' : 'Student results updated successfully';
+        return back()->with('message', $message);
 
     }
 
@@ -209,17 +239,12 @@ class AdminController extends Controller
             abort(403);
         }
 
-
-
     }
 
 
     public function showGuardian($guardian_id){
 
-
-
         $guardian = Guardian::with('students')->findOrFail($guardian_id);
-
 
         return view('admin.guardian')->with('guardian', $guardian);
 

@@ -122,7 +122,7 @@
                                         <td><a class="" href="<?php echo e(url('teacher/classrooms/' .  $classroom->id  . '/students/' . $student->id )); ?>" title="<?php echo e('View ' . $student->name . ' profile'); ?>"><?php echo e($student->name); ?></a></td>
                                         <td><?php echo e($student->sex); ?></td>
                                         <td><?php echo e($student->house->name); ?></td>
-                                        <td><?php echo e($student->guardian->name); ?></td>
+                                        <td><?php echo e(isset($student->guardian->name) ? $student->guardian->name : 'N/A'); ?></td>
 
                                         <?php if(isset($session) && !is_null($session) && ($session->term() == 'third' || $session->third_term == 'closed')): ?>
                                         <td></td>

@@ -272,7 +272,7 @@
                                     <td>{{ $student->sex }}</td>
                                     <td>{{ $student->dob->format('d/m/Y') }}</td>
                                     <td>{{ $student->house->name }}</td>
-                                    <td>{{ $student->guardian->name }}</td>
+                                    <td>{{ $student->guardian->name or 'N/A' }}</td>
                                     <td class="center">
                                     {{ $student->status }}
                                     </td>

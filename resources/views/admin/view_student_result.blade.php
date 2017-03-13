@@ -19,8 +19,80 @@
                 </li>
             </ol>
         </div>
-        <div class="col-lg-2">
+          <div class="col-lg-2">
+            <button type="button" class="btn btn-primary m-t-md" data-toggle="modal" data-target="#edit-student-info">
+                Upload Result
+            </button>
+             <div class="modal inmodal" id="edit-student-info" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content animated bounceInRight">
 
+
+                            <form method="POST" class="form" enctype="multipart/form-data" action="{{ url('admin/students/' . $student->id . '/results/session/' . $session->id . '/update_student_term_results_excel') }}">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                                 <h4 class="modal-title">{{ $student->name }}</h4>
+
+                            </div>
+
+                            <div class="modal-body">
+
+
+
+                                {{ csrf_field() }}
+                                 <input type="hidden" name="classroom_id" value="{{ $student->classroom->id }}">
+
+                              @if (count($errors) > 0)
+                                 <!-- Form Error List -->
+                                 <div class="alert alert-danger">
+                                     <strong>Whoops! Something went wrong!</strong>
+                                     <ul>
+                                         @foreach ($errors->all() as $error)
+                                             <li>{{ $error }}</li>
+                                         @endforeach
+                                     </ul>
+                                 </div>
+                             @endif
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="control-label" for="upload_student_term_results_excel">Select file</label>
+                                            <input type="file" name="student_term_results" id="upload_student_term_results_excel" class="form-control" required>
+                                        </div>
+                                     </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Term </label>
+                                                <select class="form-control" name="term" required>
+                                                    <option></option>
+                                                    <option value="first"  {{ old('term') == 'first' ? 'selected' : '' }}>First</option>
+                                                    <option value="second" {{ old('term') == 'second' ? 'selected' : '' }}>Second</option>
+                                                    <option value="third"  {{ old('term') == 'third' ? 'selected' : '' }}>Third</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Upload result</button>
+                            </div>
+
+                     </form>
+                     </div>
+                </div>
+            </div>
         </div>
  </div>
 @endsection

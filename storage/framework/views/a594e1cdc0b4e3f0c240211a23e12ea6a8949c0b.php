@@ -83,7 +83,7 @@
                                             </td>
                                             <td>
                                                 <?php if($student->guardian): ?>
-                                                    <a class="link-info" href="<?php echo e(url('admin/guardians/' . $student->guardian->id)); ?>" target="_blank" title="<?php echo e("View" . ' ' . $student->name . ' guardian details'); ?>"><?php echo e($student->guardian->name); ?></a>
+                                                    <a class="link-info" href="<?php echo e(url('admin/guardians/' . $student->guardian->id)); ?>" target="_blank" title="<?php echo e("View" . ' ' . $student->name . ' guardian details'); ?>"><?php echo e(isset($student->guardian->name) ? $student->guardian->name : 'N/A'); ?></a>
                                                 <?php endif; ?>
                                             </td>
                                             

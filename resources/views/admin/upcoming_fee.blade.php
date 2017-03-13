@@ -104,8 +104,8 @@
                            @elseif($term == 'third')
                            <td>{{ number_format($student->classroom->third_term_charges) }}</td>
                            @endif
-                           <td>{{ $student->guardian->name }}</td>
-                           <td>{{ $student->guardian->phone }}</td>
+                           <td>{{ $student->guardian->name or 'N/A'}}</td>
+                           <td>{{ $student->guardian->phone or 'N/A' }}</td>
                            <td><button>Pay</button></td>
                        </tr>
                        @endforeach
