@@ -150,17 +150,20 @@
 
                                           <td style="width: 13%;">
                                               <div class="input-group">
-                                                  <input type="number" name="first_ca" class="form-control first_ca" value="{{ !is_null($result) ? $result->first_ca : '' }}" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                  <input type="number" name="first_ca" class="form-control first_ca" value="{{ !is_null($result) ? $result->first_ca : '' }}" max="20" min="0">
+                                                  {{--<span class="input-group-addon"><i>/20</i></span>--}}
                                               </div>
                                           </td>
                                           <td style="width: 13%;">
                                               <div class="input-group">
-                                                  <input type="number" name="second_ca" class="form-control second_ca" value="{{ !is_null($result) ? $result->second_ca : '' }}" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                  <input type="number" name="second_ca" class="form-control second_ca" value="{{ !is_null($result) ? $result->second_ca : '' }}" max="20" min="0">
+                                                  {{--<span class="input-group-addon"><i>/20</i></span>--}}
                                               </div>
                                           </td>
                                           <td style="width: 13%;">
                                               <div class="input-group">
-                                                  <input type="number" name="exam" class="form-control exam" value="{{ !is_null($result) ? $result->exam : '' }}" max="60" min="0"><span class="input-group-addon"><i>/60</i></span>
+                                                  <input type="number" name="exam" class="form-control exam" value="{{ !is_null($result) ? $result->exam : '' }}" max="60" min="0">
+                                                  {{--<span class="input-group-addon"><i>/60</i></span>--}}
                                               </div>
                                           </td>
                                       </form>
@@ -242,17 +245,20 @@
 
                                                <td style="width: 13%;">
                                                    <div class="input-group">
-                                                       <input type="number" name="first_ca" class="form-control first_ca" value="{{ !is_null($result) ? $result->first_ca : '' }}" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                       <input type="number" name="first_ca" class="form-control first_ca" value="{{ !is_null($result) ? $result->first_ca : '' }}" max="20" min="0">
+                                                       {{--<span class="input-group-addon"><i>/20</i></span>--}}
                                                    </div>
                                                </td>
                                                <td style="width: 13%;">
                                                    <div class="input-group">
-                                                       <input type="number" name="second_ca" class="form-control second_ca" value="{{ !is_null($result) ? $result->second_ca : '' }}" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                       <input type="number" name="second_ca" class="form-control second_ca" value="{{ !is_null($result) ? $result->second_ca : '' }}" max="20" min="0">
+                                                       {{--<span class="input-group-addon"><i>/20</i></span>--}}
                                                    </div>
                                                </td>
                                                <td style="width: 13%;">
                                                    <div class="input-group">
-                                                       <input type="number" name="exam" class="form-control exam" value="{{ !is_null($result) ? $result->exam : '' }}" max="60" min="0"><span class="input-group-addon"><i>/60</i></span>
+                                                       <input type="number" name="exam" class="form-control exam" value="{{ !is_null($result) ? $result->exam : '' }}" max="60" min="0">
+                                                       {{--<span class="input-group-addon"><i>/60</i></span>--}}
                                                    </div>
                                                </td>
                                            </form>
@@ -333,17 +339,20 @@
 
                                                    <td style="width: 13%;">
                                                        <div class="input-group">
-                                                           <input type="number" name="first_ca" class="form-control first_ca" value="{{ !is_null($result) ? $result->first_ca : '' }}" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                           <input type="number" name="first_ca" class="form-control first_ca" value="{{ !is_null($result) ? $result->first_ca : '' }}" max="20" min="0">
+                                                           {{--<span class="input-group-addon"><i>/20</i></span>--}}
                                                        </div>
                                                    </td>
                                                    <td style="width: 13%;">
                                                        <div class="input-group">
-                                                           <input type="number" name="second_ca" class="form-control second_ca" value="{{ !is_null($result) ? $result->second_ca : '' }}" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                           <input type="number" name="second_ca" class="form-control second_ca" value="{{ !is_null($result) ? $result->second_ca : '' }}" max="20" min="0">
+                                                           {{--<span class="input-group-addon"><i>/20</i></span>--}}
                                                        </div>
                                                    </td>
                                                    <td style="width: 13%;">
                                                        <div class="input-group">
-                                                           <input type="number" name="exam" class="form-control exam" value="{{ !is_null($result) ? $result->exam : '' }}" max="60" min="0"><span class="input-group-addon"><i>/60</i></span>
+                                                           <input type="number" name="exam" class="form-control exam" value="{{ !is_null($result) ? $result->exam : '' }}" max="60" min="0">
+                                                           {{--<span class="input-group-addon"><i>/60</i></span>--}}
                                                        </div>
                                                    </td>
                                                </form>
