@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $classroom->name)
+@section('title', $classroom->level->name . ' '  . $classroom->name)
 
 @section('styles')
 <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
@@ -20,7 +20,82 @@
             </ol>
         </div>
         <div class="col-lg-2">
+                <button type="button" class="btn btn-primary m-t-md" data-toggle="modal" data-target="#edit-student-info">
+                    Upload Result
+                </button>
+                 <div class="modal inmodal" id="edit-student-info" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
 
+
+                                <form method="POST" class="form" enctype="multipart/form-data" action="{{ url('teacher/classrooms/' . $classroom->id . '/subjects/' . $subject->subject->id . '/update_students_term_results_excel') }}">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                                     <h4 class="modal-title">{{ $classroom->level->name . ' ' . $classroom->name . ' - ' . $subject->subject->short_name}}</h4>
+
+                                </div>
+
+                                <div class="modal-body">
+
+
+
+                                    {{ csrf_field() }}
+                                     <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
+                                     <input type="hidden" name="subject_id" value="{{ $subject->subject->id }}">
+                                     <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                                     <input type="hidden" name="session_id" value="{{ $session->id }}">
+
+                                  @if (count($errors) > 0)
+                                     <!-- Form Error List -->
+                                     <div class="alert alert-danger">
+                                         <strong>Whoops! Something went wrong!</strong>
+                                         <ul>
+                                             @foreach ($errors->all() as $error)
+                                                 <li>{{ $error }}</li>
+                                             @endforeach
+                                         </ul>
+                                     </div>
+                                 @endif
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+
+                                        <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="upload_students_term_results_excel">Select file</label>
+                                                <input type="file" name="students_term_results" id="upload_students_term_results_excel" class="form-control" required>
+                                            </div>
+                                         </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Term </label>
+                                                    <select class="form-control" name="term" required>
+                                                        <option></option>
+                                                        <option value="first"  {{ old('term') == 'first' ? 'selected' : '' }}>First</option>
+                                                        <option value="second" {{ old('term') == 'second' ? 'selected' : '' }}>Second</option>
+                                                        <option value="third"  {{ old('term') == 'third' ? 'selected' : '' }}>Third</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Upload result</button>
+                                </div>
+
+                         </form>
+                         </div>
+                    </div>
+                </div>
         </div>
  </div>
 @endsection
@@ -45,7 +120,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content" style="display: none">
                     <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover subjects-score-dataTables" >
                             <thead>
@@ -60,8 +135,8 @@
                                     <th>Grade</th>
                                     <th>Position</th>
                                 </tr>
-                                </thead>
-                                <tbody>
+                            </thead>
+                            <tbody>
                                 @foreach($students as $student)
                                 <tr class="gradeX">
                                     <td>{{ $student->admin_number }}</td>
@@ -80,12 +155,14 @@
                                           <input type="hidden" name="term" value="{{ $session->term() }}">
 
                                           <td style="width: 13%;">
+
                                               <div class="input-group">
                                                   <input type="number" name="first_ca" class="form-control first_ca" value="{{ !is_null($score) ? $score->first_ca : '' }}" max="20" min="0">
                                                   {{--<span class="input-group-addon"><i>/20</i></span>--}}
                                               </div>
                                           </td>
                                           <td style="width: 13%;">
+
                                               <div class="input-group">
                                                   <input type="number" name="second_ca" class="form-control second_ca" value="{{ !is_null($score) ? $score->second_ca : '' }}" max="20" min="0">
                                                   {{--<span class="input-group-addon"><i>/20</i></span>--}}
@@ -93,8 +170,7 @@
                                           </td>
                                           <td style="width: 13%;">
                                               <div class="input-group">
-                                                  <input type="number" name="exam" class="form-control exam" value="{{ !is_null($score) ? $score->exam : '' }}" max="60" min="0">
-                                                  {{--<span class="input-group-addon"><i>/60</i></span>--}}
+                                                  <input type="number" name="exam" class="form-control exam" value="{{ !is_null($score) ? $score->exam : '' }}" max="60" min="0">{{--<span class="input-group-addon"><i>/60</i></span>--}}
                                               </div>
                                           </td>
                                       </form>
@@ -144,7 +220,7 @@
                              </a>
                          </div>
                      </div>
-                     <div class="ibox-content">
+                     <div class="ibox-content" style="display: none">
                          <div class="table-responsive">
                                  <table class="table table-striped table-bordered table-hover subjects-score-dataTables" >
                                  <thead>
@@ -243,7 +319,7 @@
                                       </a>
                                   </div>
                               </div>
-                              <div class="ibox-content">
+                              <div class="ibox-content" style="display: none">
                                   <div class="table-responsive">
                                           <table class="table table-striped table-bordered table-hover subjects-score-dataTables" >
                                           <thead>

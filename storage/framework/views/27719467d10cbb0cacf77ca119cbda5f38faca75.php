@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', $classroom->name); ?>
+<?php $__env->startSection('title', $classroom->level->name . ' '  . $classroom->name); ?>
 
 <?php $__env->startSection('styles'); ?>
 <link href="<?php echo e(asset('css/plugins/dataTables/datatables.min.css')); ?>" rel="stylesheet">
@@ -18,7 +18,83 @@
             </ol>
         </div>
         <div class="col-lg-2">
+                <button type="button" class="btn btn-primary m-t-md" data-toggle="modal" data-target="#edit-student-info">
+                    Upload Result
+                </button>
+                 <div class="modal inmodal" id="edit-student-info" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
 
+
+                                <form method="POST" class="form" enctype="multipart/form-data" action="<?php echo e(url('teacher/classrooms/' . $classroom->id . '/subjects/' . $subject->subject->id . '/update_students_term_results_excel')); ?>">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                                     <h4 class="modal-title"><?php echo e($classroom->level->name . ' ' . $classroom->name . ' - ' . $subject->subject->short_name); ?></h4>
+
+                                </div>
+
+                                <div class="modal-body">
+
+
+
+                                    <?php echo e(csrf_field()); ?>
+
+                                     <input type="hidden" name="classroom_id" value="<?php echo e($classroom->id); ?>">
+                                     <input type="hidden" name="subject_id" value="<?php echo e($subject->subject->id); ?>">
+                                     <input type="hidden" name="teacher_id" value="<?php echo e($teacher->id); ?>">
+                                     <input type="hidden" name="session_id" value="<?php echo e($session->id); ?>">
+
+                                  <?php if(count($errors) > 0): ?>
+                                     <!-- Form Error List -->
+                                     <div class="alert alert-danger">
+                                         <strong>Whoops! Something went wrong!</strong>
+                                         <ul>
+                                             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                 <li><?php echo e($error); ?></li>
+                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                         </ul>
+                                     </div>
+                                 <?php endif; ?>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+
+                                        <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label" for="upload_students_term_results_excel">Select file</label>
+                                                <input type="file" name="students_term_results" id="upload_students_term_results_excel" class="form-control" required>
+                                            </div>
+                                         </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Term </label>
+                                                    <select class="form-control" name="term" required>
+                                                        <option></option>
+                                                        <option value="first"  <?php echo e(old('term') == 'first' ? 'selected' : ''); ?>>First</option>
+                                                        <option value="second" <?php echo e(old('term') == 'second' ? 'selected' : ''); ?>>Second</option>
+                                                        <option value="third"  <?php echo e(old('term') == 'third' ? 'selected' : ''); ?>>Third</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Upload result</button>
+                                </div>
+
+                         </form>
+                         </div>
+                    </div>
+                </div>
         </div>
  </div>
 <?php $__env->stopSection(); ?>
@@ -43,7 +119,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content" style="display: none">
                     <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover subjects-score-dataTables" >
                             <thead>
@@ -58,8 +134,8 @@
                                     <th>Grade</th>
                                     <th>Position</th>
                                 </tr>
-                                </thead>
-                                <tbody>
+                            </thead>
+                            <tbody>
                                 <?php $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                 <tr class="gradeX">
                                     <td><?php echo e($student->admin_number); ?></td>
@@ -78,18 +154,22 @@
                                           <input type="hidden" name="term" value="<?php echo e($session->term()); ?>">
 
                                           <td style="width: 13%;">
+
                                               <div class="input-group">
-                                                  <input type="number" name="first_ca" class="form-control first_ca" value="<?php echo e(!is_null($score) ? $score->first_ca : ''); ?>" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                  <input type="number" name="first_ca" class="form-control first_ca" value="<?php echo e(!is_null($score) ? $score->first_ca : ''); ?>" max="20" min="0">
+                                                  
+                                              </div>
+                                          </td>
+                                          <td style="width: 13%;">
+
+                                              <div class="input-group">
+                                                  <input type="number" name="second_ca" class="form-control second_ca" value="<?php echo e(!is_null($score) ? $score->second_ca : ''); ?>" max="20" min="0">
+                                                  
                                               </div>
                                           </td>
                                           <td style="width: 13%;">
                                               <div class="input-group">
-                                                  <input type="number" name="second_ca" class="form-control second_ca" value="<?php echo e(!is_null($score) ? $score->second_ca : ''); ?>" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
-                                              </div>
-                                          </td>
-                                          <td style="width: 13%;">
-                                              <div class="input-group">
-                                                  <input type="number" name="exam" class="form-control exam" value="<?php echo e(!is_null($score) ? $score->exam : ''); ?>" max="60" min="0"><span class="input-group-addon"><i>/60</i></span>
+                                                  <input type="number" name="exam" class="form-control exam" value="<?php echo e(!is_null($score) ? $score->exam : ''); ?>" max="60" min="0">
                                               </div>
                                           </td>
                                       </form>
@@ -177,17 +257,20 @@
 
                                                <td style="width: 13%;">
                                                    <div class="input-group">
-                                                       <input type="number" name="first_ca" class="form-control first_ca" value="<?php echo e(!is_null($score) ? $score->first_ca : ''); ?>" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                       <input type="number" name="first_ca" class="form-control first_ca" value="<?php echo e(!is_null($score) ? $score->first_ca : ''); ?>" max="20" min="0">
+                                                       
                                                    </div>
                                                </td>
                                                <td style="width: 13%;">
                                                    <div class="input-group">
-                                                       <input type="number" name="second_ca" class="form-control second_ca" value="<?php echo e(!is_null($score) ? $score->second_ca : ''); ?>" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                       <input type="number" name="second_ca" class="form-control second_ca" value="<?php echo e(!is_null($score) ? $score->second_ca : ''); ?>" max="20" min="0">
+                                                       
                                                    </div>
                                                </td>
                                                <td style="width: 13%;">
                                                    <div class="input-group">
-                                                       <input type="number" name="exam" class="form-control exam" value="<?php echo e(!is_null($score) ? $score->exam : ''); ?>" max="60" min="0"><span class="input-group-addon"><i>/60</i></span>
+                                                       <input type="number" name="exam" class="form-control exam" value="<?php echo e(!is_null($score) ? $score->exam : ''); ?>" max="60" min="0">
+                                                       
                                                    </div>
                                                </td>
                                            </form>
@@ -276,17 +359,20 @@
 
                                                         <td style="width: 13%;">
                                                             <div class="input-group">
-                                                                <input type="number" name="first_ca" class="form-control first_ca" value="<?php echo e(!is_null($score) ? $score->first_ca : ''); ?>" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                                <input type="number" name="first_ca" class="form-control first_ca" value="<?php echo e(!is_null($score) ? $score->first_ca : ''); ?>" max="20" min="0">
+                                                                
                                                             </div>
                                                         </td>
                                                         <td style="width: 13%;">
                                                             <div class="input-group">
-                                                                <input type="number" name="second_ca" class="form-control second_ca" value="<?php echo e(!is_null($score) ? $score->second_ca : ''); ?>" max="20" min="0"><span class="input-group-addon"><i>/20</i></span>
+                                                                <input type="number" name="second_ca" class="form-control second_ca" value="<?php echo e(!is_null($score) ? $score->second_ca : ''); ?>" max="20" min="0">
+                                                                
                                                             </div>
                                                         </td>
                                                         <td style="width: 13%;">
                                                             <div class="input-group">
-                                                                <input type="number" name="exam" class="form-control exam" value="<?php echo e(!is_null($score) ? $score->exam : ''); ?>" max="60" min="0"><span class="input-group-addon"><i>/60</i></span>
+                                                                <input type="number" name="exam" class="form-control exam" value="<?php echo e(!is_null($score) ? $score->exam : ''); ?>" max="60" min="0">
+                                                                
                                                             </div>
                                                         </td>
                                                     </form>

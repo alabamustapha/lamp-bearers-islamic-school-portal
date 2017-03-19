@@ -19,6 +19,7 @@ use App\Events\TeacherRegistration;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TeacherController extends Controller
 {
@@ -188,6 +189,58 @@ class TeacherController extends Controller
     }
 
 
+    public function storeStudentSubjectScoreExcel(Requests\TeacherSubjectClassroomTermResults $request, $classroom_id, $subject_id){
+
+
+        $excel_results = Excel::load($request->students_term_results)->get();
+
+        $error_counts = 0;
+
+
+        foreach($excel_results as $row){
+            $student = Student::where('admin_number', $row->admin_number)->first();
+
+            $result = Result::where('student_id', $student->id)->where('session_id', $request->session_id)->where('classroom_id', $request->classroom_id)->where('subject_id', $subject_id)->where('term', $request->term)->first();
+
+
+            if(isset($result) || !is_null($result) ){
+
+
+                if((int)$row->ca1 <= 20 && (int)$row->ca2 <= 20 && (int)$row->exam <= 60){
+                    $result->first_ca = (int)$row->ca1;
+                    $result->second_ca = (int)$row->ca2;
+                    $result->exam = (int)$row->exam;
+                    $result->save();
+
+                }else{
+                    $error_counts++;
+                }
+            }else{
+
+                if((int)$row->ca1 <= 20 && (int)$row->ca2 <= 20 && (int)$row->exam <= 60) {
+                    $result = Result::create([
+                        'session_id' => $request->session_id,
+                        'classroom_id' => $request->classroom_id,
+                        'subject_id' => $request->subject_id,
+                        'student_id' => $student->id,
+                        'teacher_id' => $request->teacher_id,
+                        'term' => $request->term,
+                        'first_ca' => (int)$row->ca1,
+                        'second_ca' => (int)$row->ca2,
+                        'exam' => (int)$row->exam,
+                    ]);
+                }
+
+            }
+
+
+        }
+
+        $message = $error_counts > 0 ? 'Student results updated, ' . $error_counts . ' scores not updated' : 'Student results updated successfully';
+
+        return back()->with('message', $message);
+
+    }
     public function storeStudentSubjectScore(Requests\StoreStudentSubjectScore $request, $classroom_id, $subject_id, $student_id){
 
         $result = Result::where('classroom_id', '=', $request->classroom_id)

@@ -171,6 +171,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('teacher/classrooms/{classroom_id}/subjects/{subject_id}', 'TeacherController@showSubject')->name('teacher_classroom_subject');
 
 
+    Route::post('teacher/classrooms/{classroom_id}/subjects/{subject_id}/update_students_term_results_excel', 'TeacherController@storeStudentSubjectScoreExcel')->name('teacher_store_student_subject_scores_excel');
     Route::post('teacher/classrooms/{classroom_id}/subjects/{subject_id}/students/{student_id}/results/create', 'TeacherController@storeStudentSubjectScore')->name('teacher_store_student_subject_scores');
     Route::get('teacher/classrooms/{classroom_id}/students/{student_id}/results', 'StudentController@showResults')->name('teacher_show_student_results_scores');
 

@@ -144,7 +144,7 @@ class StudentController extends Controller
 
 
         if(!Auth::user()->isAdmin()){
-            return back()->with('message', 'you dont have the permission to update this record');
+            return back()->with('message', 'you don\'t have the permission to update this record');
         }
 
         $student = Student::findOrFail($id);
@@ -161,7 +161,9 @@ class StudentController extends Controller
         $student->dob = Carbon::createFromFormat('m/d/Y', $request->dob);
 
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image') && !profile_image_taken($request->image, 'student')) {
+
+
 
             if ($request->file('image')->isValid()) {
 

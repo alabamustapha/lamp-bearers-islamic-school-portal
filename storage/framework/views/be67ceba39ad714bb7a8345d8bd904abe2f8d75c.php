@@ -275,7 +275,7 @@
                                     <td><?php echo e($student->sex); ?></td>
                                     <td><?php echo e($student->dob->format('d/m/Y')); ?></td>
                                     <td><?php echo e($student->house->name); ?></td>
-                                    <td><?php echo e($student->guardian->name); ?></td>
+                                    <td><?php echo e(isset($student->guardian->name) ? $student->guardian->name : 'N/A'); ?></td>
                                     <td class="center">
                                     <?php echo e($student->status); ?>
 

@@ -36,7 +36,7 @@ class UpdateStudentsRecord extends FormRequest
             'address'       => 'min:10',
             'comment'       => 'min:4',
             'house_id'      => 'integer|exists:houses,id',
-            'classroom_id'      => 'integer|exists:classrooms,id',
+            'classroom_id'  => 'integer|exists:classrooms,id',
             'status'        => 'in:active,promoting,promoted,repeating,repeated,left,dismissed,graduated,graduating,deactivated',
             'guardian_id'   => 'nullable|integer|exists:guardians,id',
             'image'         => 'mimes:jpeg,jpg,png|max:120|unique:students,image,'.$student->id,

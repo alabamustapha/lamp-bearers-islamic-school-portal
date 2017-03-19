@@ -114,7 +114,7 @@
                                             <div class="form-group">
                                                 <label class="font-normal control-label">DOB *</label>
                                                 <div class="input-group date">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="date" id="dob" class="form-control input-lg" name="dob" value="{{ $student->dob->format('m/d/Y') }}" required>
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" id="dob" class="form-control input-lg" name="dob" value="{{ $student->dob->format('m/d/Y') }}" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -359,10 +359,27 @@
 
 @section('scripts')
     <!-- ChartJS-->
+    <script src="{{ asset('js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
     <script src="{{ asset('js/plugins/chartJs/Chart.min.js') }}"></script>
     <script>
 
         $(function () {
+
+        $('#dob').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        $('#date_admitted').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
 
            function readURL(input) {
                if (input.files && input.files[0]) {

@@ -17,6 +17,7 @@ function delete_profile_image($user){
        $status = \Illuminate\Support\Facades\Storage::disk('public')->delete($user->image);
 
         if($status) {
+
             $user->image = null;
             $user->save();
         }
@@ -25,4 +26,16 @@ function delete_profile_image($user){
 
     return $status;
 
+}
+
+function profile_image_taken($image, $account){
+    $img_name = md5_file($image->path());
+
+    $students = \App\Student::where('image', 'images/student/profile/' . $img_name . '.' . $image->extension())->first();
+
+    if($students && !is_null($students)){
+        return true;
+    }
+
+    return false;
 }

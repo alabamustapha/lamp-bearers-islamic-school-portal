@@ -18,7 +18,81 @@
             </ol>
         </div>
         <div class="col-lg-2">
+            <button type="button" class="btn btn-primary m-t-md" data-toggle="modal" data-target="#edit-student-info">
+                                Update classroom
+                            </button>
+                             <div class="modal inmodal" id="edit-student-info" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content animated bounceInRight">
 
+
+                                            <form method="POST" class="form" enctype="multipart/form-data" action="<?php echo e(url('#')); ?>">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+                                                 <h4 class="modal-title"><?php echo e($classroom->level->name . ' ' . $classroom->name); ?></h4>
+
+                                            </div>
+
+                                            <div class="modal-body">
+
+
+
+                                                <?php echo e(csrf_field()); ?>
+
+                                                 <input type="hidden" name="classroom_id" value="<?php echo e($classroom->id); ?>">
+
+
+                                              <?php if(count($errors) > 0): ?>
+                                                 <!-- Form Error List -->
+                                                 <div class="alert alert-danger">
+                                                     <strong>Whoops! Something went wrong!</strong>
+                                                     <ul>
+                                                         <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                                             <li><?php echo e($error); ?></li>
+                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                                     </ul>
+                                                 </div>
+                                             <?php endif; ?>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+
+                                                    <div class="row">
+
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label" for="upload_students_term_results_excel">Select file</label>
+                                                            <input type="file" name="students_term_results" id="upload_students_term_results_excel" class="form-control" required>
+                                                        </div>
+                                                     </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Term </label>
+                                                                <select class="form-control" name="term" required>
+                                                                    <option></option>
+                                                                    <option value="first"  <?php echo e(old('term') == 'first' ? 'selected' : ''); ?>>First</option>
+                                                                    <option value="second" <?php echo e(old('term') == 'second' ? 'selected' : ''); ?>>Second</option>
+                                                                    <option value="third"  <?php echo e(old('term') == 'third' ? 'selected' : ''); ?>>Third</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Upload result</button>
+                                            </div>
+
+                                     </form>
+                                     </div>
+                                </div>
+                            </div>
         </div>
  </div>
 <?php $__env->stopSection(); ?>
