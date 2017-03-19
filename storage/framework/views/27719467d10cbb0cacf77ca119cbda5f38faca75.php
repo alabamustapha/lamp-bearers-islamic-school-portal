@@ -222,7 +222,7 @@
                              </a>
                          </div>
                      </div>
-                     <div class="ibox-content">
+                     <div class="ibox-content" style="display: none">
                          <div class="table-responsive">
                                  <table class="table table-striped table-bordered table-hover subjects-score-dataTables" >
                                  <thead>
@@ -324,7 +324,7 @@
                                       </a>
                                   </div>
                               </div>
-                              <div class="ibox-content">
+                              <div class="ibox-content" style="display: none">
                                   <div class="table-responsive">
                                           <table class="table table-striped table-bordered table-hover subjects-score-dataTables" >
                                           <thead>

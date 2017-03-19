@@ -19,3 +19,4 @@ storage/*.key
 .env.php
 .env.*
 /storage/logs/laravel*.log
+/storage/app/public/
