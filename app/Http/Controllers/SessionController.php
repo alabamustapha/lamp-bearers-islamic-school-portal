@@ -54,7 +54,6 @@ class SessionController extends Controller
 
     public function closeFirstTerm(Requests\CloseFirstTerm $request){
 
-        if(removeLicenceKey(get_licence_key())) {
 
             $session = Session::find($request->session_id);
 
@@ -63,7 +62,7 @@ class SessionController extends Controller
             $session->save();
 
             return redirect('admin/sessions')->with('message', 'First term closed');
-        }
+
     }
 
 

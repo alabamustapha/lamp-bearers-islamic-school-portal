@@ -13,7 +13,7 @@ function term_percentage_done($session_id, $term){
             $total_students_scores_that_should_be_recorded += $classroom->students()->where('status', '=', 'active')->count() * $classroom->subjects()->count();
     }
 
-  //  var_dump($total_students_scores_that_should_be_recorded);
+    //var_dump($total_students_scores_that_should_be_recorded);
 
 
     $classrooms_with_results_ids = array_unique(\App\Result::where('session_id', '=', $session_id)->where('term', '=', $term)->pluck('classroom_id')->toArray());
@@ -33,7 +33,7 @@ function term_percentage_done($session_id, $term){
 
         $scores_recorded += $records_count;
 
-//        var_dump($classroom->level->name . ' ' . $classroom->name . ' ' . $classroom->students->count() . ' '. $classroom->subjects->count() . ' ' .$records_count);
+       // var_dump($classroom->level->name . ' ' . $classroom->name . ' ' . $classroom->students->count() . ' '. $classroom->subjects->count() . ' ' .$records_count);
 
     }
 
