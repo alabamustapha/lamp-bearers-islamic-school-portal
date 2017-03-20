@@ -25,4 +25,13 @@ class ClassroomSubjectController extends Controller
 
         return back()->with('message', 'Subject teacher updated');
     }
+
+
+    public function remove(Request $request, $id){
+        $classroom_subject = ClassroomSubject::find($id);
+
+        $classroom_subject->delete();
+
+        return back()->with('message', 'Subject removed');
+    }
 }

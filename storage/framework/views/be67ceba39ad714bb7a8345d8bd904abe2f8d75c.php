@@ -395,7 +395,16 @@
                                         <td><?php echo e($subject->teacher->name); ?></td>
                                         <td class="center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-outline btn-xs btn-primary">View</button>
+                                                <form class="form-horizontal" method="POST" action="<?php echo e(url('admin/classroom_subjects/' . $subject->id )); ?>  ">
+
+                                                    <?php echo e(csrf_field()); ?>
+
+                                                    <?php echo e(method_field('DELETE')); ?>
+
+
+                                                    <button type="submit" class="btn btn-outline btn-xs btn-primary">Remove</button>
+                                                </form>
+
                                                 <button type="button" class="btn btn-outline btn-xs btn-primary" data-toggle="modal" data-target="#change-class-subject-teacher<?php echo e($subject->id); ?>">Edit</button>
                                             </div>
                                         </td>

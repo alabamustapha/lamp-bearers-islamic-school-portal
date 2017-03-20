@@ -141,6 +141,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('admin/classroom_subjects', 'ClassroomSubjectController@store')->name('admin_create_classroomsubject');
         Route::put('admin/classroom_subjects/{classroomsubject_id}', 'ClassroomSubjectController@update')->name('admin_update_classroomsubject');
+        Route::delete('admin/classroom_subjects/{classroomsubject_id}', 'ClassroomSubjectController@remove')->name('admin_remove_classroomsubject');
 
         Route::get('admin/results', 'AdminController@showResults')->name('admin_show_results');
 
@@ -160,6 +161,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::put('teacher/classrooms/{classroom_id}/promote', 'TeacherController@promoteAllStudent')->name('teacher_promote_classroom');
     Route::put('teacher/classrooms/{classroom_id}/repeat', 'TeacherController@repeatAllStudent')->name('teacher_repeat_classroom');
+    Route::post('teacher/classrooms/{classroom_id}/upload_classroom_comments_excel', 'TeacherController@uploadClassroomCommentsExcel')->name('teacher_update_classroom_comments_excel');
 
     Route::put('teacher/classrooms/{classroom_id}/graduate', 'TeacherController@graduateAllStudent')->name('teacher_graduate_classroom');
     Route::put('teacher/classrooms/{classroom_id}/students/{student_id}/graduate', 'TeacherController@graduateStudent')->name('teacher_graduate_classroom');

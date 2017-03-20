@@ -163,6 +163,10 @@
                          <?php endif; ?>
                     </ul>
                 </li>
+
+                <li class="<?php echo e(isActiveRoute('faq')); ?>">
+                    <a href="#"><i class="fa fa-comment"></i> <span class="nav-label">FAQ</span></a>
+                </li>
             <?php endif; ?>
 
             <?php if(Auth::user()->isStudent()): ?>

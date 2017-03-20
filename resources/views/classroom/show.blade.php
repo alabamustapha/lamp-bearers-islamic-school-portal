@@ -388,7 +388,14 @@
                                         <td>{{ $subject->teacher->name }}</td>
                                         <td class="center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-outline btn-xs btn-primary">View</button>
+                                                <form class="form-horizontal" method="POST" action="{{ url('admin/classroom_subjects/' . $subject->id ) }}  ">
+
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+
+                                                    <button type="submit" class="btn btn-outline btn-xs btn-primary">Remove</button>
+                                                </form>
+
                                                 <button type="button" class="btn btn-outline btn-xs btn-primary" data-toggle="modal" data-target="#change-class-subject-teacher{{ $subject->id }}">Edit</button>
                                             </div>
                                         </td>

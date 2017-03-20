@@ -28,12 +28,13 @@
                                     <div class="modal-content animated bounceInRight">
 
 
-                                            <form method="POST" class="form" enctype="multipart/form-data" action="{{ url('#') }}">
+                                            <form method="POST" class="form" enctype="multipart/form-data" action="{{ url('teacher/classrooms/' . $classroom->id . '/upload_classroom_comments_excel') }}">
 
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
                                                  <h4 class="modal-title">{{ $classroom->level->name . ' ' . $classroom->name }}</h4>
+                                                 <h3 class="modal-title">Comments and Psychomotor</h3>
 
                                             </div>
 
@@ -43,6 +44,9 @@
 
                                                 {{ csrf_field() }}
                                                  <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
+                                                 <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                                                 <input type="hidden" name="term" value="{{ $session ? $session->term() : null }}">
+                                                 <input type="hidden" name="session_id" value="{{ $session ? $session->id : 0 }}">
 
 
                                               @if (count($errors) > 0)
@@ -65,18 +69,18 @@
 
                                                     <div class="col-lg-6">
                                                         <div class="form-group">
-                                                            <label class="control-label" for="upload_students_term_results_excel">Select file</label>
-                                                            <input type="file" name="students_term_results" id="upload_students_term_results_excel" class="form-control" required>
+                                                            <label class="control-label" for="comments_psychomotor">Select file</label>
+                                                            <input type="file" name="comments_physchomotor" id="comments_psychomotor" class="form-control" required>
                                                         </div>
                                                      </div>
                                                         <div class="col-lg-6">
                                                             <div class="form-group">
-                                                                <label class="control-label">Term </label>
-                                                                <select class="form-control" name="term" required>
+                                                                <label class="control-label">File Type </label>
+                                                                <select class="form-control" name="type" required>
                                                                     <option></option>
-                                                                    <option value="first"  {{ old('term') == 'first' ? 'selected' : '' }}>First</option>
-                                                                    <option value="second" {{ old('term') == 'second' ? 'selected' : '' }}>Second</option>
-                                                                    <option value="third"  {{ old('term') == 'third' ? 'selected' : '' }}>Third</option>
+                                                                    <option value="comments"  {{ old('type') == 'comments' ? 'selected' : '' }}>Comments</option>
+                                                                    <option value="psychomotors" {{ old('type') == 'psychomotor' ? 'selected' : '' }}>Psychomotors</option>
+                                                                    <option value="attendance" {{ old('type') == 'attendance' ? 'selected' : '' }}>Attendance</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -87,7 +91,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Upload result</button>
+                                                <button type="submit" class="btn btn-primary">Upload classroom</button>
                                             </div>
 
                                      </form>

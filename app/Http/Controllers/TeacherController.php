@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Classroom;
 use App\ClassroomSubject;
+use App\Comment;
 use App\Country;
 use App\Level;
+use App\Psychomotor;
 use App\Result;
 use App\Role;
 use App\Session;
@@ -390,5 +392,124 @@ class TeacherController extends Controller
         ]);
 
         return back()->with('message', 'Students repeated successfully');
+    }
+
+    public function uploadClassroomCommentsExcel(Requests\UploadClassroomCommentsExcel $request, $classroom_id){
+
+        $comments_count = 0;
+        $errors_count = 0;
+        $updates_count = 0;
+        if ($request->hasFile('comments_physchomotor')) {
+
+            if ($request->file('comments_physchomotor')->isValid()) {
+
+                if($request->type == 'comments') {
+                    $comments = Excel::load($request->comments_physchomotor)->get();
+
+                    foreach($comments as $excel_comment){
+                        $student = Student::where('admin_number', $excel_comment->admin_no)->first();
+
+                        if($student && !is_null($student) && $student->classroom->id == $classroom_id){
+
+                            $comment = Comment::where('student_id', $student->id)
+                                ->where('classroom_id', $classroom_id)
+                                ->where('session_id', $request->session_id)
+                                ->where('term', $request->term)->first();
+
+                            if($comment && !is_null($comment)){
+                                if($excel_comment->comment != null) {
+                                    $comment->body = $excel_comment->comment;
+                                    $comment->save();
+                                    $updates_count++;
+                                }
+                            }else{
+                                if($excel_comment->comment != null) {
+                                    Comment::create([
+                                        'student_id' => $student->id,
+                                        'body' => $excel_comment->comment,
+                                        'classroom_id' => $classroom_id,
+                                        'session_id' => $request->session_id,
+                                        'teacher_id' => $request->teacher_id,
+                                        'term' => $request->term
+                                    ]);
+                                }
+
+                                $comments_count++;
+                            }
+
+
+                        }
+
+                    }
+                }
+
+                if($request->type == 'psychomotors'){
+                    $psychomotors = Excel::load($request->comments_physchomotor)->get();
+
+                    foreach($psychomotors as $excel_psychomotor){
+                        $student = Student::where('admin_number', $excel_psychomotor->admin_no)->first();
+
+                        if($student && !is_null($student) && $student->classroom->id == $classroom_id){
+
+                            $psychomotor = Psychomotor::where('student_id', $student->id)
+                                ->where('classroom_id', $classroom_id)
+                                ->where('session_id', $request->session_id)
+                                ->where('term', $request->term)->first();
+
+                            if($psychomotor && !is_null($psychomotor)){
+
+                                    $psychomotor->handwriting           = $excel_psychomotor->handwriting;
+                                    $psychomotor->drawing_painting      = $excel_psychomotor->drawing_painting;
+                                    $psychomotor->games_sports          = $excel_psychomotor->games_sports;
+                                    $psychomotor->computer_appreciation = $excel_psychomotor->computer_appreciation;
+                                    $psychomotor->recitation_skills     = $excel_psychomotor->recitation_skills;
+                                    $psychomotor->punctuality           = $excel_psychomotor->punctuality;
+                                    $psychomotor->neatness              = $excel_psychomotor->neatness;
+                                    $psychomotor->politeness            = $excel_psychomotor->politeness;
+                                    $psychomotor->cooperation           = $excel_psychomotor->cooperation;
+                                    $psychomotor->leadership            = $excel_psychomotor->leadership;
+                                    $psychomotor->emotional_stability   = $excel_psychomotor->emotional_stability;
+                                    $psychomotor->health                = $excel_psychomotor->health;
+                                    $psychomotor->attitude_to_work      = $excel_psychomotor->attitude_to_work;
+                                    $psychomotor->attentiveness         = $excel_psychomotor->attentiveness;
+
+                                    $psychomotor->save();
+
+                            }else{
+
+                                    Psychomotor::create([
+                                        'student_id'            => $student->id,
+                                        'classroom_id'          => $classroom_id,
+                                        'session_id'            => $request->session_id,
+                                        'teacher_id'            => $request->teacher_id,
+                                        'term'                  => $request->term,
+                                        'handwriting'           => $excel_psychomotor->handwriting,
+                                        'drawing_painting'      => $excel_psychomotor->drawing_painting,
+                                        'games_sports'          => $excel_psychomotor->games_sports,
+                                        'computer_appreciation' => $excel_psychomotor->computer_appreciation,
+                                        'recitation_skills'     => $excel_psychomotor->recitation_skills,
+                                        'punctuality'           => $excel_psychomotor->punctuality,
+                                        'neatness'              => $excel_psychomotor->neatness,
+                                        'politeness'            => $excel_psychomotor->politeness,
+                                        'cooperation'           => $excel_psychomotor->cooperation,
+                                        'leadership'            => $excel_psychomotor->leadership,
+                                        'emotional_stability'   => $excel_psychomotor->emotional_stability,
+                                        'health'                => $excel_psychomotor->health,
+                                        'attitude_to_work'      => $excel_psychomotor->attitude_to_work,
+                                        'attentiveness'         => $excel_psychomotor->attentiveness
+                                    ]);
+                            }
+
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+
+        return back()->with('message', $comments_count . ' Comments added, ' . $updates_count . ' Comments updated ,' . $errors_count . ' Errors encountered');
     }
 }

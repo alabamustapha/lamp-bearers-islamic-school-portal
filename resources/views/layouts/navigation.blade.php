@@ -161,6 +161,10 @@
                          @endif
                     </ul>
                 </li>
+
+                <li class="{{ isActiveRoute('faq') }}">
+                    <a href="#"><i class="fa fa-comment"></i> <span class="nav-label">FAQ</span></a>
+                </li>
             @endif
 
             @if(Auth::user()->isStudent())
