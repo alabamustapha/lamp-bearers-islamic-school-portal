@@ -27,8 +27,7 @@ class FirstTermResultsSeeder extends Seeder
                     ->where('term','=','first')
                     ->where('subject_id', '=', $subject->id)
                     ->where('student_id', '=', $student->id)
-                    ->where('classroom_id', '=', $student->classroom->id)
-                    ->where('teacher_id', '=',   $subject->pivot->teacher_id)->first();
+                    ->where('classroom_id', '=', $student->classroom->id)->first();
 
                     if(!isset($result) && is_null($result)){
                         \App\Result::create([
