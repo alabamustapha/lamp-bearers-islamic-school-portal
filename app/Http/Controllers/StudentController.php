@@ -121,15 +121,18 @@ class StudentController extends Controller
             $results = Result::where('student_id', '=', $request->student_id)
                 ->where('session_id', '=', $request->session_id)->where('term', '=', $request->term)->get();
 
+            if($results && $results->count() > 0) {
 
-            if($request->term == 'first') {
-                return view('student.first_term_result')->with('results', $results)->with('student',  $student)->with('session_id', $request->session_id);
-            }elseif($request->term == 'second'){
-                return view('student.second_term_result')->with('results', $results)->with('student',  $student)->with('session_id', $request->session_id);
-            }elseif($request->term == 'third'){
-                return view('student.third_term_result')->with('results', $results)->with('student',  $student)->with('session_id', $request->session_id);
+                if ($request->term == 'first') {
+                    return view('student.first_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id);
+                } elseif ($request->term == 'second') {
+                    return view('student.second_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id);
+                } elseif ($request->term == 'third') {
+                    return view('student.third_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id);
+                }
+            }else{
+                return back()->with('message', 'No record for students for the selected term');
             }
-
         }else{
 
             return '';

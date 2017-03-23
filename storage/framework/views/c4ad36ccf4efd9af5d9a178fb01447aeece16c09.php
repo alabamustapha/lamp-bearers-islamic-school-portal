@@ -64,7 +64,7 @@
                             </h3>
                             
                         </div>
-                        <form class="m-t-md" method="POST" action="<?php echo e(url('admin/sessions/' . $session->id . "/close_first_term" )); ?>" onsubmit="return confirm('Are you sure you want to close term?');">>
+                        <form class="m-t-md" method="POST" action="<?php echo e(url('admin/sessions/' . $session->id . "/close_first_term" )); ?>" onsubmit="return confirm('Are you sure you want to close term?');">
                          <?php echo e(csrf_field()); ?>
 
                          <?php echo e(method_field('PUT')); ?>
@@ -128,7 +128,7 @@
                             </h3>
                             
                         </div>
-                        <form class="m-t-md" method="POST" action="<?php echo e(url('admin/sessions/' . $session->id . "/close_second_term" )); ?>" onsubmit="return confirm('Are you sure you want to close term?');">>
+                        <form class="m-t-md" method="POST" action="<?php echo e(url('admin/sessions/' . $session->id . "/close_second_term" )); ?>" onsubmit="return confirm('Are you sure you want to close term?');">
                          <?php echo e(csrf_field()); ?>
 
                          <?php echo e(method_field('PUT')); ?>
@@ -191,7 +191,7 @@
                             </h3>
                             
                         </div>
-                        <form class="m-t-md" method="POST" action="<?php echo e(url('admin/sessions/' . $session->id . "/close_third_term" )); ?>" onsubmit="return confirm('Are you sure you want to close term?');">>
+                        <form class="m-t-md" method="POST" action="<?php echo e(url('admin/sessions/' . $session->id . "/close_third_term" )); ?>" onsubmit="return confirm('Are you sure you want to close term?');">
                          <?php echo e(csrf_field()); ?>
 
                          <?php echo e(method_field('PUT')); ?>

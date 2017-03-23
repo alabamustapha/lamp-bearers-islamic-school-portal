@@ -402,7 +402,7 @@
                                                     <?php echo e(method_field('DELETE')); ?>
 
 
-                                                    <button type="submit" class="btn btn-outline btn-xs btn-primary">Remove</button>
+                                                    <input type="submit" name="Remove" value="Remove" class="btn btn-outline btn-xs btn-primary" onclick="return confirm('Are you sure you want to remove subject from classroom?');">
                                                 </form>
 
                                                 <button type="button" class="btn btn-outline btn-xs btn-primary" data-toggle="modal" data-target="#change-class-subject-teacher<?php echo e($subject->id); ?>">Edit</button>

@@ -1,11 +1,9 @@
-@extends('layouts.result')
+<?php $__env->startSection('title',  $student->name); ?>
 
-@section('title',  $student->name)
+<?php $__env->startSection('result-heading'); ?>
 
-@section('result-heading')
-
-@section('result-heading')
-<img src="{{ asset('img/banner.jpg') }}" class="m-b-xs" alt="profile" width="100%">
+<?php $__env->startSection('result-heading'); ?>
+<img src="<?php echo e(asset('img/banner.jpg')); ?>" class="m-b-xs" alt="profile" width="100%">
     <div class="row m-b-xs m-t-xs">
                   <div class="col-sm-12">
 
@@ -14,26 +12,26 @@
                               <tbody>
                               <tr>
                                   <td>
-                                      Name: <strong> {{ $student->name }} </strong>
+                                      Name: <strong> <?php echo e($student->name); ?> </strong>
                                   </td>
                                   <td>
-                                      Reg Number: <strong> {{ $student->admin_number }} </strong>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      Class: <strong> {{ $results->first()->classroom->level->name . ' ' . $results->first()->classroom->name }} </strong>
-                                  </td>
-                                  <td>
-                                      House: <strong> {{ $student->house->name }} </strong>
+                                      Reg Number: <strong> <?php echo e($student->admin_number); ?> </strong>
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      No in class: <strong> {{ $results->first()->classroom_students_count() }} </strong>
+                                      Class: <strong> <?php echo e($results->first()->classroom->level->name . ' ' . $results->first()->classroom->name); ?> </strong>
                                   </td>
                                   <td>
-                                      Position: <strong> {{ $student->second_term_position($results->first()->session_id) }} </strong>
+                                      House: <strong> <?php echo e($student->house->name); ?> </strong>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>
+                                      No in class: <strong> <?php echo e($results->first()->classroom_students_count()); ?> </strong>
+                                  </td>
+                                  <td>
+                                      Position: <strong> <?php echo e($student->second_term_position($results->first()->session_id)); ?> </strong>
                                   </td>
                               </tr>
 
@@ -43,7 +41,7 @@
                       <div class="col-sm-2">
 
                           <div class="profile-image">
-                              <img src="{{ is_file(asset('storage/' . $student->image)) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png') }}" class="img-rounded m-b-md" alt="profile">
+                              <img src="<?php echo e(is_file(asset('storage/' . $student->image)) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png')); ?>" class="img-rounded m-b-md" alt="profile">
                           </div>
 
                       </div>
@@ -53,29 +51,30 @@
                                               <tbody>
                                               <tr>
                                                   <td>
-                                                      Academic year: <strong> {{ $results->first()->session->name }} </strong>
+                                                      Academic year: <strong> <?php echo e($results->first()->session->name); ?> </strong>
                                                   </td>
                                                   <td>
-                                                    <strong>Term</strong> {{ ucfirst($results->first()->term) }}
+                                                    <strong>Term</strong> <?php echo e(ucfirst($results->first()->term)); ?>
+
                                                   </td>
                                               </tr>
 
                                               <tr>
                                                   <td>
-                                                      No. of days School opened: <strong> {{ "" }} </strong>
+                                                      No. of days School opened: <strong> <?php echo e(""); ?> </strong>
                                                   </td>
                                                   <td>
-                                                      No. of days present: <strong> {{ "" }} </strong>
+                                                      No. of days present: <strong> <?php echo e(""); ?> </strong>
                                                   </td>
                                               </tr>
 
                                               <tr>
                                                   <td>
-                                                      % of days present: <strong> {{ "" }} </strong>
+                                                      % of days present: <strong> <?php echo e(""); ?> </strong>
                                                   </td>
 
                                                   <td>
-                                                      House: <strong> {{ $student->house->name }} </strong>
+                                                      House: <strong> <?php echo e($student->house->name); ?> </strong>
                                                   </td>
 
                                               </tr>
@@ -87,9 +86,9 @@
                   </div>
               </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('result-body')
+<?php $__env->startSection('result-body'); ?>
         <table class="table table-bordered small result-table" >
             <thead>
             <tr>
@@ -100,32 +99,31 @@
                 <th class="text-center">Exam/60</th>
                 <th class="text-center">Grand Total</th>
                 <th class="text-center">Grade</th>
-                {{--<th class="text-center">Position</th>--}}
+                
                 <th class="text-center">Remarks</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($results as $result)
+            <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
             <tr>
-                <td>{{ $result->subject->name }}</td>
-                <td class="text-center">{{ str_pad($result->first_ca, 2, '0', 0) }}</td>
-                <td class="text-center">{{ str_pad($result->second_ca, 2, '0', 0) }}</td>
-                <td class="text-center">{{ str_pad($result->first_ca + $result->second_ca, 2, '0', 0)}}</td>
-                <td class="text-center">{{ str_pad($result->exam, 2, '0', 0) }}</td>
-                <td class="text-center">{{ str_pad($result->total(), 2, '0', 0) }}</td>
-                <td class="text-center">{{ $result->grade() }}</td>
-                {{--<td class="text-center">{{ $result->position() }}</td>--}}
-                <td class="text-center">{{ $result->remark() }}</td>
+                <td><?php echo e($result->subject->name); ?></td>
+                <td class="text-center"><?php echo e(str_pad($result->first_ca, 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e(str_pad($result->second_ca, 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e(str_pad($result->first_ca + $result->second_ca, 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e(str_pad($result->exam, 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e(str_pad($result->total(), 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e($result->grade()); ?></td>
+                
+                <td class="text-center"><?php echo e($result->remark()); ?></td>
             </tr>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
           <tr>
                 <td></td>
                 <td>Total Mark</td>
-                <td>{{
-                    $student->second_term_results($results->first()->session_id)->sum('first_ca') +
+                <td><?php echo e($student->second_term_results($results->first()->session_id)->sum('first_ca') +
                     $student->second_term_results($results->first()->session_id)->sum('second_ca') +
-                    $student->second_term_results($results->first()->session_id)->sum('exam')
-                    }}
+                    $student->second_term_results($results->first()->session_id)->sum('exam')); ?>
+
                 </td>
                 <td></td>
                 <td></td>
@@ -136,7 +134,7 @@
             <tr>
                 <td></td>
                 <td>Average</td>
-                <td>{{ round($student->term_percentage($results), 2)  }}</td>
+                <td><?php echo e(round($student->term_percentage($results), 2)); ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -146,7 +144,7 @@
             <tr>
                 <td></td>
                 <td>Percentage</td>
-                <td>{{ round($student->term_percentage($results), 0) . '%' }}</td>
+                <td><?php echo e(round($student->term_percentage($results), 0) . '%'); ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -155,10 +153,10 @@
             </tr>
             </tbody>
         </table>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('result-footer')
+<?php $__env->startSection('result-footer'); ?>
 
 
 <div class="row">
@@ -266,26 +264,26 @@
 <table class="table small">
             <tr>
                 <td height="10">Class Teacher's Comment</td>
-                <td height="10" style="text-align: left;" colspan="3">{{ "" }}</td>
+                <td height="10" style="text-align: left;" colspan="3"><?php echo e(""); ?></td>
             </tr>
             <tr>
                 <td height="10">Date</td>
                 <td height="10"></td>
                 <td height="10">Signature</td>
-                {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
+                
                 <td height="10"></td>
             </tr>
 
             <tr>
                 <td height="10">Head Teacher's Comment</td>
-                <td height="10" style="text-align: left;" colspan="3">{{ "" }}</td>
+                <td height="10" style="text-align: left;" colspan="3"><?php echo e(""); ?></td>
             </tr>
             <tr>
                 <td>Date</td>
                 <td></td>
                 <td>Signature</td>
                 <td></td>
-                {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
+                
             </tr>
             <tr>
                 <td>Next Term Begin</td>
@@ -295,4 +293,5 @@
             </tr>
         </table>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.result', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

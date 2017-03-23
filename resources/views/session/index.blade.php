@@ -64,7 +64,7 @@
                             </h3>
                             {{--<small>Total subject recorded: 9</small>--}}
                         </div>
-                        <form class="m-t-md" method="POST" action="{{ url('admin/sessions/' . $session->id . "/close_first_term" ) }}" onsubmit="return confirm('Are you sure you want to close term?');">>
+                        <form class="m-t-md" method="POST" action="{{ url('admin/sessions/' . $session->id . "/close_first_term" ) }}" onsubmit="return confirm('Are you sure you want to close term?');">
                          {{ csrf_field() }}
                          {{ method_field('PUT') }}
                          <input type="hidden" name="session_id" value="{{ $session->id }}">
@@ -124,7 +124,7 @@
                             </h3>
                             {{--<small>Total subject recorded: 9</small>--}}
                         </div>
-                        <form class="m-t-md" method="POST" action="{{ url('admin/sessions/' . $session->id . "/close_second_term" ) }}" onsubmit="return confirm('Are you sure you want to close term?');">>
+                        <form class="m-t-md" method="POST" action="{{ url('admin/sessions/' . $session->id . "/close_second_term" ) }}" onsubmit="return confirm('Are you sure you want to close term?');">
                          {{ csrf_field() }}
                          {{ method_field('PUT') }}
                          <input type="hidden" name="session_id" value="{{ $session->id }}">
@@ -183,7 +183,7 @@
                             </h3>
                             {{--<small>Total subject recorded: 9</small>--}}
                         </div>
-                        <form class="m-t-md" method="POST" action="{{ url('admin/sessions/' . $session->id . "/close_third_term" ) }}" onsubmit="return confirm('Are you sure you want to close term?');">>
+                        <form class="m-t-md" method="POST" action="{{ url('admin/sessions/' . $session->id . "/close_third_term" ) }}" onsubmit="return confirm('Are you sure you want to close term?');">
                          {{ csrf_field() }}
                          {{ method_field('PUT') }}
                          <input type="hidden" name="session_id" value="{{ $session->id }}">
