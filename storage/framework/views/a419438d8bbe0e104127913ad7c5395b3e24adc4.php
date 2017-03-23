@@ -36,6 +36,7 @@
                 </div>
             <?php endif; ?>
             <form class="m-t" role="form" method="POST" action="<?php echo e(url('/login')); ?>">
+            <?php echo e(csrf_field()); ?>
 
                 <div class="form-group<?php echo e($errors->has('username') ? ' has-error' : ''); ?>">
                     <input id="username" type="text" class="form-control" name="username" placeholder="user id" value="<?php echo e(old('username')); ?>" required autofocus>

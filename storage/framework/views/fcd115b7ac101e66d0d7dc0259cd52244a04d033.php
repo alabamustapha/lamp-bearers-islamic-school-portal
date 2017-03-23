@@ -4,10 +4,10 @@
 <?php $__env->startSection('result-heading'); ?>
 <img src="<?php echo e(asset('img/banner.jpg')); ?>" class="m-b-xs" alt="profile" width="100%">
   <div class="row m-b-xs m-t-xs">
-                <div class="col-sm-12">
+                <div class="col-xs-12">
 
-                    <div class="col-sm-5">
-                        <table class="table small m-b-xs">
+                    <div class="col-xs-5">
+                        <table class="table small m-b-xs result-table">
                             <tbody>
                             <tr>
                                 <td>
@@ -37,16 +37,16 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-xs-2">
 
                         <div class="profile-image">
                             <img src="<?php echo e(has_image($student) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png')); ?>" class="img-rounded m-b-md" alt="profile">
                         </div>
 
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-xs-5">
 
-                                        <table class="table small m-b-xs">
+                                        <table class="table small m-b-xs result-table">
                                             <tbody>
                                             <tr>
                                                 <td>
@@ -158,8 +158,8 @@
 <?php $__env->startSection('result-footer'); ?>
 
 <div class="row">
-    <div class="col-sm-4">
-            <table class="table table-bordered small">
+    <div class="col-xs-4">
+            <table class="table table-bordered small result-table">
                 <thead>
                     <th>Pratical Skills</th>
                     <th>Rating</th>
@@ -187,8 +187,8 @@
                 </tbody>
             </table>
     </div>
-    <div class="col-sm-4">
-            <table class="table table-bordered small">
+    <div class="col-xs-4">
+            <table class="table table-bordered small result-table">
                 <thead>
                     <th>Character &amp; Development</th>
                     <th>Rating</th>
@@ -217,8 +217,8 @@
                 </tbody>
             </table>
     </div>
-    <div class="col-sm-4">
-            <table class="table table-bordered small">
+    <div class="col-xs-4">
+            <table class="table table-bordered small result-table">
                 <thead>
                     <th>Pratical Skills</th>
                     <th>Rating</th>
@@ -246,7 +246,7 @@
     </div>
 
 </div>
-<table class="table table-bordered small">
+<table class="table table-bordered small result-table">
     <tr>
         <td>RATING SCALES</td>
         <td>70-100 Excellent ( A )</td>
@@ -259,36 +259,31 @@
 </table>
 
 
-<table class="table small">
+<table class="table small result-table">
             <tr>
-                <td>Class Teacher's Comment</td>
-                <td height="10" style="text-align: left;" colspan="3"><?php echo e(""); ?></td>
+                <td colspan="2">Class Teacher's Comment</td>
+                
                 
             </tr>
             <tr>
                 <td>Date</td>
-                <td></td>
                 <td>Signature</td>
                 
-                <td></td>
+
             </tr>
 
             <tr>
-                <td>Head Teacher's Comment</td>
-                <td height="20" style="text-align: left;" colspan="3"><?php echo e(""); ?></td>
+                <td colspan="2">Head Teacher's Comment</td>
+                
             </tr>
             <tr>
                 <td>Date</td>
-                <td></td>
                 <td>Signature</td>
-                <td></td>
                 
             </tr>
             <tr>
                 <td>Next Term Begin</td>
-                <td></td>
                 <td>Next Term Fee</td>
-                <td></td>
             </tr>
         </table>
 <?php $__env->stopSection(); ?>

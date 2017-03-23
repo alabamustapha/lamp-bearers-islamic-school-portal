@@ -1,0 +1,12 @@
+table.result-table{
+    color: #000000;
+    font-size: .9em;
+}
+
+table.result-table tr,
+table.result-table tr td,
+table.result-table thead th{
+    border: 2px solid #000;
+}
+
+

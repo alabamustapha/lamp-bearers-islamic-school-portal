@@ -6,33 +6,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title') | Result Print</title>
-
+    <title>@yield('title') | Result</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/schoolite.css') }}" rel="stylesheet">
+
 
 </head>
 
 <body class="white-bg result-page">
-                <div class="wrapper wrapper-content">
+      <div class="wrapper wrapper-content">
 
+           @yield('result-heading')
 
-                   @yield('result-heading')
+           @yield('result-body')
 
-                   @yield('result-body')
-
-                   @yield('result-footer')
-
-
-    </div>
-
-    <!-- Mainly scripts -->
-    <script src="{{ asset('js/jquery-2.1.1.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+           @yield('result-footer')
+      </div>
 
     <!-- Custom and plugin javascript -->
     <script src="{{ asset('js/inspinia.js') }}"></script>

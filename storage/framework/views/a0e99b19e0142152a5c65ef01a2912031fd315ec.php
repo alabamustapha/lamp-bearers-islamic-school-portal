@@ -6,33 +6,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo $__env->yieldContent('title'); ?> | Result Print</title>
-
+    <title><?php echo $__env->yieldContent('title'); ?> | Result</title>
     <link href="<?php echo e(asset('css/bootstrap.min.css')); ?>" rel="stylesheet">
-    <link href="<?php echo e(asset('font-awesome/css/font-awesome.css')); ?>" rel="stylesheet">
-
-    <link href="<?php echo e(asset('css/animate.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('css/style.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('css/schoolite.css')); ?>" rel="stylesheet">
+
 
 </head>
 
 <body class="white-bg result-page">
-                <div class="wrapper wrapper-content">
+      <div class="wrapper wrapper-content">
 
+           <?php echo $__env->yieldContent('result-heading'); ?>
 
-                   <?php echo $__env->yieldContent('result-heading'); ?>
+           <?php echo $__env->yieldContent('result-body'); ?>
 
-                   <?php echo $__env->yieldContent('result-body'); ?>
-
-                   <?php echo $__env->yieldContent('result-footer'); ?>
-
-
-    </div>
-
-    <!-- Mainly scripts -->
-    <script src="<?php echo e(asset('js/jquery-2.1.1.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/bootstrap.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/plugins/metisMenu/jquery.metisMenu.js')); ?>"></script>
+           <?php echo $__env->yieldContent('result-footer'); ?>
+      </div>
 
     <!-- Custom and plugin javascript -->
     <script src="<?php echo e(asset('js/inspinia.js')); ?>"></script>
