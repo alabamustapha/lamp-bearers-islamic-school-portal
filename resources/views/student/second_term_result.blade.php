@@ -43,7 +43,7 @@
                       <div class="col-sm-2">
 
                           <div class="profile-image">
-                              <img src="{{ is_file(asset('storage/' . $student->image)) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png') }}" class="img-rounded m-b-md" alt="profile">
+                              <img src="{{ has_image($student) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png') }}" class="img-rounded m-b-md" alt="profile">
                           </div>
 
                       </div>

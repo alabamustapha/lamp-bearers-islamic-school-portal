@@ -40,7 +40,7 @@
                     <div class="col-sm-2">
 
                         <div class="profile-image">
-                            <img src="<?php echo e(is_file(asset('storage/' . $student->image)) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png')); ?>" class="img-rounded m-b-md" alt="profile">
+                            <img src="<?php echo e(has_image($student) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png')); ?>" class="img-rounded m-b-md" alt="profile">
                         </div>
 
                     </div>
