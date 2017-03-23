@@ -167,19 +167,19 @@
                 <tbody>
                     <tr>
                         <td>Handwriting</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Drawing &amp; Painting</td>
-                        <td>B</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Games &amp; Sports</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Computer Appreciation</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Recitation Skills</td>
@@ -197,19 +197,19 @@
                 <tbody>
                     <tr>
                         <td>Punctuality</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Neatness</td>
-                        <td>B</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Politeness</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Cooperation with others</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Leadership</td>
@@ -226,19 +226,19 @@
                 <tbody>
                     <tr>
                         <td>Emotional Stability</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Health</td>
-                        <td>B</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Attentiveness</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Attitude to work</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
 
                 </tbody>
