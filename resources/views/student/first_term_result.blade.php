@@ -169,19 +169,19 @@
                 <tbody>
                     <tr>
                         <td>Handwriting</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Drawing &amp; Painting</td>
-                        <td>B</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Games &amp; Sports</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Computer Appreciation</td>
-                        <td>A</td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td>Recitation Skills</td>
