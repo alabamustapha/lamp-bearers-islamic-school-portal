@@ -249,8 +249,7 @@ class TeacherController extends Controller
                         ->where('subject_id', '=', $request->subject_id)
                         ->where('student_id', '=', $request->student_id)
                         ->where('term', '=', $request->term)
-                        ->where('session_id', '=', $request->session_id)
-                        ->where('teacher_id', '=', $request->teacher_id)->get()->first();
+                        ->where('session_id', '=', $request->session_id)->get()->first();
 
 
         if(!isset($result) || is_null($result)){
