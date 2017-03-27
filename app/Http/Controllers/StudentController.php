@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Classroom;
+use App\Comment;
 use App\Country;
 use App\Guardian;
 use App\House;
+use App\Psychomotor;
 use App\Result;
 use App\Role;
 use App\Session;
@@ -112,6 +114,7 @@ class StudentController extends Controller
 
     public function showResults(Request $request, $student_id){
 
+
         $student = Student::with('guardian', 'classroom')->where('id', '=', $request->student_id)->first();
 
 
@@ -121,14 +124,33 @@ class StudentController extends Controller
             $results = Result::where('student_id', '=', $request->student_id)
                 ->where('session_id', '=', $request->session_id)->where('term', '=', $request->term)->get();
 
+            $comment = Comment::where('student_id', '=', $request->student_id)
+                ->where('session_id', '=', $request->session_id)->where('term', '=', $request->term)->first();
+
+            $psychomotor = Psychomotor::where('student_id', '=', $request->student_id)
+                ->where('session_id', '=', $request->session_id)->where('term', '=', $request->term)->first();
+
             if($results && $results->count() > 0) {
 
                 if ($request->term == 'first') {
-                    return view('student.first_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id);
+                    $first_term_avg = round($student->term_percentage($results), 0);
+                    return view('student.first_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id)->with('comment', $comment)->with('psychomotor', $psychomotor)
+                        ->with('first_term_avg', $first_term_avg)
+                        ->with('second_term_avg', null)
+                        ->with('third_term_avg', null);
                 } elseif ($request->term == 'second') {
-                    return view('student.second_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id);
+                    $f_results = Result::where('student_id', '=', $request->student_id)
+                        ->where('session_id', '=', $request->session_id)->where('term', '=', 'first')->get();
+                    $first_term_avg = round($student->term_percentage($f_results), 0);
+                    $second_term_avg = round($student->term_percentage($results), 0);
+                    return view('student.second_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id)->with('comment', $comment)
+                        ->with('psychomotor', $psychomotor)
+                        ->with('first_term_avg', $first_term_avg)
+                        ->with('second_term_avg', $second_term_avg)
+                        ->with('third_term_avg', 0);
+
                 } elseif ($request->term == 'third') {
-                    return view('student.third_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id);
+                    return view('student.third_term_result')->with('results', $results)->with('student', $student)->with('session_id', $request->session_id)->with('comment', $comment)->with('psychomotor', $psychomotor);
                 }
             }else{
                 return back()->with('message', 'No record for students for the selected term');

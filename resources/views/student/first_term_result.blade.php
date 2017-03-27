@@ -158,9 +158,8 @@
 @endsection
 
 @section('result-footer')
-
 <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-3">
             <table class="table table-bordered small result-table">
                 <thead>
                     <th>Pratical Skills</th>
@@ -169,27 +168,28 @@
                 <tbody>
                     <tr>
                         <td>Handwriting</td>
-                        <td></td>
+                        <td>{{ $psychomotor->handwriting or '' }}</td>
                     </tr>
                     <tr>
                         <td>Drawing &amp; Painting</td>
-                        <td></td>
+                        <td>{{ $psychomotor->drawing_painting or '' }}</td>
                     </tr>
                     <tr>
                         <td>Games &amp; Sports</td>
-                        <td></td>
+                        <td>{{ $psychomotor->games_sports or '' }}</td>
                     </tr>
                     <tr>
                         <td>Computer Appreciation</td>
-                        <td></td>
+                        <td>{{ $psychomotor->computer_appreciation or ''}}</td>
                     </tr>
                     <tr>
                         <td>Recitation Skills</td>
+                        <td>{{ $psychomotor->recitation_skills or ''}}</td>
                     </tr>
                 </tbody>
             </table>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
             <table class="table table-bordered small result-table">
                 <thead>
                     <th>Character &amp; Development</th>
@@ -199,27 +199,28 @@
                 <tbody>
                     <tr>
                         <td>Punctuality</td>
-                        <td></td>
+                        <td>{{ $psychomotor->punctuality or '' }}</td>
                     </tr>
                     <tr>
                         <td>Neatness</td>
-                        <td></td>
+                        <td>{{ $psychomotor->neatness or '' }}</td>
                     </tr>
                     <tr>
                         <td>Politeness</td>
-                        <td></td>
+                        <td>{{ $psychomotor->politeness or '' }}</td>
                     </tr>
                     <tr>
                         <td>Cooperation with others</td>
-                        <td></td>
+                        <td>{{ $psychomotor->cooperation or '' }}</td>
                     </tr>
                     <tr>
                         <td>Leadership</td>
+                        <td>{{ $psychomotor->leadership or '' }}</td>
                     </tr>
                 </tbody>
             </table>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
             <table class="table table-bordered small result-table">
                 <thead>
                     <th>Pratical Skills</th>
@@ -228,23 +229,28 @@
                 <tbody>
                     <tr>
                         <td>Emotional Stability</td>
-                        <td></td>
+                        <td>{{ $psychomotor->emotional_stability or '' }}</td>
                     </tr>
                     <tr>
                         <td>Health</td>
-                        <td></td>
+                        <td>{{ $psychomotor->health or '' }}</td>
                     </tr>
                     <tr>
                         <td>Attentiveness</td>
-                        <td></td>
+                        <td>{{ $psychomotor->attentiveness or '' }}</td>
                     </tr>
                     <tr>
                         <td>Attitude to work</td>
-                        <td></td>
+                        <td>{{ $psychomotor->attitude_to_work or '' }}</td>
                     </tr>
 
                 </tbody>
             </table>
+    </div>
+    <div class="col-xs-3">
+
+        <canvas id="barChart" heigth="150px"></canvas>
+
     </div>
 
 </div>
@@ -262,30 +268,31 @@
 
 
 <table class="table small result-table">
-            <tr>
-                <td colspan="2">Class Teacher's Comment</td>
-                {{--<td height="10" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
-                {{--<td height="20" style="text-align: left;" colspan="3">{{ class_teacher_remark(round($student->term_percentage($results))) }}</td>--}}
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td>Signature</td>
-                {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
+    <tr>
+        <td colspan="2">Class Teacher's Comment: <strong><em class="text-right">{{ $comment->body or '' }}</em></strong></td>
+        {{--<td height="10" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
+        {{--<td height="20" style="text-align: left;" colspan="3">{{ class_teacher_remark(round($student->term_percentage($results))) }}</td>--}}
+    </tr>
+    <tr>
+        <td>Date: <strong><em> {{ date('m - d - Y') }} </em></strong></td>
+        <td>Signature</td>
+        {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
 
-            </tr>
+    </tr>
 
-            <tr>
-                <td colspan="2">Head Teacher's Comment</td>
-                {{--<td height="20" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td>Signature</td>
-                {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
-            </tr>
-            <tr>
-                <td>Next Term Begin</td>
-                <td>Next Term Fee</td>
-            </tr>
-        </table>
+    <tr>
+        <td colspan="2">Head Teacher's Comment: <strong><em>{{ head_teacher_remark(round($student->term_percentage($results))) }}</em></strong></td>
+        {{--<td height="20" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td>Signature</td>
+        {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
+    </tr>
+    <tr>
+        <td>Next Term Begin</td>
+        <td>Next Term Fee</td>
+    </tr>
+</table>
+
 @endsection

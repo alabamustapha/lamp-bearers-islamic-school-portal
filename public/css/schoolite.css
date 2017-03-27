@@ -9,4 +9,8 @@ table.result-table thead th{
     border: 2px solid #000;
 }
 
-
+canvas#barChart{
+    max-width: 230px;
+    height: 180px;
+    color: #fff;
+}

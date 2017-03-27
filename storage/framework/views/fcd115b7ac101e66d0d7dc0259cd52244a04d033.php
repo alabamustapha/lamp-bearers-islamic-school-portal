@@ -156,9 +156,8 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('result-footer'); ?>
-
 <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-3">
             <table class="table table-bordered small result-table">
                 <thead>
                     <th>Pratical Skills</th>
@@ -167,27 +166,28 @@
                 <tbody>
                     <tr>
                         <td>Handwriting</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->handwriting) ? $psychomotor->handwriting : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Drawing &amp; Painting</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->drawing_painting) ? $psychomotor->drawing_painting : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Games &amp; Sports</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->games_sports) ? $psychomotor->games_sports : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Computer Appreciation</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->computer_appreciation) ? $psychomotor->computer_appreciation : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Recitation Skills</td>
+                        <td><?php echo e(isset($psychomotor->recitation_skills) ? $psychomotor->recitation_skills : ''); ?></td>
                     </tr>
                 </tbody>
             </table>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
             <table class="table table-bordered small result-table">
                 <thead>
                     <th>Character &amp; Development</th>
@@ -197,27 +197,28 @@
                 <tbody>
                     <tr>
                         <td>Punctuality</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->punctuality) ? $psychomotor->punctuality : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Neatness</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->neatness) ? $psychomotor->neatness : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Politeness</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->politeness) ? $psychomotor->politeness : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Cooperation with others</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->cooperation) ? $psychomotor->cooperation : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Leadership</td>
+                        <td><?php echo e(isset($psychomotor->leadership) ? $psychomotor->leadership : ''); ?></td>
                     </tr>
                 </tbody>
             </table>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-3">
             <table class="table table-bordered small result-table">
                 <thead>
                     <th>Pratical Skills</th>
@@ -226,23 +227,28 @@
                 <tbody>
                     <tr>
                         <td>Emotional Stability</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->emotional_stability) ? $psychomotor->emotional_stability : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Health</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->health) ? $psychomotor->health : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Attentiveness</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->attentiveness) ? $psychomotor->attentiveness : ''); ?></td>
                     </tr>
                     <tr>
                         <td>Attitude to work</td>
-                        <td></td>
+                        <td><?php echo e(isset($psychomotor->attitude_to_work) ? $psychomotor->attitude_to_work : ''); ?></td>
                     </tr>
 
                 </tbody>
             </table>
+    </div>
+    <div class="col-xs-3">
+
+        <canvas id="barChart" heigth="150px"></canvas>
+
     </div>
 
 </div>
@@ -260,31 +266,32 @@
 
 
 <table class="table small result-table">
-            <tr>
-                <td colspan="2">Class Teacher's Comment</td>
-                
-                
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td>Signature</td>
-                
+    <tr>
+        <td colspan="2">Class Teacher's Comment: <strong><em class="text-right"><?php echo e(isset($comment->body) ? $comment->body : ''); ?></em></strong></td>
+        
+        
+    </tr>
+    <tr>
+        <td>Date: <strong><em> <?php echo e(date('m - d - Y')); ?> </em></strong></td>
+        <td>Signature</td>
+        
 
-            </tr>
+    </tr>
 
-            <tr>
-                <td colspan="2">Head Teacher's Comment</td>
-                
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td>Signature</td>
-                
-            </tr>
-            <tr>
-                <td>Next Term Begin</td>
-                <td>Next Term Fee</td>
-            </tr>
-        </table>
+    <tr>
+        <td colspan="2">Head Teacher's Comment: <strong><em><?php echo e(head_teacher_remark(round($student->term_percentage($results)))); ?></em></strong></td>
+        
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td>Signature</td>
+        
+    </tr>
+    <tr>
+        <td>Next Term Begin</td>
+        <td>Next Term Fee</td>
+    </tr>
+</table>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.result', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

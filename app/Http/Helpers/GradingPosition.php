@@ -72,22 +72,24 @@ function grade($average){
     }
 }
 
-function class_teacher_remark($average){
+function head_teacher_remark($average){
 
         if(isset($average) && !is_null($average)){
 
-            if($average >= 70) return 'Excellent result';
-            if($average >= 60) return 'A very good performance, keep it up';
-            if($average >= 50) return 'Average result, put in more work next term';
-            if($average >= 45) return 'Below average, you need to work harder';
-            if($average >= 40) return 'Poor performance';
-            if($average < 40) return  'Failed';
+            if($average >= 80) return rand(1, 2) == 1 ? 'An excellent result' : 'An outstanding result';
+            if($average >= 70) return 'A very good performance, keep it up';
+            if($average >= 60) return 'A good result, put in more work next term';
+            if($average >= 50) return 'An average result, work harder next term';
+            //if($average >= 40) return 'Work harder';
+            if($average < 50) return  'Work harder';
 
             return 'N/A';
 
         }else{
             return 'N/A';
         }
+
+
 
 }
 
@@ -116,9 +118,6 @@ function third_term_remark($average, $session_id, $student){
 
 }
 
-function head_teacher_remark($average){
-    return $average;
-}
 
 function house_master_remark($average){
     return 0;
