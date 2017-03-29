@@ -181,6 +181,7 @@ class StudentController extends Controller
         $student->email = $request->email == "" ? null : $request->email;
         $student->phone = $request->phone == "" ? null : $request->phone;
         $student->comment = $request->comment;
+        $student->sex = $request->sex;
         $student->name = $request->surname . ' ' . $request->first_name . ' ' . $request->middle_name;
 
         $student->dob = Carbon::createFromFormat('m/d/Y', $request->dob);

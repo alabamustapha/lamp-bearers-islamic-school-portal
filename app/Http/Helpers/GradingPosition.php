@@ -78,7 +78,7 @@ function head_teacher_remark($average){
 
             if($average >= 80) return rand(1, 2) == 1 ? 'An excellent result' : 'An outstanding result';
             if($average >= 70) return 'A very good performance, keep it up';
-            if($average >= 60) return 'A good result, put in more work next term';
+            if($average >= 60) return 'A good result, put in more effort next term';
             if($average >= 50) return 'An average result, work harder next term';
             //if($average >= 40) return 'Work harder';
             if($average < 50) return  'Work harder';
