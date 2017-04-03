@@ -94,13 +94,15 @@
             <thead>
             <tr>
                 <th>Subjects</th>
-                <th class="text-center">CA1/20</th>
-                <th class="text-center">CA2/20</th>
-                <th class="text-center">CA Total</th>
+                {{--<th class="text-center">CA1/20</th>--}}
+                {{--<th class="text-center">CA2/20</th>--}}
+                <th class="text-center">CAT/40</th>
                 <th class="text-center">Exam/60</th>
                 <th class="text-center">Grand Total</th>
+                <th class="text-center">Class Highest</th>
+                <th class="text-center">Class Average</th>
+                <th class="text-center">Position</th>
                 <th class="text-center">Grade</th>
-                {{--<th class="text-center">Position</th>--}}
                 <th class="text-center">Remarks</th>
             </tr>
             </thead>
@@ -108,13 +110,15 @@
             @foreach($results as $result)
             <tr>
                 <td>{{ $result->subject->name }}</td>
-                <td class="text-center">{{ str_pad($result->first_ca, 2, '0', 0) }}</td>
-                <td class="text-center">{{ str_pad($result->second_ca, 2, '0', 0) }}</td>
+                {{--<td class="text-center">{{ str_pad($result->first_ca, 2, '0', 0) }}</td>--}}
+                {{--<td class="text-center">{{ str_pad($result->second_ca, 2, '0', 0) }}</td>--}}
                 <td class="text-center">{{ str_pad($result->first_ca + $result->second_ca, 2, '0', 0)}}</td>
                 <td class="text-center">{{ str_pad($result->exam, 2, '0', 0) }}</td>
                 <td class="text-center">{{ str_pad($result->total(), 2, '0', 0) }}</td>
+                <td class="text-center">{{ str_pad($result->class_highest_mark(), 2, '0', 0) }}</td>
+                <td class="text-center">{{ round($result->class_average(), 1) }}</td>
+                <td class="text-center">{{ $result->position() }}</td>
                 <td class="text-center">{{ $result->grade() }}</td>
-                {{--<td class="text-center">{{ $result->position() }}</td>--}}
                 <td class="text-center">{{ $result->remark() }}</td>
             </tr>
             @endforeach

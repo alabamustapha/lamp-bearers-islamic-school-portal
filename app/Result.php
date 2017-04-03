@@ -91,8 +91,7 @@ class Result extends Model
             $subject_scores = Result::where('session_id', $this->session_id)
                 ->where('classroom_id', '=', $this->classroom_id)
                 ->where('subject_id', '=', $this->subject_id)
-                ->where('term', '=', $this->term)
-                ->where('teacher_id', '=', $this->teacher_id)->select( DB::raw('first_ca + second_ca + exam as score'))->orderBY('score', 'desc')->get()->toArray();
+                ->where('term', '=', $this->term)->select( DB::raw('first_ca + second_ca + exam as score'))->orderBY('score', 'desc')->get()->toArray();
             return $subject_scores;
 
         }
@@ -141,6 +140,25 @@ class Result extends Model
         return $this->belongsTo('App\Session');
     }
 
+    public function class_highest_mark(){
 
+
+        $scores = $this->this_term_class_subject_scores();
+
+        $scores = array_flatten($scores);
+
+        return is_array($scores) ? max($scores) : 0;
+
+    }
+
+    public function class_average(){
+
+        $scores = $this->this_term_class_subject_scores();
+
+        $scores = array_flatten($scores);
+
+        return is_array($scores) && count($scores) > 0 ? array_sum($scores) / count($scores) : 0;
+
+    }
 
 }

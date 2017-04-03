@@ -132,6 +132,7 @@
                                     <th>CA2</th>
                                     <th>Exam</th>
                                     <th>Total</th>
+                                    <th>Class Highest</th>
                                     <th>Grade</th>
                                     <th>Position</th>
                                 </tr>
@@ -177,6 +178,9 @@
                                       <td class="total-score">
                                            {{ !is_null($score) ? $score->total() : '' }}
                                       </td>
+                                      <td class="class-highest">
+                                          {{ !is_null($score) ? $score->class_highest_mark() : '' }}
+                                        </td>
                                       <td class="score-grade">
                                         {{ !is_null($score) ? $score->grade() : '' }}
                                       </td>
@@ -195,6 +199,7 @@
                                     <th>CA2</th>
                                     <th>Exam</th>
                                     <th>Total</th>
+                                    <th>Class Highest</th>
                                     <th>Grade</th>
                                     <th>Position</th>
                                 </tr>
@@ -232,6 +237,7 @@
                                          <th>CA2</th>
                                          <th>Exam</th>
                                          <th>Total</th>
+                                         {{--<th>Class Highest</th>--}}
                                          <th>Grade</th>
                                          <th>Position</th>
                                      </tr>
@@ -275,6 +281,9 @@
                                            <td class="total-score">
                                                 {{ !is_null($score) ? $score->total() : '' }}
                                            </td>
+                                           {{--<td class="class-highest">--}}
+                                             {{--{{ !is_null($score) ? round($score->class_average(), 1) : '' }}--}}
+                                           {{--</td>--}}
                                            <td class="score-grade">
                                              {{ !is_null($score) ? $score->grade() : '' }}
                                            </td>
@@ -293,6 +302,7 @@
                                          <th>CA2</th>
                                          <th>Exam</th>
                                          <th>Total</th>
+                                         {{--<th>Class Highest</th>--}}
                                          <th>Grade</th>
                                          <th>Position</th>
                                      </tr>
