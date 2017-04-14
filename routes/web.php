@@ -50,14 +50,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('get_guardian_id/{guardian_phone}', function(\Illuminate\Http\Request $request){
 
-        $guardian = \App\Guardian::where('phone', '=', $request->phone)->first();
+        if($request->has('phone') && !is_null($request->phone)){
 
-        if($guardian){
-            return $guardian;
+            $guardian = \App\Guardian::where('phone', '=', $request->phone)->first();
+
+            if($guardian){
+                return $guardian;
+
+            }else{
+                return 0;
+            }
 
         }else{
             return 0;
         }
+
     });
 
 

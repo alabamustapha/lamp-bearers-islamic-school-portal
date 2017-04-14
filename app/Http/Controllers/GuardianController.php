@@ -6,6 +6,7 @@ use App\Guardian;
 use App\Country;
 use App\Result;
 use App\Role;
+use App\SchoolFeePayment;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
@@ -88,16 +89,22 @@ class GuardianController extends Controller
         if($session  && $term ){
             foreach($guardian->active_students as $student){
 
-                if(!has_term_payment($student, $session->id, $term))
+                if(!has_term_payment($student, $session->id, $term)) {
 
-                    if($term == 'first'){ $total_outstanding_payments += $student->classroom->first_term_charges; }
-                    elseif($term == 'second'){ $total_outstanding_payments += $student->classroom->second_term_charges; }
-                    elseif($term == 'third'){ $total_outstanding_payments += $student->classroom->third_term_charges; }
-
+                    if ($term == 'first') {
+                        $total_outstanding_payments += $student->classroom->first_term_charges;
+                    } elseif ($term == 'second') {
+                        $total_outstanding_payments += $student->classroom->second_term_charges;
+                    } elseif ($term == 'third') {
+                        $total_outstanding_payments += $student->classroom->third_term_charges;
+                    }
+                }
             }
         }
 
-        return view('guardian.dashboard')->with('guardian', $guardian )->with('total_outstanding_payments', $total_outstanding_payments);
+        $total_debts = SchoolFeePayment::where('guardian_id', $guardian->id)->where('status', 'debt')->sum('balance');
+
+        return view('guardian.dashboard')->with('guardian', $guardian )->with('total_outstanding_payments', $total_outstanding_payments)->with('total_debts', $total_debts);
     }
 
     public function showWards(){
@@ -141,7 +148,8 @@ class GuardianController extends Controller
         $current_term_payments = [];
         $part_payments = [];
         $debts = [];
-        $email = $guardian->email;
+        $email = filter_var($guardian->email, FILTER_VALIDATE_EMAIL)  ? $guardian->email : "redehubng@gmail.com" ;
+
 
         $session = session_on();
         $term = term_on();

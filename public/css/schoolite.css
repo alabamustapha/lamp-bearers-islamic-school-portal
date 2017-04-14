@@ -14,3 +14,13 @@ canvas#barChart{
     height: 180px;
     color: #fff;
 }
+
+@media print {
+
+    table.result-table tr td:nth-child(2) {
+        background: #ccc;
+    }
+}
+table.result-table#subject-scores tr:nth-child(odd) {
+    background: rgba(67,15,69,0.23)
+}

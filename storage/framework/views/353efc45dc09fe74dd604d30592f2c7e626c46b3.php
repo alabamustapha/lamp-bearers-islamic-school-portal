@@ -166,6 +166,24 @@
 
                                </div>
                                <div class="row">
+                                   <div class="col-lg-6">
+                                      <div class="form-group">
+                                          <label class="control-label">Guardian phone</label>
+                                          <input type="text" id="guardian_phone" class="form-control input-lg" name="guardian_phone" value="<?php echo e(isset($student->guardian->phone) ? $student->guardian->phone : old('guardian_phone')); ?>">
+                                      </div>
+                                  </div>
+                                   <div class="col-lg-6">
+                                      <div class="form-group">
+                                          <label class="control-label">Guardian </label>
+                                          <select class="form-control input-lg" name="guardian_id" readonly="readonly">
+                                                <?php if($student->guardian != null): ?>
+                                                    <option value="<?php echo e($student->guardian->id); ?>"><?php echo e($student->guardian->name); ?></option>
+                                                <?php endif; ?>
+                                          </select>
+                                      </div>
+                                  </div>
+                               </div>
+                               <div class="row">
                                 <div class="col-lg-6">
                                    <div class="form-group">
                                        <label class="control-label">Address *</label>
@@ -176,12 +194,14 @@
                                </div>
                                 <div class="col-lg-6">
                                        <div class="form-group">
-                                           <label class="control-label">Guardian *</label>
-                                           <select class="form-control input-lg" name="guardian_id">
+                                           <label class="control-label">Status *</label>
+                                           <select class="form-control input-lg" name="status">
                                                <option value="">--select-</option>
-                                               <?php $__currentLoopData = $guardians; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $guardian): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
-                                                <option value="<?php echo e($guardian->id); ?>" <?php echo e($student->guardian_id == $guardian->id ? 'selected' : ''); ?>><?php echo e($guardian->name); ?></option>
-                                               <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                               <option value="active" <?php echo e($student->status == 'active' ? 'selected' : ''); ?>>Active</option>
+                                               <option value="active" <?php echo e($student->status == 'left' ? 'selected' : ''); ?>>Left</option>
+                                               <option value="active" <?php echo e($student->status == 'graduated' ? 'selected' : ''); ?>>Graduated</option>
+                                               <option value="active" <?php echo e($student->status == 'dismissed' ? 'selected' : ''); ?>>Dismissed</option>
+                                               <option value="active" <?php echo e($student->status == 'deactivated' ? 'selected' : ''); ?>>Deactivated</option>
                                            </select>
                                        </div>
                                    </div>
@@ -322,13 +342,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                <?php $__currentLoopData = $sessions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $session): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                <?php $__currentLoopData = $sessions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $class_session): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
                                         <tr>
-                                            <td><?php echo e($session->name); ?></td>
-                                            <td><?php echo e($student->session_classroom($session->id)->name); ?></td>
-                                            <td><?php echo e('1'); ?></td>
-                                            <td><?php echo e('2'); ?></td>
-                                            <td><?php echo e('3'); ?></td>
+                                            <td><?php echo e($class_session->name); ?></td>
+                                            <td><?php echo e($student->session_classroom($class_session->id)->name); ?></td>
+                                            <td><?php echo e(isset($session) && $class_session->id == $session->id ? $student->classroom->first_term_charges : 0); ?></td>
+                                            <td><?php echo e(isset($session) && $class_session->id == $session->id ? $student->classroom->second_term_charges : 0); ?></td>
+                                            <td><?php echo e(isset($session) && $class_session->id == $session->id ? $student->classroom->third_term_charges : 0); ?></td>
                                             <td class="text-left">
                                                 <div class="btn-group">
                                                     
@@ -363,39 +383,116 @@
     <script src="<?php echo e(asset('js/plugins/chartJs/Chart.min.js')); ?>"></script>
     <script>
 
-        $(function () {
 
-        $('#dob').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
+        $(document).ready(function(){
 
-        $('#date_admitted').datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            calendarWeeks: true,
-            autoclose: true
-        });
+                           $.ajaxSetup({
+                               headers: {
+                                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                               }
+                           });
 
-           function readURL(input) {
-               if (input.files && input.files[0]) {
-                   var reader = new FileReader();
+                                    guardian_phone = $('#guardian_phone');
 
-                   reader.onload = function (e) {
-                       $('#image_upload_preview').attr('src', e.target.result);
+                                    guardian_phone.focusout(function(){
+
+                                       var phone = $(this).val();
+
+                                       if(phone.length == 0){
+                                           $('#guardian_phone').parent().removeClass('has-success');
+                                           $('#guardian_phone').parent().removeClass('has-error');
+                                           $("select[name='guardian_id']").children().remove();
+                                       }
+
+                                       $.ajax({
+                                             type: "POST",
+                                             data: {"phone":phone},
+                                             url: window.location.protocol + "//" + window.location.host + "/get_guardian_id/" + phone,
+                                             success: function(data){
+
+                                                if(parseInt(data) == 0){
+
+                                                    $('#guardian_phone').parent().removeClass('has-success');
+                                                    $('#guardian_phone').parent().addClass('has-error');
+                                                    $("select[name='guardian_id']").children().remove();
+
+                                                }else{
+                                                    $('#guardian_phone').parent().removeClass('has-error');
+                                                    $('#guardian_phone').parent().addClass('has-success');
+                                                    $("select[name='guardian_id']").children().remove();
+                                                    $("select[name='guardian_id']").append("<option value='" + data.id + "' selected='selected'>" + data.name + "</option>");
+                                                }
+
+                                             }
+                                           });
+
+                                    });
+
+                                    guardian_phone.keyup(function(){
+
+                                       var phone = $(this).val();
+
+                                       if(phone.length == 0){
+                                           $('#guardian_phone').parent().removeClass('has-success');
+                                           $('#guardian_phone').parent().removeClass('has-error');
+                                           $("select[name='guardian_id']").children().remove();
+                                       }
+
+                                       $.ajax({
+                                             type: "POST",
+                                             data: {"phone":phone},
+                                             url: window.location.protocol + "//" + window.location.host + "/get_guardian_id/" + phone,
+                                             success: function(data){
+
+                                                if(parseInt(data) == 0){
+
+                                                    $('#guardian_phone').parent().removeClass('has-success');
+                                                    $('#guardian_phone').parent().addClass('has-error');
+                                                    $("select[name='guardian_id']").children().remove();
+
+                                                }else{
+                                                    $('#guardian_phone').parent().removeClass('has-error');
+                                                    $('#guardian_phone').parent().addClass('has-success');
+                                                    $("select[name='guardian_id']").children().remove();
+                                                    $("select[name='guardian_id']").append("<option value='" + data.id + "' selected='selected'>" + data.name + "</option>");
+                                                }
+
+                                             }
+                                           });
+
+                                    });
+
+                $('#dob').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true
+                });
+
+                $('#date_admitted').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    autoclose: true
+                });
+
+                   function readURL(input) {
+                       if (input.files && input.files[0]) {
+                           var reader = new FileReader();
+
+                           reader.onload = function (e) {
+                               $('#image_upload_preview').attr('src', e.target.result);
+                           }
+
+                           reader.readAsDataURL(input.files[0]);
+                       }
                    }
 
-                   reader.readAsDataURL(input.files[0]);
-               }
-           }
-
-           $("#inputFile").change(function () {
-               readURL(this);
-           });
+                   $("#inputFile").change(function () {
+                       readURL(this);
+                   });
 
 
 

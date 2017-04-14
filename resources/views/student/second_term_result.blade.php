@@ -90,7 +90,7 @@
 @endsection
 
 @section('result-body')
-        <table class="table table-bordered small result-table" >
+        <table class="table table-bordered small result-table"  id="subject-scores">
             <thead>
             <tr>
                 <th>Subjects</th>

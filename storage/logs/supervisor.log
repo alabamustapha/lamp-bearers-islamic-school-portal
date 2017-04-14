@@ -10,3 +10,7 @@
 [2017-03-07 13:27:20] Failed: Illuminate\Mail\SendQueuedMailable
 [2017-03-21 17:50:19] Processed: App\Listeners\MailRegisteredUser@handle
 [2017-03-21 17:50:28] Failed: Illuminate\Mail\SendQueuedMailable
+[2017-04-14 08:40:47] Processed: App\Listeners\MailRegisteredUser@handle
+[2017-04-14 08:40:53] Failed: Illuminate\Mail\SendQueuedMailable
+[2017-04-14 11:08:27] Processed: App\Listeners\MailRegisteredUser@handle
+[2017-04-14 11:08:32] Failed: Illuminate\Mail\SendQueuedMailable

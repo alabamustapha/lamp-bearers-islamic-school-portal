@@ -66,7 +66,28 @@
 
     <script src="<?php echo e(asset('js/plugins/toastr/toastr.min.js')); ?>"></script>
 
+    <!-- offline js -->
+    <script src="<?php echo e(asset('js/offline-js.js')); ?>"></script>
+
+
     <script>
+
+
+        Offline.options = {
+          game: true
+        };
+        var offline_check = function(){
+          Offline.check();
+          if (Offline.state === 'up'){
+                if($(".toast-error").length > 0){
+                    toastr.success('connected');
+                }
+          }else{
+                toastr.error('no connection');
+          }
+
+        };
+        setInterval(offline_check, 5000);
 
         <?php if(session('message')): ?>
 

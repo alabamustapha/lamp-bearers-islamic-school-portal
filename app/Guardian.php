@@ -28,4 +28,5 @@ class Guardian extends Model
         return $this->students()->whereIn('status', ['active', 'promoting', 'graduating', 'repeating', 'repeated', 'promoted']);
     }
 
+
 }

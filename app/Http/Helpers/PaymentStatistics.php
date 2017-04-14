@@ -77,3 +77,4 @@ function has_term_payment($student, $session_id, $term){
     }
 
 }
+

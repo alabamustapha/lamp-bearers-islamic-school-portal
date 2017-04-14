@@ -1,18 +1,16 @@
-@extends('layouts.app')
+<?php $__env->startSection('title', 'Guarrdian'); ?>
 
-@section('title', 'Guarrdian')
+<?php $__env->startSection('styles'); ?>
+    <link href="<?php echo e(asset('css/plugins/dataTables/datatables.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('styles')
-    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
-@endsection
-
-@section('page-heading')
+<?php $__env->startSection('page-heading'); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Welcome, {{ $guardian->title . ' ' . $guardian->name }}</h2>
+            <h2>Welcome, <?php echo e($guardian->title . ' ' . $guardian->name); ?></h2>
             <ol class="breadcrumb">
                 <li class="active">
-                    <a href="{{ url('guardian') }}">Dashboard</a>
+                    <a href="<?php echo e(url('guardian')); ?>">Dashboard</a>
                 </li>
             </ol>
         </div>
@@ -20,9 +18,9 @@
 
         </div>
  </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="wrapper wrapper-content">
 
 
@@ -37,17 +35,17 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <h1 class="no-margins text-center"> {{ $guardian->students()->where('sex', '=', 'Female')->count() }} <i class="fa fa-female"></i></h1>
+                            <h1 class="no-margins text-center"> <?php echo e($guardian->students()->where('sex', '=', 'Female')->count()); ?> <i class="fa fa-female"></i></h1>
                         </div>
                         <div class="col-md-6">
-                            <h1 class="no-margins text-center">{{ $guardian->students()->where('sex', '=', 'Male')->count() }} <i class="fa fa-male"></i></h1>
+                            <h1 class="no-margins text-center"><?php echo e($guardian->students()->where('sex', '=', 'Male')->count()); ?> <i class="fa fa-male"></i></h1>
                         </div>
 
                     </div>
 
                     <hr>
 
-                    <a href="{{ url('guardian/wards') }}" class="btn btn-block btn-white" target="_blank" title="View wards">View</a>
+                    <a href="<?php echo e(url('guardian/wards')); ?>" class="btn btn-block btn-white" target="_blank" title="View wards">View</a>
 
 
                 </div>
@@ -64,11 +62,11 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <h1 class="no-margins text-left text-secondary"> {{ 'N' . number_format($total_outstanding_payments) }}</h1>
+                                <h1 class="no-margins text-left text-secondary"> <?php echo e('N' . number_format($total_outstanding_payments)); ?></h1>
                                 <span class="text-info">Current</span>
                             </div>
                             <div class="col-md-6">
-                                <h1 class="no-margins text-left text-danger"> {{ 'N' . number_format($total_debts) }}</h1>
+                                <h1 class="no-margins text-left text-danger"> <?php echo e('N' . number_format($total_debts)); ?></h1>
                                 <span class="text-danger">Debts</span>
                             </div>
 
@@ -77,7 +75,7 @@
 
                         <hr>
 
-                        <a href="{{ url('guardian/payments') }}" class="btn btn-block btn-primary">Pay now</a>
+                        <a href="<?php echo e(url('guardian/payments')); ?>" class="btn btn-block btn-primary">Pay now</a>
 
 
                         </div>
@@ -115,7 +113,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Current Active Wards({{$guardian->students()->whereIn('status',  ['active', 'promoting', 'promoted', 'repeating', 'repeated', 'graduating'] )->count() }})</h5>
+                <h5>Current Active Wards(<?php echo e($guardian->students()->whereIn('status',  ['active', 'promoting', 'promoted', 'repeating', 'repeated', 'graduating'] )->count()); ?>)</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -138,17 +136,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($guardian->students()->where('status', '=', 'active')->get() as $student)
+                    <?php $__currentLoopData = $guardian->students()->where('status', '=', 'active')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 
                     <tr class="gradeA">
-                        <td>{{ $student->admin_number }}</td>
-                        <td> <a href="{{ url('guardian/wards/' . $student->id) }}" target="_blank" title="View {{ $student->name }}">{{ $student->name }}</a></td>
-                        <td>{{ $student->sex }}</td>
-                        <td>{{ $student->classroom->name or "" }}</td>
-                        <td>{{ $student->house->name or "" }}</td>
+                        <td><?php echo e($student->admin_number); ?></td>
+                        <td> <a href="<?php echo e(url('guardian/wards/' . $student->id)); ?>" target="_blank" title="View <?php echo e($student->name); ?>"><?php echo e($student->name); ?></a></td>
+                        <td><?php echo e($student->sex); ?></td>
+                        <td><?php echo e(isset($student->classroom->name) ? $student->classroom->name : ""); ?></td>
+                        <td><?php echo e(isset($student->house->name) ? $student->house->name : ""); ?></td>
 
                     </tr>
-                   @endforeach
+                   <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                     </tbody>
                     <tfoot>
                     <tr>
@@ -167,12 +165,12 @@
 
 </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
-@section('scripts')
-<script src=" {{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+<?php $__env->startSection('scripts'); ?>
+<script src=" <?php echo e(asset('js/plugins/dataTables/datatables.min.js')); ?>"></script>
 
 <script>
  $(document).ready(function(){
@@ -209,4 +207,5 @@
 
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
