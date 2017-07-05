@@ -122,3 +122,35 @@ function third_term_remark($average, $session_id, $student){
 function house_master_remark($average){
     return 0;
 }
+
+
+function student_academic_history($student_id, $session_ids = null, $term = null){
+
+    $results = \App\Result::where('student_id', $student_id)->get();
+
+    $session_results = [];
+
+    if(is_null($session_ids) || !is_array($session_ids)){
+        $session_ids = array_unique($results->pluck('session_id')->toArray());
+    }
+
+    $sessions = \App\Session::find($session_ids);
+
+    foreach($sessions as $academic_session){
+
+        if(is_null($term)){
+            $first_term_academic_session_results =  $results->where('session_id', $academic_session->id)->where('term', 'first');
+            $second_term_academic_session_results =  $results->where('session_id', $academic_session->id)->where('term', 'second');
+            $third_term_academic_session_results =  $results->where('session_id', $academic_session->id)->where('term', 'third');
+
+            $session_results[$academic_session->name]  = ["first_term" => $first_term_academic_session_results, "second_term" => $second_term_academic_session_results, "third_term" => $third_term_academic_session_results, 'session_id' => $academic_session->id];
+        }else{
+            $term_academic_session_results =  $results->where('session_id', $academic_session->id)->where('term', $term);
+            $session_results[$academic_session->name]  = [$term => $term_academic_session_results, 'session_id' => $academic_session->id];
+        }
+    }
+
+
+    return $session_results;
+
+}

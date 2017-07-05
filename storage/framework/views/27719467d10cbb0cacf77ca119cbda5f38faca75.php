@@ -240,7 +240,7 @@
                                          <th>CA2</th>
                                          <th>Exam</th>
                                          <th>Total</th>
-                                         <th>Class Highest</th>
+                                         
                                          <th>Grade</th>
                                          <th>Position</th>
                                      </tr>
@@ -285,10 +285,9 @@
                                                 <?php echo e(!is_null($score) ? $score->total() : ''); ?>
 
                                            </td>
-                                           <td class="class-highest">
-                                             <?php echo e(!is_null($score) ? round($score->class_average(), 1) : ''); ?>
-
-                                           </td>
+                                           
+                                             
+                                           
                                            <td class="score-grade">
                                              <?php echo e(!is_null($score) ? $score->grade() : ''); ?>
 
@@ -309,7 +308,7 @@
                                          <th>CA2</th>
                                          <th>Exam</th>
                                          <th>Total</th>
-                                         <th>Class Highest</th>
+                                         
                                          <th>Grade</th>
                                          <th>Position</th>
                                      </tr>

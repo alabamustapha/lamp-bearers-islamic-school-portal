@@ -204,7 +204,7 @@
                     <a href="<?php echo e(url('/guardian/wards')); ?>"><i class="fa fa-group"></i> <span class="nav-label">Wards</span></a>
                 </li>
                 <li class="<?php echo e(isActiveRoute('guardian_payment')); ?>">
-                    <a href="<?php echo e(url('guardian/payments')); ?>"><i class="fa fa-money"></i> <span class="nav-label">Payment History</span></a>
+                    <a href="<?php echo e(url('guardian/payments')); ?>"><i class="fa fa-money"></i> <span class="nav-label">Payments</span></a>
                 </li>
                 <li class="<?php echo e(isActiveRoute('guardian_notifications')); ?>">
                     <a href="<?php echo e(url('guardian/notifications')); ?>"><i class="fa fa-bell"></i> <span class="nav-label">Notifications</span></a>

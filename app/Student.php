@@ -180,7 +180,7 @@ class Student extends Model
             $total_score += $result->first_ca + $result->second_ca + $result->exam;
         }
 
-        return $total_subject == 0 ? 'no subject' :(double)($total_score / $total_subject);
+        return $total_subject == 0 ? 'N/A' : round((double)($total_score / $total_subject), 0) . '%';
 
     }
 

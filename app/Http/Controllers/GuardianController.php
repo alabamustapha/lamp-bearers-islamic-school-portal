@@ -109,7 +109,32 @@ class GuardianController extends Controller
 
     public function showWards(){
         $guardian = Guardian::with('students')->findOrFail(Auth::user()->guardian->id);
-        return view('guardian.wards')->with('guardian', $guardian);
+
+
+        $total_outstanding_payments = 0;
+
+        $session = session_on();
+        $term = term_on();
+        if($session  && $term ){
+            foreach($guardian->active_students as $student){
+
+                if(!has_term_payment($student, $session->id, $term)) {
+
+                    if ($term == 'first') {
+                        $total_outstanding_payments += $student->classroom->first_term_charges;
+                    } elseif ($term == 'second') {
+                        $total_outstanding_payments += $student->classroom->second_term_charges;
+                    } elseif ($term == 'third') {
+                        $total_outstanding_payments += $student->classroom->third_term_charges;
+                    }
+                }
+            }
+        }
+
+        $total_debts = SchoolFeePayment::where('guardian_id', $guardian->id)->where('status', 'debt')->sum('balance');
+
+
+        return view('guardian.wards')->with('guardian', $guardian)->with('total_outstanding_payments', $total_outstanding_payments)->with('total_debts', $total_debts);
     }
 
     public function showWard($student_id){
@@ -117,7 +142,11 @@ class GuardianController extends Controller
 
         $student = Student::with('results', 'classroom')->findOrFail($student_id);
 
-        return view('guardian.ward')->with('student', $student)->with('guardian', $guardian);
+        $academic_history = student_academic_history($student_id, null, null);
+
+        //dd($academic_history);
+
+        return view('guardian.ward')->with('student', $student)->with('guardian', $guardian)->with('academic_history', $academic_history);
     }
 
     public function showResult(Request $request, $student_id){

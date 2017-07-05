@@ -202,7 +202,7 @@
                     <a href="{{ url('/guardian/wards') }}"><i class="fa fa-group"></i> <span class="nav-label">Wards</span></a>
                 </li>
                 <li class="{{ isActiveRoute('guardian_payment') }}">
-                    <a href="{{ url('guardian/payments') }}"><i class="fa fa-money"></i> <span class="nav-label">Payment History</span></a>
+                    <a href="{{ url('guardian/payments') }}"><i class="fa fa-money"></i> <span class="nav-label">Payments</span></a>
                 </li>
                 <li class="{{ isActiveRoute('guardian_notifications') }}">
                     <a href="{{ url('guardian/notifications') }}"><i class="fa fa-bell"></i> <span class="nav-label">Notifications</span></a>

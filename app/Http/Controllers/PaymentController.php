@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\SchoolFeePayment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Paystack;
 
@@ -52,20 +53,26 @@ class PaymentController extends Controller
         $school_fee_payment->session_id = $paymentDetails['data']['metadata']['custom_fields'][4]['value'];
         $school_fee_payment->classroom_id = $paymentDetails['data']['metadata']['custom_fields'][5]['value'];
         $school_fee_payment->amount = $paymentDetails['data']['metadata']['custom_fields'][6]['value'];
-        $school_fee_payment->transaction_date = '';
 
-        $school_fee_payment->balance = 1;
+        $school_fee_payment->balance = 0;
+
+        $trans_date = trim(str_replace(['T', 'Z'], ' ', $paymentDetails['data']['transaction_date']));
+
+        $school_fee_payment->transaction_date = Carbon::createFromFormat('Y-m-d H:i:s.u', $trans_date);
 
         $school_fee_payment->reference = $paymentDetails['data']['reference'];
 
         $school_fee_payment->status = 'payed';
 
 
+        if(SchoolFeePayment::where('reference', '<>', null)->where('reference', $school_fee_payment->reference)->first()){
+            return redirect('guardian/payments')->with('message', "Record already exist");
+        }else{
+            $school_fee_payment->save();
 
+            return redirect('guardian/payments')->with('message', "Payment successful");
+        }
 
-
-
-        dd($school_fee_payment);
 
         dd($paymentDetails);
     }

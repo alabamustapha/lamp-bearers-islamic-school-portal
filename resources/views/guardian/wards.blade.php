@@ -78,11 +78,21 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-primary pull-right"></span>
-                    <h5>Outstanding Payments</h5>
+                    <h5>Outstanding Payments <span class="text-right text-danger">(Debts)</span></h5>
                 </div>
                 <div class="ibox-content">
 
-                <h1 class="no-margins text-center"> #406,42</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="no-margins text-left text-secondary"> {{ '#' . number_format($total_outstanding_payments) }}</h1>
+                        {{--<span class="text-info">Current</span>--}}
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="no-margins text-left text-danger"> {{ '#' . number_format($total_debts) }}</h1>
+                        {{--<span class="text-danger">Debts</span>--}}
+                    </div>
+
+                </div>
 
                 </div>
             </div>
@@ -150,7 +160,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Graduated Wards({{$guardian->students()->whereNotIn('status',  ['active', 'promoting', 'promoted', 'repeating', 'repeated', 'graduating'] )->count() }})</h5>
+                <h5>Graduated Wards({{$guardian->students()->where('status', 'graduated')->count() }})</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -173,7 +183,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($guardian->students()->where('status', '=', 'active')->get() as $student)
+                    @foreach($guardian->students()->where('status', 'graduated')->get() as $student)
 
                     <tr class="gradeA">
                         <td>{{ $student->admin_number }}</td>

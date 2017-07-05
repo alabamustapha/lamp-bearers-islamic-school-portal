@@ -84,7 +84,7 @@
                 }
           }else{
             if($(".toast-error").length == 0){
-                    toastr.options = {"timeOut": "7000"};
+                    toastr.options = {"timeOut": "7000", "progressBar": true};
                     toastr.error('no connection');
                 }
           }

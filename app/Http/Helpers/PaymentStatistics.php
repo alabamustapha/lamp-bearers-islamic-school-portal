@@ -68,7 +68,7 @@ function has_term_payment($student, $session_id, $term){
     $payment = \App\SchoolFeePayment::where('student_id', '=', $student->id)
                                 ->where('session_id', '=', $session_id)
                                 ->where('term', '=', $term)
-                                ->where('status', '=', 'pay')->first();
+                                ->where('status', '=', 'payed')->first();
 
     if($payment){
         return true;

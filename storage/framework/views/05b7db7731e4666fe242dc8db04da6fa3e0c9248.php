@@ -30,59 +30,34 @@
 <?php echo $__env->make('layouts.partials.student.profile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 
+<div class="row m-t-sm">
+    <div class="col-lg-6">
 
-    
-    
-    
-        
-            
-                
-                
-                
-                    
-                
-                
-            
-        
-      
-    
-    
+       <table class="table table-bordered table-stripped">
+        <thead>
+            <th>Session</th>
+            <th>First Term</th>
+            <th>Second Term</th>
+            <th>Third Term</th>
+            <th>Analytics</th>
+        </thead>
+        <tbody>
+            <?php $__currentLoopData = $academic_history; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $session_name => $session_results): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                <tr>
+                    <td><?php echo e($session_name); ?></td>
+                    <td><?php echo e($student->term_percentage($session_results['first_term'])); ?></td>
+                    <td><?php echo e($student->term_percentage($session_results['second_term'])); ?></td>
+                    <td><?php echo e($student->term_percentage($session_results['third_term'])); ?></td>
+                    <td>View Analytics</td>
+                </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+        </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
 
-    
-    
-    
-        
-            
-                
-                
-                
-                    
-                
-                
-            
-        
-      
-    
-    
-
-    
-    
-    
-        
-            
-                
-                
-                
-                    
-                
-                
-            
-        
-      
-    
-    
-
-
+    </div>
+</div>
 
 </div>
 

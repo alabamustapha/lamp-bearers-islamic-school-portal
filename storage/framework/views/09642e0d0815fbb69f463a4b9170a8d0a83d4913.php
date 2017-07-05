@@ -76,11 +76,21 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-primary pull-right"></span>
-                    <h5>Outstanding Payments</h5>
+                    <h5>Outstanding Payments <span class="text-right text-danger">(Debts)</span></h5>
                 </div>
                 <div class="ibox-content">
 
-                <h1 class="no-margins text-center"> #406,42</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="no-margins text-left text-secondary"> <?php echo e('#' . number_format($total_outstanding_payments)); ?></h1>
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="no-margins text-left text-danger"> <?php echo e('#' . number_format($total_debts)); ?></h1>
+                        
+                    </div>
+
+                </div>
 
                 </div>
             </div>
@@ -148,7 +158,7 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Graduated Wards(<?php echo e($guardian->students()->whereNotIn('status',  ['active', 'promoting', 'promoted', 'repeating', 'repeated', 'graduating'] )->count()); ?>)</h5>
+                <h5>Graduated Wards(<?php echo e($guardian->students()->where('status', 'graduated')->count()); ?>)</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -171,7 +181,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $__currentLoopData = $guardian->students()->where('status', '=', 'active')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                    <?php $__currentLoopData = $guardian->students()->where('status', 'graduated')->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
 
                     <tr class="gradeA">
                         <td><?php echo e($student->admin_number); ?></td>
