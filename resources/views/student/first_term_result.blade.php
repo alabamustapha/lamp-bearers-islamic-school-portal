@@ -31,9 +31,10 @@
                                 <td>
                                     No in class: <strong> {{ $results->first()->classroom_students_count() }} </strong>
                                 </td>
-                                <td>
-                                    Position: <strong> {{ $student->first_term_position($results->first()->session_id) }} </strong>
-                                </td>
+                                {{-- commnet out position--}}
+                                {{--<td>--}}
+                                    {{--Position: <strong> {{ $student->first_term_position($results->first()->session_id) }} </strong>--}}
+                                {{--</td>--}}
                             </tr>
 
                             </tbody>

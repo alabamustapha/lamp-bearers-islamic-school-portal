@@ -18,7 +18,7 @@ class StoreStudentSubjectScore extends FormRequest
         $session = Session::where('status', '=', 'active')->first();
 
 
-        if(isset($session) && !is_null($session) && $request->term == $session->term() ){
+        if(isset($session) && !is_null($session) && ($request->term == $session->term() || $request->term = 'first')){ //to allow first term result. remove later
               return true;
         }
 

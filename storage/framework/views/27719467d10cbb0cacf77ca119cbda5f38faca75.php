@@ -103,6 +103,114 @@
 
  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
+     <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Update students First term result</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none">
+                    <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover subjects-score-dataTables" >
+                            <thead>
+                                <tr>
+                                    <th>Admin Number</th>
+                                    <th>Name</th>
+                                    <th>Sex</th>
+                                    <th>CA1</th>
+                                    <th>CA2</th>
+                                    <th>Exam</th>
+                                    <th>Total</th>
+                                    <th>Class Highest</th>
+                                    <th>Grade</th>
+                                    <th>Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
+                                <tr class="gradeX">
+                                    <td><?php echo e($student->admin_number); ?></td>
+                                    <td><a href="#" title="Alaba profile" target="_blank"><?php echo e($student->name); ?></a></td>
+                                    <td><?php echo e($student->sex); ?></td>
+
+                                    <?php $score = $student->student_subject_session_term_result($subject->subject->id, $session->id, 'first') ?>
+
+                                      <form method="POST" action="<?php echo e(url('teacher/classrooms/'. $classroom->id .'/subjects/' . $subject->id . '/students/' .$student->id. '/results/create')); ?>">
+
+                                          <input type="hidden" name="student_id" value="<?php echo e($student->id); ?>">
+                                          <input type="hidden" name="classroom_id" value="<?php echo e($classroom->id); ?>">
+                                          <input type="hidden" name="subject_id" value="<?php echo e($subject->subject->id); ?>">
+                                          <input type="hidden" name="teacher_id" value="<?php echo e($teacher->id); ?>">
+                                          <input type="hidden" name="session_id" value="<?php echo e($session->id); ?>">
+                                          <input type="hidden" name="term" value="first">
+
+                                          <td style="width: 13%;">
+
+                                              <div class="input-group">
+                                                  <input type="number" name="first_ca" class="form-control first_ca" value="<?php echo e(!is_null($score) ? $score->first_ca : ''); ?>" max="20" min="0">
+                                                  
+                                              </div>
+                                          </td>
+                                          <td style="width: 13%;">
+
+                                              <div class="input-group">
+                                                  <input type="number" name="second_ca" class="form-control second_ca" value="<?php echo e(!is_null($score) ? $score->second_ca : ''); ?>" max="20" min="0">
+                                                  
+                                              </div>
+                                          </td>
+                                          <td style="width: 13%;">
+                                              <div class="input-group">
+                                                  <input type="number" name="exam" class="form-control exam" value="<?php echo e(!is_null($score) ? $score->exam : ''); ?>" max="60" min="0">
+                                              </div>
+                                          </td>
+                                      </form>
+                                      <td class="total-score">
+                                           <?php echo e(!is_null($score) ? $score->total() : ''); ?>
+
+                                      </td>
+                                      <td class="class-highest">
+                                          <?php echo e(!is_null($score) ? $score->class_highest_mark() : ''); ?>
+
+                                        </td>
+                                      <td class="score-grade">
+                                        <?php echo e(!is_null($score) ? $score->grade() : ''); ?>
+
+                                      </td>
+                                      <td class="score-position">
+                                        <?php echo e(!is_null($score) ? $score->position() : ''); ?>
+
+                                      </td>
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Admin Number</th>
+                                    <th>Name</th>
+                                    <th>Sex</th>
+                                    <th>CA1</th>
+                                    <th>CA2</th>
+                                    <th>Exam</th>
+                                    <th>Total</th>
+                                    <th>Class Highest</th>
+                                    <th>Grade</th>
+                                    <th>Position</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php if(isset($session) && !is_null($session) && $session->term() == 'first'): ?>
      <div class="row">

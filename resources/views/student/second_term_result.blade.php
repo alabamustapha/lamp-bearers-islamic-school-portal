@@ -32,9 +32,10 @@
                                   <td>
                                       No in class: <strong> {{ $results->first()->classroom_students_count() }} </strong>
                                   </td>
-                                  <td>
-                                      Position: <strong> {{ $student->second_term_position($results->first()->session_id) }} </strong>
-                                  </td>
+                                  {{--comment out position--}}
+                                  {{--<td>--}}
+                                      {{--Position: <strong> {{ $student->second_term_position($results->first()->session_id) }} </strong>--}}
+                                  {{--</td>--}}
                               </tr>
 
                               </tbody>
@@ -298,7 +299,7 @@
             </tr>
             <tr>
                 <td>Next Term Begin: <strong><em>24th, April 2017</em></strong></td>
-                <td>Next Term Fee: {{ $student->classroom->second_term_charges ? 'N' . number_format($student->classroom->second_term_charges) : '' }}</td>
+                <td>Next Term Fee: {{  'N' . number_format($student->next_term_charges('second')) }}</td>
             </tr>
         </table>
 

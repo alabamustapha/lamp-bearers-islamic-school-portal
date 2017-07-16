@@ -363,8 +363,8 @@
                                         <td>{{ $student->admin_number }}</td>
                                         <td><a class="" href="{{ url('teacher/classrooms/' .  $classroom->id  . '/students/' . $student->id ) }}" title="{{ 'View ' . $student->name . ' profile' }}">{{ $student->name }}</a></td>
                                         <td>{{ $student->sex }}</td>
-                                        <td>{{ $student->house->name }}</td>
-                                        <td>{{ $student->guardian->name }}</td>
+                                        <td>{{ $student->house->name or 'N/A' }}</td>
+                                        <td>{{ $student->guardian->name or 'N/A'}}</td>
 
                                     </tr>
                                    @endforeach
@@ -424,8 +424,8 @@
                                         <td>{{ $student->admin_number }}</td>
                                         <td><a class="" href="{{ url('teacher/classrooms/' .  $classroom->id  . '/students/' . $student->id ) }}" title="{{ 'View ' . $student->name . ' profile' }}">{{ $student->name }}</a></td>
                                         <td>{{ $student->sex }}</td>
-                                        <td>{{ $student->house->name }}</td>
-                                        <td>{{ $student->guardian->name }}</td>
+                                        <td>{{ $student->house->name or 'N/A'}}</td>
+                                        <td>{{ $student->guardian->name or 'N/A'}}</td>
 
                                     </tr>
                                    @endforeach

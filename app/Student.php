@@ -153,11 +153,17 @@ class Student extends Model
 
     public function third_term_position($session_id = null){
 
+
         if($session_id === null){
             $session_id = Session::where('status', '=', 'active')->firstOrFail()->pluck('id');
         }
 
+
         $percentages = classroom_percentages($this->third_term_results($session_id)->first()->classroom_id, $session_id, 'third');
+
+
+
+
 
         $third_term_results = $this->third_term_results($session_id);
 
@@ -180,7 +186,7 @@ class Student extends Model
             $total_score += $result->first_ca + $result->second_ca + $result->exam;
         }
 
-        return $total_subject == 0 ? 'N/A' : round((double)($total_score / $total_subject), 0) . '%';
+        return $total_subject == 0 ? 'N/A' : round((double)($total_score / $total_subject), 0);
 
     }
 
@@ -193,7 +199,30 @@ class Student extends Model
             $total_score += $result->first_term_total() + $result->second_term_total() +  $result->total();
         }
 
-        return $total_subject == 0 ? 'no subject' :(double)($total_score / ($total_subject * 3));
+        return $total_subject == 0 ? 'no subject' : (double)($total_score / ($total_subject * 3));
+    }
+
+    public function next_term_charges($term){
+
+        $session = Session::where('status', 'active')->first();
+
+        if(isset($session) && !is_null($session)){
+            if($session->term() == 'first' && $term == 'first'){
+                return $this->classroom()->second_term_charges;
+            }elseif($session->term() == 'second' && $term == 'second'){
+                return $this->classroom()->third_term_charges;
+            }elseif($session->term() == 'third' && $term == 'third'){
+                if($this->status == 'promoting' || $this->status == 'repeating' || $this->status == 'repeated' || $this->status == 'promoted'){
+                    return $this->classroom->first_term_charges;
+                }else{
+                    return 0;
+                }
+            }else{
+                return null;
+            }
+
+        }
+
     }
 
 

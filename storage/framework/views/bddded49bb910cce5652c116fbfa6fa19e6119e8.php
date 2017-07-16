@@ -374,8 +374,8 @@
                                         <td><?php echo e($student->admin_number); ?></td>
                                         <td><a class="" href="<?php echo e(url('teacher/classrooms/' .  $classroom->id  . '/students/' . $student->id )); ?>" title="<?php echo e('View ' . $student->name . ' profile'); ?>"><?php echo e($student->name); ?></a></td>
                                         <td><?php echo e($student->sex); ?></td>
-                                        <td><?php echo e($student->house->name); ?></td>
-                                        <td><?php echo e($student->guardian->name); ?></td>
+                                        <td><?php echo e(isset($student->house->name) ? $student->house->name : 'N/A'); ?></td>
+                                        <td><?php echo e(isset($student->guardian->name) ? $student->guardian->name : 'N/A'); ?></td>
 
                                     </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
@@ -435,8 +435,8 @@
                                         <td><?php echo e($student->admin_number); ?></td>
                                         <td><a class="" href="<?php echo e(url('teacher/classrooms/' .  $classroom->id  . '/students/' . $student->id )); ?>" title="<?php echo e('View ' . $student->name . ' profile'); ?>"><?php echo e($student->name); ?></a></td>
                                         <td><?php echo e($student->sex); ?></td>
-                                        <td><?php echo e($student->house->name); ?></td>
-                                        <td><?php echo e($student->guardian->name); ?></td>
+                                        <td><?php echo e(isset($student->house->name) ? $student->house->name : 'N/A'); ?></td>
+                                        <td><?php echo e(isset($student->guardian->name) ? $student->guardian->name : 'N/A'); ?></td>
 
                                     </tr>
                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>

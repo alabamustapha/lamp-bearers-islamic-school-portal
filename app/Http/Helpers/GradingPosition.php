@@ -26,8 +26,11 @@ function classroom_percentages($classroom_id, $session_id, $term){
 
     if($term == 'third'){
         foreach($students as $student){
-            $percentages[] = $student->third_term_percentage($student->results()->where('session_id', '=', $session_id)->where('term', '=', $term)->get());
+            $percentages[] = $student->term_percentage($student->results()->where('session_id', '=', $session_id)->where('term', '=', $term)->get());
         }
+//        foreach($students as $student){
+//            $percentages[] = $student->third_term_percentage($student->results()->where('session_id', '=', $session_id)->where('term', '=', $term)->get());
+//        }
     }else{
         foreach($students as $student){
             $percentages[] = $student->term_percentage($student->results()->where('session_id', '=', $session_id)->where('term', '=', $term)->get());

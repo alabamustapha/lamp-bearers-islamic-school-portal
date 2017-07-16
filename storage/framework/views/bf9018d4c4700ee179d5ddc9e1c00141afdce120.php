@@ -30,7 +30,7 @@
                                 Academic year: <strong> <?php echo e($results->first()->session->name); ?> </strong>
                             </td>
                             <td>
-                                Position: <strong> <?php echo e($student->third_term_position($results->first()->session_id)); ?> </strong>
+                                
                             </td>
                             <td>
                               <strong>Term</strong> <?php echo e(ucfirst($results->first()->term)); ?>
@@ -126,10 +126,9 @@
              <tr>
                 <td></td>
                 <td>Session avg</td>
-                <td><?php echo e(round(
-                        ($student->term_percentage($student->first_term_results($results->first()->session_id)) +
+                <td><?php echo e($student->term_percentage($student->first_term_results($results->first()->session_id)) +
                         $student->term_percentage($student->second_term_results($results->first()->session_id)) +
-                        $student->term_percentage($results))/3, 2)); ?></td>
+                        $student->term_percentage($results)); ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -144,48 +143,145 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('result-footer'); ?>
-<table class="table table-bordered small">
+
+
+<div class="row">
+    <div class="col-xs-3">
+            <table class="table table-bordered small result-table">
+                <thead>
+                    <th>Pratical Skills</th>
+                    <th>Rating</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Handwriting</td>
+                        <td><?php echo e(isset($psychomotor->handwriting) ? $psychomotor->handwriting : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Drawing &amp; Painting</td>
+                        <td><?php echo e(isset($psychomotor->drawing_painting) ? $psychomotor->drawing_painting : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Games &amp; Sports</td>
+                        <td><?php echo e(isset($psychomotor->games_sports) ? $psychomotor->games_sports : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Computer Appreciation</td>
+                        <td><?php echo e(isset($psychomotor->computer_appreciation) ? $psychomotor->computer_appreciation : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Recitation Skills</td>
+                        <td><?php echo e(isset($psychomotor->recitation_skills) ? $psychomotor->recitation_skills : ''); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div class="col-xs-3">
+            <table class="table table-bordered small result-table">
+                <thead>
+                    <th>Character &amp; Development</th>
+                    <th>Rating</th>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Punctuality</td>
+                        <td><?php echo e(isset($psychomotor->punctuality) ? $psychomotor->punctuality : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Neatness</td>
+                        <td><?php echo e(isset($psychomotor->neatness) ? $psychomotor->neatness : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Politeness</td>
+                        <td><?php echo e(isset($psychomotor->politeness) ? $psychomotor->politeness : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Cooperation with others</td>
+                        <td><?php echo e(isset($psychomotor->cooperation) ? $psychomotor->cooperation : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Leadership</td>
+                        <td><?php echo e(isset($psychomotor->leadership) ? $psychomotor->leadership : ''); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div class="col-xs-3">
+            <table class="table table-bordered small result-table">
+                <thead>
+                    <th>Pratical Skills</th>
+                    <th>Rating</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Emotional Stability</td>
+                        <td><?php echo e(isset($psychomotor->emotional_stability) ? $psychomotor->emotional_stability : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Health</td>
+                        <td><?php echo e(isset($psychomotor->health) ? $psychomotor->health : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Attentiveness</td>
+                        <td><?php echo e(isset($psychomotor->attentiveness) ? $psychomotor->attentiveness : ''); ?></td>
+                    </tr>
+                    <tr>
+                        <td>Attitude to work</td>
+                        <td><?php echo e(isset($psychomotor->attitude_to_work) ? $psychomotor->attitude_to_work : ''); ?></td>
+                    </tr>
+
+                </tbody>
+            </table>
+    </div>
+        <div class="col-xs-3">
+
+            <canvas id="barChart" heigth="150px"></canvas>
+
+        </div>
+
+</div>
+<table class="table table-bordered small result-table">
     <tr>
         <td>RATING SCALES</td>
-        <td>70-100 Excellent</td>
-        <td>60-69 Very Good</td>
-        <td>50-59 Good</td>
-        <td>45-49 Fair</td>
-        <td>40-44 Poor</td>
-        <td>00-39 Fail</td>
+        <td>70-100 Excellent ( A )</td>
+        <td>60-69 Very Good ( B )</td>
+        <td>50-59 Good ( C )</td>
+        <td>45-49 Fair ( D )</td>
+        <td>40-44 Poor ( E )</td>
+        <td>00-39 Fail ( F )</td>
     </tr>
 </table>
 
 
-<table class="table small">
+<table class="table small result-table">
             <tr>
-                <td>Grade</td>
-                <td><?php echo e(grade(round($student->term_percentage($results), 0))); ?></td>
+                <td colspan="2">Class Teacher's Comment: <strong><em class="text-right"><?php echo e(isset($comment->body) ? $comment->body : ''); ?></em></strong></td>
+                
+                
             </tr>
             <tr>
-                <td>No. of Student in Class</td>
-                <td><?php echo e($results->first()->classroom_students_count()); ?></td>
-            </tr>
-            <tr>
-                <td>Next Term Begin</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Teacher's Comment</td>
-                <td height="20"><?php echo e(third_term_remark(
-                            round(
-                                ($student->term_percentage($student->first_term_results($results->first()->session_id)) +
-                                 $student->term_percentage($student->second_term_results($results->first()->session_id)) +
-                                 $student->term_percentage($results))/3, 2),
+                <td>Date: <strong><em> <?php echo e(date('m - d - Y')); ?> </em></strong></td>
+                <td>Signature</td>
+                
 
-                            $results->first()->session_id,
-                            $student
-                            )); ?></td>
+            </tr>
+
+            <tr>
+                <td colspan="2">Head Teacher's Comment: <strong><em><?php echo e(head_teacher_remark(round($student->term_percentage($results)))); ?></em></strong></td>
+                
             </tr>
             <tr>
-                <td>Head Teacher's Sign</td>
-                <td><img src="<?php echo e(asset('img/sign.png')); ?>" width="80px" height="35px"></td>
+                <td>Date</td>
+                <td>Signature</td>
+                
+            </tr>
+            <tr>
+                <td>Next Term Begin: <strong><em>24th, April 2017</em></strong></td>
+                <td>Next Term Fee: <?php echo e('N' . number_format($student->next_term_charges('third'))); ?></td>
             </tr>
         </table>
+
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.result', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -33,6 +33,10 @@ class Result extends Model
         return (isset($result) && !is_int($result)) ?  $result->first_ca + $result->second_ca + $result->exam : 'N/A';
     }
 
+    public function session_avg(){
+        return $this->total();
+    }
+
     public function grade(){
         if(isset($this) && !is_null($this)){
 
