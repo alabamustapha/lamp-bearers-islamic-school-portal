@@ -523,7 +523,7 @@ class TeacherController extends Controller
                 $row_number = 2;
 
                 $sheet->row(1, array(
-                    'Admin NO.', 'Name', 'Handwriting', 'Drawing & Painting', 'Games & Sports', 'Computer Appreciation', 'Recitation Skills', 'Punctuality	Neatness', 'Politeness', 'Cooperation',
+                    'Admin NO.', 'Name', 'Handwriting', 'Drawing & Painting', 'Games & Sports', 'Computer Appreciation', 'Recitation Skills', 'Punctuality', 'Neatness', 'Politeness', 'Cooperation',
                     'Leadership',	'Emotional stability',	'Health', 'Attitude To Work',	'Attentiveness'
                 ));
 
