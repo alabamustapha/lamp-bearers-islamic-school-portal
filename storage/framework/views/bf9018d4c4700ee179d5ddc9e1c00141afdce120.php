@@ -5,41 +5,85 @@
 <?php $__env->startSection('result-heading'); ?>
 <img src="<?php echo e(asset('img/banner.jpg')); ?>" class="m-b-xs" alt="profile" width="100%">
   <div class="row m-b-xs m-t-xs">
-                <div class="col-md-12">
+                <div class="col-xs-12">
 
-                    <table class="table small m-b-xs">
-                        <tbody>
-                        <tr>
-                            
+                    <div class="col-xs-5">
+                        <table class="table small m-b-xs result-table">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Name: <strong> <?php echo e($student->name); ?> </strong>
+                                </td>
+                                <td>
+                                    Reg Number: <strong> <?php echo e($student->admin_number); ?> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Class: <strong> <?php echo e($results->first()->classroom->level->name . ' ' . $results->first()->classroom->name); ?> </strong>
+                                </td>
+                                <td>
+                                    House: <strong> <?php echo e($student->house->name); ?> </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    No in class: <strong> <?php echo e($results->first()->classroom_students_count()); ?> </strong>
+                                </td>
+                                
                                 
                                     
                                 
-                            
-                            <td>
-                                Name: <strong> <?php echo e($student->name); ?> </strong>
-                            </td>
-                            <td>
-                                Reg Number: <strong> <?php echo e($student->admin_number); ?> </strong>
-                            </td>
-                            <td>
-                                Class: <strong> <?php echo e($results->first()->classroom->name); ?> </strong>
-                            </td>
-                        </tr>
-                        <tr>
-                           <td>
-                                Academic year: <strong> <?php echo e($results->first()->session->name); ?> </strong>
-                            </td>
-                            <td>
-                                
-                            </td>
-                            <td>
-                              <strong>Term</strong> <?php echo e(ucfirst($results->first()->term)); ?>
+                            </tr>
 
-                            </td>
-                        </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-2">
 
-                        </tbody>
-                    </table>
+                        <div class="profile-image">
+                            <img src="<?php echo e(has_image($student) ? asset('storage/' . $student->image) : asset('storage/images/' . strtolower($student->sex) . '.png')); ?>" class="img-rounded m-b-md" alt="profile">
+                        </div>
+
+                    </div>
+                    <div class="col-xs-5">
+
+                                        <table class="table small m-b-xs result-table">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    Academic year: <strong> <?php echo e($results->first()->session->name); ?> </strong>
+                                                </td>
+                                                <td>
+                                                  <strong>Term</strong> <?php echo e(ucfirst($results->first()->term)); ?>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    No. of days School opened: <strong> <?php echo e(""); ?> </strong>
+                                                </td>
+                                                <td>
+                                                    No. of days present: <strong> <?php echo e(""); ?> </strong>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    % of days present: <strong> <?php echo e(""); ?> </strong>
+                                                </td>
+
+                                                <td>
+                                                    House: <strong> <?php echo e($student->house->name); ?> </strong>
+                                                </td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                    </div>
+
                 </div>
             </div>
 <?php $__env->stopSection(); ?>
@@ -49,16 +93,18 @@
             <thead>
             <tr>
                 <th>Subjects</th>
-                <th>1st term</th>
-                <th>2nd term</th>
-                <th class="text-center">CA1/20</th>
-                <th class="text-center">CA2/20</th>
+                <th class="text-center">1st Term</th>
+                <th class="text-center">2nd Term</th>
+                
+                
                 <th class="text-center">CA Total</th>
                 <th class="text-center">Exam/60</th>
                 <th class="text-center">Grand Total</th>
-                <th>Session Avg</th>
+                <th class="text-center">Session Avg</th>
+                <th class="text-center">Class Highest</th>
+                <th class="text-center">Class Average</th>
+                <th class="text-center">Position</th>
                 <th class="text-center">Grade</th>
-                
                 <th class="text-center">Remarks</th>
             </tr>
             </thead>
@@ -68,12 +114,15 @@
                 <td><?php echo e($result->subject->name); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->first_term_total(), 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->second_term_total(), 2, '0', 0)); ?></td>
-                <td class="text-center"><?php echo e(str_pad($result->first_ca, 2, '0', 0)); ?></td>
-                <td class="text-center"><?php echo e(str_pad($result->second_ca, 2, '0', 0)); ?></td>
+                
+                
                 <td class="text-center"><?php echo e(str_pad($result->first_ca + $result->second_ca, 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->exam, 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->total(), 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(round(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3, 1)); ?></td>
+                <td class="text-center"><?php echo e(str_pad($result->class_highest_mark(), 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e(round($result->class_average(), 1)); ?></td>
+                <td class="text-center"><?php echo e($result->position()); ?></td>
                 <td class="text-center"><?php echo e(grade(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3)); ?></td>
                 
                 <td class="text-center"><?php echo e(remark(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3)); ?></td>

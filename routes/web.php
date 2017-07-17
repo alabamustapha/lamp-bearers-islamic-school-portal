@@ -164,6 +164,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('teacher', 'TeacherController@dashboard')->name('teacher_dashboard');
+    Route::get('teacher/classrooms/{classroom_id}/psychomotor_template', 'TeacherController@getClassroomPsychomotorTemplate');
+    Route::get('teacher/classrooms/{classroom_id}/comment_template', 'TeacherController@getClassroomCommentTemplate');
     Route::get('teacher/classrooms/{classroom_id}', 'TeacherController@showClassroom')->name('teacher_classroom');
 
     Route::put('teacher/classrooms/{classroom_id}/promote', 'TeacherController@promoteAllStudent')->name('teacher_promote_classroom');

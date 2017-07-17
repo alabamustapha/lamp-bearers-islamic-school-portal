@@ -14,13 +14,17 @@ class Result extends Model
     }
 
     public function first_term_total(){
+
         $result = Result::where('session_id', '=', $this->session_id)
             ->where('subject_id', '=', $this->subject_id)
             ->where('term', '=', 'first')
             ->where('student_id', '=', $this->student_id)
-            ->where('classroom_id', '=', $this->classroom_id)->firstOrFail();
+            ->where('classroom_id', '=', $this->classroom_id)->first();
 
-        return (isset($result) && !is_int($result)) ?  $result->first_ca + $result->second_ca + $result->exam : 'N/A';
+        if(isset($result) && !is_null($result)){
+            return $result->first_ca + $result->second_ca + $result->exam;
+        }
+        return 0;
     }
 
     public function second_term_total(){
@@ -30,7 +34,11 @@ class Result extends Model
             ->where('student_id', '=', $this->student_id)
             ->where('classroom_id', '=', $this->classroom_id)->firstOrFail();
 
-        return (isset($result) && !is_int($result)) ?  $result->first_ca + $result->second_ca + $result->exam : 'N/A';
+        if(isset($result) && !is_null($result)){
+            return $result->first_ca + $result->second_ca + $result->exam;
+        }
+        return 0;
+
     }
 
     public function session_avg(){

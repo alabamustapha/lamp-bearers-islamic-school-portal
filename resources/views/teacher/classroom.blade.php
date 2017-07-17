@@ -62,30 +62,36 @@
                                              @endif
 
                                             <div class="row">
-                                                <div class="col-md-12">
 
-
-                                                    <div class="row">
-
-                                                    <div class="col-lg-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label" for="comments_psychomotor">Select file</label>
-                                                            <input type="file" name="comments_physchomotor" id="comments_psychomotor" class="form-control" required>
-                                                        </div>
-                                                     </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label class="control-label">File Type </label>
-                                                                <select class="form-control" name="type" required>
-                                                                    <option></option>
-                                                                    <option value="comments"  {{ old('type') == 'comments' ? 'selected' : '' }}>Comments</option>
-                                                                    <option value="psychomotors" {{ old('type') == 'psychomotor' ? 'selected' : '' }}>Psychomotors</option>
-                                                                    <option value="attendance" {{ old('type') == 'attendance' ? 'selected' : '' }}>Attendance</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="comments_psychomotor">Select file</label>
+                                                        <input type="file" name="comments_physchomotor" id="comments_psychomotor" class="form-control" required>
+                                                    </div>
+                                                 </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label">File Type </label>
+                                                        <select class="form-control" name="type" required>
+                                                            <option></option>
+                                                            <option value="comments"  {{ old('type') == 'comments' ? 'selected' : '' }}>Comments</option>
+                                                            <option value="psychomotors" {{ old('type') == 'psychomotor' ? 'selected' : '' }}>Psychomotors</option>
+                                                            <option value="attendance" {{ old('type') == 'attendance' ? 'selected' : '' }}>Attendance</option>
+                                                        </select>
                                                     </div>
                                                 </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-lg-6">
+                                                    <a class="btn btn-primary btn-block" href="{{ url("teacher/classrooms/" . $classroom->id . "/psychomotor_template") }}" target="_blank">Get Psychomotor template <span class="glyphicon glyphicon-download"></span></a>
+                                                 </div>
+                                                <div class="col-lg-6">
+                                                    <a class="btn btn-primary btn-block" href=" {{ url("teacher/classrooms/" . $classroom->id . "/comment_template") }} " target="_blank">Get Comment template <span class="glyphicon glyphicon-download"></span></a>
+                                                </div>
+
                                             </div>
 
                                             </div>

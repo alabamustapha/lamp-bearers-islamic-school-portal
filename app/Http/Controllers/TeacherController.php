@@ -508,7 +508,67 @@ class TeacherController extends Controller
             }
         }
 
-
         return back()->with('message', $comments_count . ' Comments added, ' . $updates_count . ' Comments updated ,' . $errors_count . ' Errors encountered');
+    }
+
+    public function getClassroomPsychomotorTemplate(Request $request, $classroom_id){
+
+        $classroom = Classroom::with('students')->find($classroom_id)->first();
+
+
+        \Excel::create($classroom->name . " Psychomotor", function($excel) use ($classroom){
+
+            $excel->sheet('Psychomotor', function($sheet) use ($classroom) {
+
+                $row_number = 2;
+
+                $sheet->row(1, array(
+                    'Admin NO.', 'Name', 'Handwriting', 'Drawing & Painting', 'Games & Sports', 'Computer Appreciation', 'Recitation Skills', 'Punctuality	Neatness', 'Politeness', 'Cooperation',
+                    'Leadership',	'Emotional stability',	'Health', 'Attitude To Work',	'Attentiveness'
+                ));
+
+                foreach($classroom->students as $student){
+                    if($student->status == 'active') {
+                        $sheet->row($row_number++, array(
+                            $student->admin_number
+                        ));
+                    }
+                }
+
+
+
+            });
+
+        })->download("xlsx");
+    }
+
+    public function getClassroomCommentTemplate(Request $request, $classroom_id){
+
+        $classroom = Classroom::with('students')->find($classroom_id)->first();
+
+
+        \Excel::create($classroom->name . " Comments", function($excel) use ($classroom){
+
+            $excel->sheet('Comments', function($sheet) use ($classroom) {
+
+                $row_number = 2;
+
+                $sheet->row(1, array(
+                    'Admin NO.', 'Name', 'Comment'
+                ));
+
+                foreach($classroom->students as $student){
+                    if($student->status == 'active') {
+                        $sheet->row($row_number++, array(
+                            $student->admin_number
+                        ));
+                    }
+                }
+
+
+
+            });
+
+        })->download("xlsx");
     }
 }
