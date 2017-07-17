@@ -513,7 +513,7 @@ class TeacherController extends Controller
 
     public function getClassroomPsychomotorTemplate(Request $request, $classroom_id){
 
-        $classroom = Classroom::with('students')->find($classroom_id)->first();
+        $classroom = Classroom::with('students')->where('id', '=', $classroom_id)->first();
 
 
         \Excel::create($classroom->name . " Psychomotor", function($excel) use ($classroom){
@@ -530,7 +530,7 @@ class TeacherController extends Controller
                 foreach($classroom->students as $student){
                     if($student->status == 'active') {
                         $sheet->row($row_number++, array(
-                            $student->admin_number
+                            $student->admin_number, $student->name
                         ));
                     }
                 }
@@ -544,7 +544,8 @@ class TeacherController extends Controller
 
     public function getClassroomCommentTemplate(Request $request, $classroom_id){
 
-        $classroom = Classroom::with('students')->find($classroom_id)->first();
+        $classroom = Classroom::with('students')->where('id', '=', $classroom_id)->first();
+
 
 
         \Excel::create($classroom->name . " Comments", function($excel) use ($classroom){
@@ -560,7 +561,7 @@ class TeacherController extends Controller
                 foreach($classroom->students as $student){
                     if($student->status == 'active') {
                         $sheet->row($row_number++, array(
-                            $student->admin_number
+                            $student->admin_number, $student->name
                         ));
                     }
                 }
