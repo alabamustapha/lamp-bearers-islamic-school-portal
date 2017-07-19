@@ -326,6 +326,7 @@
                                              <th>Total</th>
                                              <th>Grade</th>
                                              <th>Position</th>
+                                             <th>Action</th>
                                          </tr>
                                          </thead>
                                          <tbody>
@@ -360,6 +361,7 @@
                                                            
                                                        </div>
                                                    </td>
+
                                                </form>
                                                <td class="total-score">
                                                     <?php echo e(!is_null($result) ? $result->total() : ''); ?>
@@ -373,6 +375,14 @@
                                                  <?php echo e(!is_null($result) ? $result->position() : ''); ?>
 
                                                </td>
+                                               <td>
+                                                <form method="post" action="<?php echo e(url('results/'. $result->id .'/delete')); ?>">
+                                                <?php echo e(csrf_field()); ?>
+
+                                                <input type="hidden" name="result_id" value="<?php echo e($result->id); ?>">
+                                                <button type="submit" class="btn btn-danger" onclick="confirm('Are you sure you want to delete?');">Delete</button>
+                                                </form>
+                                               </td>
                                          </tr>
                                          <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
                                          </tbody>
@@ -385,6 +395,7 @@
                                              <th>Total</th>
                                              <th>Grade</th>
                                              <th>Position</th>
+                                             <th>Action</th>
                                          </tr>
                                          </tfoot>
                                      </table>

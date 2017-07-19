@@ -63,7 +63,7 @@
 
                                             <tr>
                                                 <td>
-                                                    No. of days School opened: <strong> {{ "" }} </strong>
+                                                    No. of days School opened: <strong> {{ "108" }} </strong>
                                                 </td>
                                                 <td>
                                                     No. of days present: <strong> {{ "" }} </strong>
@@ -174,22 +174,22 @@
                 <td></td>
                 <td></td>
             </tr>
-             <tr>
-                <td></td>
-                <td>Session avg</td>
-                <td>{{  $student->term_percentage($student->first_term_results($results->first()->session_id)) +
-                        $student->term_percentage($student->second_term_results($results->first()->session_id)) +
-                        $student->term_percentage($results)
-                   }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+             {{--<tr>--}}
+                {{--<td></td>--}}
+                {{--<td>Session avg</td>--}}
+                {{--<td>{{  $student->term_percentage($student->first_term_results($results->first()->session_id)) +--}}
+                        {{--$student->term_percentage($student->second_term_results($results->first()->session_id)) +--}}
+                        {{--$student->term_percentage($results)--}}
+                   {{--}}</td>--}}
+                {{--<td></td>--}}
+                {{--<td></td>--}}
+                {{--<td></td>--}}
+                {{--<td></td>--}}
+                {{--<td></td>--}}
+                {{--<td></td>--}}
+                {{--<td></td>--}}
+                {{--<td></td>--}}
+            {{--</tr>--}}
             </tbody>
         </table>
 @endsection
@@ -329,7 +329,7 @@
                 {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
             </tr>
             <tr>
-                <td>Next Term Begin: <strong><em>24th, April 2017</em></strong></td>
+                <td>Next Term Begin: <strong><em>11th, September 2017</em></strong></td>
                 <td>Next Term Fee: {{  'N' . number_format($student->next_term_charges('third')) }}</td>
             </tr>
         </table>

@@ -76,6 +76,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('admin', 'AdminController@dashboard')->name('admin_dashboard');
 
+        Route::post('results/{id}/delete', 'AdminController@deleteResult');
+
         Route::get('admin/sessions', 'SessionController@index')->name('sessions');
         Route::post('admin/sessions/create', 'SessionController@store')->name('create_sessions');
 

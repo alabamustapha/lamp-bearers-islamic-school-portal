@@ -321,6 +321,7 @@
                                              <th>Total</th>
                                              <th>Grade</th>
                                              <th>Position</th>
+                                             <th>Action</th>
                                          </tr>
                                          </thead>
                                          <tbody>
@@ -355,6 +356,7 @@
                                                            {{--<span class="input-group-addon"><i>/60</i></span>--}}
                                                        </div>
                                                    </td>
+
                                                </form>
                                                <td class="total-score">
                                                     {{ !is_null($result) ? $result->total() : '' }}
@@ -364,6 +366,13 @@
                                                </td>
                                                <td class="score-position">
                                                  {{ !is_null($result) ? $result->position() : '' }}
+                                               </td>
+                                               <td>
+                                                <form method="post" action="{{ url('results/'. $result->id .'/delete') }}">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="result_id" value="{{ $result->id }}">
+                                                <button type="submit" class="btn btn-danger" onclick="confirm('Are you sure you want to delete?');">Delete</button>
+                                                </form>
                                                </td>
                                          </tr>
                                          @endforeach
@@ -377,6 +386,7 @@
                                              <th>Total</th>
                                              <th>Grade</th>
                                              <th>Position</th>
+                                             <th>Action</th>
                                          </tr>
                                          </tfoot>
                                      </table>

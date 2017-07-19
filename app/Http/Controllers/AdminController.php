@@ -50,6 +50,16 @@ class AdminController extends Controller
             ->with('total_female_teachers', $total_female_teachers)->with('total_teachers', $total_teachers);
     }
 
+    public function deleteResult(Request $request, $result_id){
+
+        $result = Result::find($result_id);
+        if($result){
+            $result->delete();
+        }
+
+        return back()->with('message', "Record deleted");
+    }
+
 
     public function showStudent($student_id){
 
