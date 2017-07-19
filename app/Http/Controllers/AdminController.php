@@ -94,7 +94,8 @@ class AdminController extends Controller
         $second_term_results = $student->results()->where('session_id', '=', $session_id)->where('term', '=', 'second')->get();
         $third_term_results = $student->results()->where('session_id', '=', $session_id)->where('term', '=', 'third')->get();
 
-        $classroom = $first_term_results->first()->classroom;
+
+        $classroom = $student->results()->where('session_id', '=', $session_id)->first()->classroom;
         $r_session = $first_term_results->first()->session;
 
 
