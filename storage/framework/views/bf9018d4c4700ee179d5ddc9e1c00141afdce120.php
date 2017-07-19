@@ -89,7 +89,7 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('result-body'); ?>
-        <table class="table small table-bordered result-table" >
+        <table class="table table-bordered small result-table" id="subject-scores">
             <thead>
             <tr>
                 <th>Subjects</th>
