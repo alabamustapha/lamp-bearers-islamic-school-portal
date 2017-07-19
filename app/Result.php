@@ -15,6 +15,7 @@ class Result extends Model
 
     public function first_term_total(){
 
+
         $result = Result::where('session_id', '=', $this->session_id)
             ->where('subject_id', '=', $this->subject_id)
             ->where('term', '=', 'first')
@@ -28,11 +29,12 @@ class Result extends Model
     }
 
     public function second_term_total(){
+
         $result = Result::where('session_id', '=', $this->session_id)
             ->where('subject_id', '=', $this->subject_id)
             ->where('term', '=', 'second')
             ->where('student_id', '=', $this->student_id)
-            ->where('classroom_id', '=', $this->classroom_id)->firstOrFail();
+            ->where('classroom_id', '=', $this->classroom_id)->first();
 
         if(isset($result) && !is_null($result)){
             return $result->first_ca + $result->second_ca + $result->exam;
