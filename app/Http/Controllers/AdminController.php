@@ -96,7 +96,7 @@ class AdminController extends Controller
 
 
         $classroom = $student->results()->where('session_id', '=', $session_id)->first()->classroom;
-        $r_session = $first_term_results->first()->session;
+        $r_session = $student->results()->where('session_id', '=', $session_id)->first()->session;
 
 
         return view('admin.view_student_result', compact(['first_term_results', 'second_term_results', 'third_term_results', 'classroom', 'student', 'r_session']));
