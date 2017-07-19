@@ -131,6 +131,7 @@
                                     <th>Total</th>
                                     <th>Grade</th>
                                     <th>Position</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -176,6 +177,13 @@
                                       <td class="score-position">
                                         {{ !is_null($result) ? $result->position() : '' }}
                                       </td>
+                                      <td>
+                                      <form method="post" action="{{ url('results/'. $result->id .'/delete') }}">
+                                      {{ csrf_field() }}
+                                      <input type="hidden" name="result_id" value="{{ $result->id }}">
+                                      <button type="submit" class="btn btn-danger" onclick="confirm('Are you sure you want to delete?');">Delete</button>
+                                      </form>
+                                     </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
@@ -188,6 +196,7 @@
                                     <th>Total</th>
                                     <th>Grade</th>
                                     <th>Position</th>
+                                    <th>Action</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -227,6 +236,7 @@
                                          <th>Total</th>
                                          <th>Grade</th>
                                          <th>Position</th>
+                                         <th>Action</th>
                                      </tr>
                                      </thead>
                                      <tbody>
@@ -271,6 +281,13 @@
                                            <td class="score-position">
                                              {{ !is_null($result) ? $result->position() : '' }}
                                            </td>
+                                           <td>
+                                            <form method="post" action="{{ url('results/'. $result->id .'/delete') }}">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="result_id" value="{{ $result->id }}">
+                                            <button type="submit" class="btn btn-danger" onclick="confirm('Are you sure you want to delete?');">Delete</button>
+                                            </form>
+                                           </td>
                                      </tr>
                                      @endforeach
                                      </tbody>
@@ -283,6 +300,7 @@
                                          <th>Total</th>
                                          <th>Grade</th>
                                          <th>Position</th>
+                                         <th>Action</th>
                                      </tr>
                                      </tfoot>
                                  </table>
