@@ -95,14 +95,15 @@ class ClassroomController extends Controller
                     'previous_classroom_id' => null
                 ]);
 
-//        $students = Student::where('previous_classroom_id', $request->classroom_id)
-//            ->where('status', 'repeating')
-//            ->update([
-//                'classroom_id' => $request->classroom_id,
-//                'status' => 'active',
-//                'previous_classroom_id' => null
-//            ]);
+        $students = Student::where('previous_classroom_id', $request->classroom_id)->where('classroom_id', $request->classroom_id)
+            ->where('status', 'repeating')
+            ->update([
+                'classroom_id' => $request->classroom_id,
+                'status' => 'active',
+                'previous_classroom_id' => null
+            ]);
 
+        //dd($students);
         return back()->with('message', "Promotion / Repeating declined successfully");
     }
 
