@@ -143,6 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('admin/classrooms', 'ClassroomController@store')->name('admin_create_classrooms');
         Route::get('admin/classrooms/{classroom_id}', 'ClassroomController@show')->name('admin_view_classroom');
         Route::put('admin/classrooms/{classroom_id}', 'ClassroomController@update')->name('admin_update_classroom');
+        Route::post('admin/classrooms/{classroom_id}/declinePromotion', 'ClassroomController@declinePromotion')->name('admin_decline_promotion');
         Route::delete('admin/classrooms/{classroom_id}/destroy', 'ClassroomController@destroy')->name('admin_delete_classroom');
 
         Route::get('admin/subjects', 'SubjectController@index')->name('admin_subjects');

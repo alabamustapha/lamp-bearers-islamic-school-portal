@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classroom;
 use App\ClassroomSubject;
 use App\Level;
+use App\Student;
 use App\Subject;
 use App\Teacher;
 use Illuminate\Http\Request;
@@ -83,6 +84,26 @@ class ClassroomController extends Controller
         $classroom->save();
 
         return back()->with('message', 'Classroom updated');
+    }
+
+    public function declinePromotion(Request $request, $classroom_id){
+        $students = Student::where('previous_classroom_id', $request->classroom_id)
+                ->where('status', 'promoting')
+                ->update([
+                    'classroom_id' => $request->classroom_id,
+                    'status' => 'active',
+                    'previous_classroom_id' => null
+                ]);
+
+//        $students = Student::where('previous_classroom_id', $request->classroom_id)
+//            ->where('status', 'repeating')
+//            ->update([
+//                'classroom_id' => $request->classroom_id,
+//                'status' => 'active',
+//                'previous_classroom_id' => null
+//            ]);
+
+        return back()->with('message', "Promotion / Repeating declined successfully");
     }
 
 

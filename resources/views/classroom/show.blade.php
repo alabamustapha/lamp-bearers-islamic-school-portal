@@ -121,6 +121,23 @@
 
 <div class="wrapper wrapper-content">
 
+
+@if(isset($session) && !is_null($session) && ($session->term() == 'third' || $session->third_term == 'closed') && $classroom->promoting_and_repeating_students->count() > 0 )
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" action="{{ url("admin/classrooms/" . $classroom->id . "/declinePromotion") }}">
+            {{ csrf_field() }}
+            <input type="hidden" name="classroom_id" value="{{ $classroom->id }}">
+            <button class="btn btn-warning btn-block" type="submit">
+                Decline Promotion and Repeating
+            </button>
+        </form>
+    </div>
+</div>
+
+@endif
+
 @if(isset($session) && !is_null($session) && ($session->term() == 'third' || $session->third_term == 'closed'))
 {{--<div class="row m-b-md">--}}
     {{--<div class="col-lg-6">--}}
@@ -233,17 +250,17 @@
 
 @if(isset($session) && !is_null($session) && ($session->term() == 'third' || $session->third_term == 'closed') && $classroom->promoting_and_repeating_students->count() > 0 )
 
+
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Students promoting or repeating from {{ $classroom->name }}</h5>
+                <h5>Students promoting or repeating from {{ $classroom->name }}
+
+                </h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
-                    </a>
-                    <a class="close-link">
-                        <i class="fa fa-times"></i>
                     </a>
                 </div>
             </div>
