@@ -320,7 +320,7 @@
             </tr>
 
             <tr>
-                <td colspan="2">Head Teacher's Comment: <strong><em>{{ head_teacher_remark(round($student->term_percentage($results))) }} {{ $student->status = "promoting" ? "Promoted to " . $student->classroom->level->name . " ". $student->classroom->name : $student->status = "repeating" ? "Repeated to " . $student->classroom->level->name . " ". $student->classroom->name : "" }}</em></strong></td>
+                <td colspan="2">Head Teacher's Comment: <strong><em>{{ head_teacher_remark(round($student->term_percentage($results))) . ". "}} {{ $student->status == "promoting" ? "Promoted to " . $student->classroom->level->name . " ". $student->classroom->name : " " . $student->status == "repeating" ? "Repeated to " . $student->classroom->level->name . " ". $student->classroom->name : " " }}</em></strong></td>
                 {{--<td height="20" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
             </tr>
             <tr>
