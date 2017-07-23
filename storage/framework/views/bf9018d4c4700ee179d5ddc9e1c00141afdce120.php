@@ -112,20 +112,21 @@
             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
             <tr>
                 <td><?php echo e($result->subject->name); ?></td>
-                <td class="text-center"><?php echo e(str_pad($result->first_term_total(), 2, '0', 0)); ?></td>
-                <td class="text-center"><?php echo e(str_pad($result->second_term_total(), 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e($result->first_term_total() ? str_pad($result->first_term_total(), 2, '0', 0)  : "-"); ?></td>
+                <td class="text-center"><?php echo e($result->second_term_total()? str_pad($result->second_term_total(), 2, '0', 0) : "-"); ?></td>
                 
                 
                 <td class="text-center"><?php echo e(str_pad($result->first_ca + $result->second_ca, 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->exam, 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->total(), 2, '0', 0)); ?></td>
-                <td class="text-center"><?php echo e(round(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3, 1)); ?></td>
+                
+                <td class="text-center"><?php echo e($result->subject_session_avg()); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->class_highest_mark(), 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(round($result->class_average(), 1)); ?></td>
                 <td class="text-center"><?php echo e($result->position()); ?></td>
-                <td class="text-center"><?php echo e(grade(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3)); ?></td>
+                <td class="text-center"><?php echo e(grade($result->subject_session_avg())); ?></td>
                 
-                <td class="text-center"><?php echo e(remark(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3)); ?></td>
+                <td class="text-center"><?php echo e(remark($result->subject_session_avg())); ?></td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
              <tr>

@@ -39,12 +39,33 @@ class Result extends Model
         if(isset($result) && !is_null($result)){
             return $result->first_ca + $result->second_ca + $result->exam;
         }
-        return 0;
+        return null;
 
     }
 
-    public function session_avg(){
-        return $this->total();
+    public function subject_session_avg(){
+        $count = 0;
+        $total = 0;
+        if($this->first_term_total() != null){
+           $count++;
+           $total += $this->first_term_total();
+        }
+
+        if($this->second_term_total() != null){
+            $count++;
+            $total += $this->second_term_total();
+        }
+
+        if($this->total() != null){
+            $count++;
+            $total += $this->total();
+        }
+
+        if($count == 0){
+            $count = 1;
+        }
+
+        return round($total / $count, 1);
     }
 
     public function grade(){

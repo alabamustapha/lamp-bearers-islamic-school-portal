@@ -113,20 +113,21 @@
             @foreach($results as $result)
             <tr>
                 <td>{{ $result->subject->name }}</td>
-                <td class="text-center">{{ str_pad($result->first_term_total(), 2, '0', 0) }}</td>
-                <td class="text-center">{{ str_pad($result->second_term_total(), 2, '0', 0) }}</td>
+                <td class="text-center">{{ $result->first_term_total() ? str_pad($result->first_term_total(), 2, '0', 0)  : "-" }}</td>
+                <td class="text-center">{{ $result->second_term_total()? str_pad($result->second_term_total(), 2, '0', 0) : "-"}}</td>
                 {{--<td class="text-center">{{ str_pad($result->first_ca, 2, '0', 0) }}</td>--}}
                 {{--<td class="text-center">{{ str_pad($result->second_ca, 2, '0', 0) }}</td>--}}
                 <td class="text-center">{{ str_pad($result->first_ca + $result->second_ca, 2, '0', 0)}}</td>
                 <td class="text-center">{{ str_pad($result->exam, 2, '0', 0) }}</td>
                 <td class="text-center">{{ str_pad($result->total(), 2, '0', 0) }}</td>
-                <td class="text-center">{{ round(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3, 1) }}</td>
+                {{--<td class="text-center">{{ round(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3, 1) }}</td>--}}
+                <td class="text-center">{{ $result->subject_session_avg() }}</td>
                 <td class="text-center">{{ str_pad($result->class_highest_mark(), 2, '0', 0) }}</td>
                 <td class="text-center">{{ round($result->class_average(), 1) }}</td>
                 <td class="text-center">{{ $result->position() }}</td>
-                <td class="text-center">{{ grade(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3) }}</td>
+                <td class="text-center">{{ grade($result->subject_session_avg()) }}</td>
                 {{--<td class="text-center">{{ $result->position() }}</td>--}}
-                <td class="text-center">{{ remark(($result->first_term_total() + $result->second_term_total() + $result->total()) / 3) }}</td>
+                <td class="text-center">{{ remark($result->subject_session_avg()) }}</td>
             </tr>
             @endforeach
              <tr>
