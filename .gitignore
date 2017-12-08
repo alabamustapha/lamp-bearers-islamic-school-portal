@@ -22,3 +22,4 @@ storage/*.key
 /storage/app/public/
 /storage/framework/
 *.sql
+/images/
