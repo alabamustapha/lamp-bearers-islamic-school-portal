@@ -91,7 +91,7 @@ class SessionController extends Controller
 
     public function closeThirdTerm(Requests\CloseThirdTerm $request){
 
-        if(removeLicenceKey(get_licence_key())) {
+        
             $session = Session::find($request->session_id);
 
 
@@ -100,7 +100,7 @@ class SessionController extends Controller
             $session->save();
 
             return redirect('admin/sessions')->with('message', 'Third term closed');
-        }
+        
     }
 
     public function closeSession(Requests\CloseSession $request){

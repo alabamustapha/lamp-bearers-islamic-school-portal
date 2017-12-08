@@ -198,10 +198,10 @@
                                            <select class="form-control input-lg" name="status">
                                                <option value="">--select-</option>
                                                <option value="active" {{ $student->status == 'active' ? 'selected' : ''}}>Active</option>
-                                               <option value="active" {{ $student->status == 'left' ? 'selected' : ''}}>Left</option>
-                                               <option value="active" {{ $student->status == 'graduated' ? 'selected' : ''}}>Graduated</option>
-                                               <option value="active" {{ $student->status == 'dismissed' ? 'selected' : ''}}>Dismissed</option>
-                                               <option value="active" {{ $student->status == 'deactivated' ? 'selected' : ''}}>Deactivated</option>
+                                               <option value="left" {{ $student->status == 'left' ? 'selected' : ''}}>Left</option>
+                                               <option value="graduated" {{ $student->status == 'graduated' ? 'selected' : ''}}>Graduated</option>
+                                               <option value="dismissed" {{ $student->status == 'dismissed' ? 'selected' : ''}}>Dismissed</option>
+                                               <option value="deactivated" {{ $student->status == 'deactivated' ? 'selected' : ''}}>Deactivated</option>
                                            </select>
                                        </div>
                                    </div>

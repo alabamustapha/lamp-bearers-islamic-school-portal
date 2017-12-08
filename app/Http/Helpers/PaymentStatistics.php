@@ -19,7 +19,7 @@ function expected_term_payment($session, $term){
             }elseif($term == 'third'){
                 $total += $classroom->third_term_charges * $students_count;
             }else{
-                return  'N/A';
+                return  NULL;
             }
 
         }

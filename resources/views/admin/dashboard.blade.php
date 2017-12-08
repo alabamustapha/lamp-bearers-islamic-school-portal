@@ -57,7 +57,7 @@
                     </div>
                     <div class="ibox-content">
 
-                        <h1 class="text-center">@if(isset($session) && !is_null($session)) {{ 'N' . number_format(expected_term_payment($session, $session->term())) }}@else{{ 'No session' }} @endif</h1>
+                        <h1 class="text-center">@if(isset($session) && !is_null($session->term())) {{ 'N' . number_format(expected_term_payment($session, $session->term())) }}@else{{ 'No session' }} @endif</h1>
                         {{--<div class="pull-left font-bold text-success">{{ '75000' }} <i class="fa fa-check"></i></div>--}}
                         {{--<div class="pull-right font-bold text-success">{{ 100 }} <i>&percnt;</i></div>--}}
                     </div>

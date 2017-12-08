@@ -198,10 +198,10 @@
                                            <select class="form-control input-lg" name="status">
                                                <option value="">--select-</option>
                                                <option value="active" <?php echo e($student->status == 'active' ? 'selected' : ''); ?>>Active</option>
-                                               <option value="active" <?php echo e($student->status == 'left' ? 'selected' : ''); ?>>Left</option>
-                                               <option value="active" <?php echo e($student->status == 'graduated' ? 'selected' : ''); ?>>Graduated</option>
-                                               <option value="active" <?php echo e($student->status == 'dismissed' ? 'selected' : ''); ?>>Dismissed</option>
-                                               <option value="active" <?php echo e($student->status == 'deactivated' ? 'selected' : ''); ?>>Deactivated</option>
+                                               <option value="left" <?php echo e($student->status == 'left' ? 'selected' : ''); ?>>Left</option>
+                                               <option value="graduated" <?php echo e($student->status == 'graduated' ? 'selected' : ''); ?>>Graduated</option>
+                                               <option value="dismissed" <?php echo e($student->status == 'dismissed' ? 'selected' : ''); ?>>Dismissed</option>
+                                               <option value="deactivated" <?php echo e($student->status == 'deactivated' ? 'selected' : ''); ?>>Deactivated</option>
                                            </select>
                                        </div>
                                    </div>
