@@ -62,7 +62,7 @@
 
                                             <tr>
                                                 <td>
-                                                    No. of days School opened: <strong> {{ "" }} </strong>
+                                                    No. of days School opened: <strong> {{ "122" }} </strong>
                                                 </td>
                                                 <td>
                                                     No. of days present: <strong> {{ "" }} </strong>
@@ -89,17 +89,21 @@
 @endsection
 
 @section('result-body')
-        <table class="table table-bordered small result-table">
+       
+@section('result-body')
+        <table class="table table-bordered small result-table"  id="subject-scores">
             <thead>
             <tr>
                 <th>Subjects</th>
-                <th class="text-center">CA1/20</th>
-                <th class="text-center">CA2/20</th>
-                <th class="text-center">CA Total</th>
+                {{--<th class="text-center">CA1/20</th>--}}
+                {{--<th class="text-center">CA2/20</th>--}}
+                <th class="text-center">CAT/40</th>
                 <th class="text-center">Exam/60</th>
                 <th class="text-center">Grand Total</th>
+                <th class="text-center">Class Highest</th>
+                <th class="text-center">Class Average</th>
+                <th class="text-center">Position</th>
                 <th class="text-center">Grade</th>
-                {{--<th class="text-center">Position</th>--}}
                 <th class="text-center">Remarks</th>
             </tr>
             </thead>
@@ -107,17 +111,19 @@
             @foreach($results as $result)
             <tr>
                 <td>{{ $result->subject->name }}</td>
-                <td class="text-center">{{ str_pad($result->first_ca, 2, '0', 0) }}</td>
-                <td class="text-center">{{ str_pad($result->second_ca, 2, '0', 0) }}</td>
+                {{--<td class="text-center">{{ str_pad($result->first_ca, 2, '0', 0) }}</td>--}}
+                {{--<td class="text-center">{{ str_pad($result->second_ca, 2, '0', 0) }}</td>--}}
                 <td class="text-center">{{ str_pad($result->first_ca + $result->second_ca, 2, '0', 0)}}</td>
                 <td class="text-center">{{ str_pad($result->exam, 2, '0', 0) }}</td>
                 <td class="text-center">{{ str_pad($result->total(), 2, '0', 0) }}</td>
+                <td class="text-center">{{ str_pad($result->class_highest_mark(), 2, '0', 0) }}</td>
+                <td class="text-center">{{ round($result->class_average(), 1) }}</td>
+                <td class="text-center">{{ $result->position() }}</td>
                 <td class="text-center">{{ $result->grade() }}</td>
-                {{--<td class="text-center">{{ $result->position() }}</td>--}}
                 <td class="text-center">{{ $result->remark() }}</td>
             </tr>
             @endforeach
-            <tr>
+          <tr>
                 <td></td>
                 <td>Total Mark</td>
                 <td>{{
@@ -154,11 +160,10 @@
             </tr>
             </tbody>
         </table>
-
-
 @endsection
 
 @section('result-footer')
+
 <div class="row">
     <div class="col-xs-3">
             <table class="table table-bordered small result-table">
@@ -248,11 +253,11 @@
                 </tbody>
             </table>
     </div>
-    <div class="col-xs-3">
+        <div class="col-xs-3">
 
-        <canvas id="barChart" heigth="150px"></canvas>
+            <canvas id="barChart" heigth="150px"></canvas>
 
-    </div>
+        </div>
 
 </div>
 <table class="table table-bordered small result-table">
@@ -269,31 +274,31 @@
 
 
 <table class="table small result-table">
-    <tr>
-        <td colspan="2">Class Teacher's Comment: <strong><em class="text-right">{{ $comment->body or '' }}</em></strong></td>
-        {{--<td height="10" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
-        {{--<td height="20" style="text-align: left;" colspan="3">{{ class_teacher_remark(round($student->term_percentage($results))) }}</td>--}}
-    </tr>
-    <tr>
-        <td>Date: <strong><em> {{ date('m - d - Y') }} </em></strong></td>
-        <td>Signature</td>
-        {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
+            <tr>
+                <td colspan="2">Class Teacher's Comment: <strong><em class="text-right">{{ $comment->body or '' }}</em></strong></td>
+                {{--<td height="10" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
+                {{--<td height="20" style="text-align: left;" colspan="3">{{ class_teacher_remark(round($student->term_percentage($results))) }}</td>--}}
+            </tr>
+            <tr>
+                <td>Date: <strong><em> {{ date('m - d - Y') }} </em></strong></td>
+                <td>Signature</td>
+                {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
 
-    </tr>
+            </tr>
 
-    <tr>
-        <td colspan="2">Head Teacher's Comment: <strong><em>{{ head_teacher_remark(round($student->term_percentage($results))) }}</em></strong></td>
-        {{--<td height="20" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
-    </tr>
-    <tr>
-        <td>Date</td>
-        <td>Signature</td>
-        {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
-    </tr>
-    <tr>
-        <td>Next Term Begin</td>
-        <td>Next Term Fee</td>
-    </tr>
-</table>
+            <tr>
+                <td colspan="2">Head Teacher's Comment: <strong><em>{{ head_teacher_remark(round($student->term_percentage($results))) }}</em></strong></td>
+                {{--<td height="20" style="text-align: left;" colspan="3">{{ "" }}</td>--}}
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>Signature</td>
+                {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
+            </tr>
+            <tr>
+                <td>Next Term Begin: <strong><em>8th, January 2018</em></strong></td>
+                <td>Next Term Fee: {{  'N' . number_format($student->next_term_charges('first')) }}</td>
+            </tr>
+        </table>
 
 @endsection

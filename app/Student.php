@@ -208,9 +208,9 @@ class Student extends Model
 
         if(isset($session) && !is_null($session)){
             if($session->term() == 'first' && $term == 'first'){
-                return $this->classroom()->second_term_charges;
+                return $this->classroom->second_term_charges;
             }elseif($session->term() == 'second' && $term == 'second'){
-                return $this->classroom()->third_term_charges;
+                return $this->classroom->third_term_charges;
             }elseif($session->term() == 'third' && $term == 'third'){
                 if($this->status == 'promoting' || $this->status == 'repeating' || $this->status == 'repeated' || $this->status == 'promoted'){
                     return $this->classroom->first_term_charges;

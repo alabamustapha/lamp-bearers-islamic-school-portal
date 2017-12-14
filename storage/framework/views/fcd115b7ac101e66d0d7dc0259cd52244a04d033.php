@@ -61,7 +61,7 @@
 
                                             <tr>
                                                 <td>
-                                                    No. of days School opened: <strong> <?php echo e(""); ?> </strong>
+                                                    No. of days School opened: <strong> <?php echo e("122"); ?> </strong>
                                                 </td>
                                                 <td>
                                                     No. of days present: <strong> <?php echo e(""); ?> </strong>
@@ -88,17 +88,21 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('result-body'); ?>
-        <table class="table table-bordered small result-table">
+       
+<?php $__env->startSection('result-body'); ?>
+        <table class="table table-bordered small result-table"  id="subject-scores">
             <thead>
             <tr>
                 <th>Subjects</th>
-                <th class="text-center">CA1/20</th>
-                <th class="text-center">CA2/20</th>
-                <th class="text-center">CA Total</th>
+                
+                
+                <th class="text-center">CAT/40</th>
                 <th class="text-center">Exam/60</th>
                 <th class="text-center">Grand Total</th>
+                <th class="text-center">Class Highest</th>
+                <th class="text-center">Class Average</th>
+                <th class="text-center">Position</th>
                 <th class="text-center">Grade</th>
-                
                 <th class="text-center">Remarks</th>
             </tr>
             </thead>
@@ -106,17 +110,19 @@
             <?php $__currentLoopData = $results; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $result): $__env->incrementLoopIndices(); $loop = $__env->getFirstLoop(); ?>
             <tr>
                 <td><?php echo e($result->subject->name); ?></td>
-                <td class="text-center"><?php echo e(str_pad($result->first_ca, 2, '0', 0)); ?></td>
-                <td class="text-center"><?php echo e(str_pad($result->second_ca, 2, '0', 0)); ?></td>
+                
+                
                 <td class="text-center"><?php echo e(str_pad($result->first_ca + $result->second_ca, 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->exam, 2, '0', 0)); ?></td>
                 <td class="text-center"><?php echo e(str_pad($result->total(), 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e(str_pad($result->class_highest_mark(), 2, '0', 0)); ?></td>
+                <td class="text-center"><?php echo e(round($result->class_average(), 1)); ?></td>
+                <td class="text-center"><?php echo e($result->position()); ?></td>
                 <td class="text-center"><?php echo e($result->grade()); ?></td>
-                
                 <td class="text-center"><?php echo e($result->remark()); ?></td>
             </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getFirstLoop(); ?>
-            <tr>
+          <tr>
                 <td></td>
                 <td>Total Mark</td>
                 <td><?php echo e($student->first_term_results($results->first()->session_id)->sum('first_ca') +
@@ -152,11 +158,10 @@
             </tr>
             </tbody>
         </table>
-
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('result-footer'); ?>
+
 <div class="row">
     <div class="col-xs-3">
             <table class="table table-bordered small result-table">
@@ -246,11 +251,11 @@
                 </tbody>
             </table>
     </div>
-    <div class="col-xs-3">
+        <div class="col-xs-3">
 
-        <canvas id="barChart" heigth="150px"></canvas>
+            <canvas id="barChart" heigth="150px"></canvas>
 
-    </div>
+        </div>
 
 </div>
 <table class="table table-bordered small result-table">
@@ -267,32 +272,33 @@
 
 
 <table class="table small result-table">
-    <tr>
-        <td colspan="2">Class Teacher's Comment: <strong><em class="text-right"><?php echo e(isset($comment->body) ? $comment->body : ''); ?></em></strong></td>
-        
-        
-    </tr>
-    <tr>
-        <td>Date: <strong><em> <?php echo e(date('m - d - Y')); ?> </em></strong></td>
-        <td>Signature</td>
-        
+            <tr>
+                <td colspan="2">Class Teacher's Comment: <strong><em class="text-right"><?php echo e(isset($comment->body) ? $comment->body : ''); ?></em></strong></td>
+                
+                
+            </tr>
+            <tr>
+                <td>Date: <strong><em> <?php echo e(date('m - d - Y')); ?> </em></strong></td>
+                <td>Signature</td>
+                
 
-    </tr>
+            </tr>
 
-    <tr>
-        <td colspan="2">Head Teacher's Comment: <strong><em><?php echo e(head_teacher_remark(round($student->term_percentage($results)))); ?></em></strong></td>
-        
-    </tr>
-    <tr>
-        <td>Date</td>
-        <td>Signature</td>
-        
-    </tr>
-    <tr>
-        <td>Next Term Begin</td>
-        <td>Next Term Fee</td>
-    </tr>
-</table>
+            <tr>
+                <td colspan="2">Head Teacher's Comment: <strong><em><?php echo e(head_teacher_remark(round($student->term_percentage($results)))); ?></em></strong></td>
+                
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>Signature</td>
+                
+            </tr>
+            <tr>
+                <td>Next Term Begin: <strong><em>8th, January 2018</em></strong></td>
+                <td>Next Term Fee: <?php echo e('N' . number_format($student->next_term_charges('first'))); ?></td>
+            </tr>
+        </table>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.result', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
