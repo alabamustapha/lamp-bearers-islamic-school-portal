@@ -344,17 +344,19 @@
                             autoclose: true
                         });
 
-                       var $country = $('#country_id');
+                       var country = $('#country_id');
 
-                       var $country_id = $country.val();
+                       var country_id = country.val();
 
-                       if($country_id !== ""){
+                        
+
+                       if(country_id !== ""){
                         $.ajax({
                              type: "POST",
-                             url: window.location.protocol + "//" + window.location.host + "/get_list_of_states/" + $country_id,
+                             url: window.location.protocol + "//" + window.location.host + "/get_list_of_states/" + country_id,
                              success: function(data){
-                                var $state = $('#state');
-                                $state.empty();
+                                var state = $('#state');
+                                state.empty();
                                 $('<option value="">--select-state--</option>').appendTo('#state');
                                 for(var i = 0; i < data.length; i++){
                                   $('<option value="' + data[i].id + '">' + data[i].name + '</option>').appendTo('#state');
@@ -363,16 +365,16 @@
                            });
                        }
 
-                       $country.change(function(){
+                       country.change(function(){
                        //$('#country').val([]);
-                       var $country_id = $(this).val();
-
+                       
+                       var country_id = $(this).val();
                        $.ajax({
                              type: "POST",
-                             url: window.location.protocol + "//" + window.location.host + "/get_list_of_states/" + $country_id,
+                             url: window.location.protocol + "//" + window.location.host + "/get_list_of_states/" + country_id,
                              success: function(data){
-                                var $state = $('#state');
-                                $state.empty();
+                                var state = $('#state');
+                                state.empty();
                                 $('<option value="">--select-state--</option>').appendTo('#state');
                                 for(var i = 0; i < data.length; i++){
                                   $('<option value="' + data[i].id + '">' + data[i].name + '</option>').appendTo('#state');
@@ -381,18 +383,18 @@
                            });
                       });
 
-                      var $state = $('#state');
+                      var state = $('#state');
 
-                         $state.change(function(){
+                         state.change(function(){
                          //$('#country').val([]);
-                         var $state_id = $(this).val();
+                         var state_id = $(this).val();
 
                          $.ajax({
                                type: "POST",
-                               url: window.location.protocol + "//" + window.location.host + "/get_list_of_lgas/" + $state_id,
+                               url: window.location.protocol + "//" + window.location.host + "/get_list_of_lgas/" + state_id,
                                success: function(data){
-                                  var $lga = $('#lga');
-                                  $lga.empty();
+                                  var lga = $('#lga');
+                                  lga.empty();
                                   $('<option value="">--select-lga--</option>').appendTo('#lga');
                                   for(var i = 0; i < data.length; i++){
                                     $('<option value="' + data[i].id + '">' + data[i].name + '</option>').appendTo('#lga');

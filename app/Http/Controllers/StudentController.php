@@ -67,7 +67,7 @@ class StudentController extends Controller
 
         $user->save();
 
-        event(new Registered($user));
+        // event(new Registered($user));
 
         $user->addRole(Role::where('name', '=', 'student')->first()->id);
 

@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('get_list_of_states/{country_id}', function($country_id){
 
        return \App\Country::with('states')->findOrFail($country_id)->states;
-    });
+    })->name('get_states');
 
     Route::post('get_list_of_lgas/{state_id}', function($state_id){
 

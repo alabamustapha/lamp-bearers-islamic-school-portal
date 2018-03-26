@@ -83,7 +83,7 @@ class TeacherController extends Controller
 
         //dd($request->file('image')->isValid());
 
-        event(new TeacherRegistration($teacher, $user));
+        // event(new TeacherRegistration($teacher, $user));
 
 
         if ($request->hasFile('image')) {
