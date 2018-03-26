@@ -26,7 +26,7 @@ class StoreNewSubject extends FormRequest
         return [
         'name' => 'required|string|min:3|unique:subjects,name',
         'category' => 'required|string|min:3',
-        'short_name' => 'required|string|min:3',
+        'short_name' => 'required|string|min:2',
         ];
     }
 }
