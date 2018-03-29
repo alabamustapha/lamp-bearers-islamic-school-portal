@@ -516,7 +516,7 @@ class TeacherController extends Controller
         $classroom = Classroom::with('students')->where('id', '=', $classroom_id)->first();
 
 
-        \Excel::create($classroom->name . " Psychomotor", function($excel) use ($classroom){
+        \Excel::create($classroom->name . "Psychomotor", function($excel) use ($classroom){
 
             $excel->sheet('Psychomotor', function($sheet) use ($classroom) {
 
@@ -548,7 +548,7 @@ class TeacherController extends Controller
 
 
 
-        \Excel::create($classroom->name . " Comments", function($excel) use ($classroom){
+        \Excel::create($classroom->name . "Comments", function($excel) use ($classroom){
 
             $excel->sheet('Comments', function($sheet) use ($classroom) {
 
