@@ -539,7 +539,7 @@ class TeacherController extends Controller
 
             });
 
-        })->download("xlsx");
+        })->export("xlsx");
     }
 
     public function getClassroomCommentTemplate(Request $request, $classroom_id){
@@ -570,6 +570,6 @@ class TeacherController extends Controller
 
             });
 
-        })->download("xlsx");
+        })->export("xlsx");
     }
 }
