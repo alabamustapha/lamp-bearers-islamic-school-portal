@@ -298,7 +298,7 @@
                 {{--<td><img src="{{ asset('img/sign.png') }}" height="35px"></td>--}}
             </tr>
             <tr>
-                <td>Next Term Begin: <strong><em>24th, April 2017</em></strong></td>
+                <td>Next Term Begin: <strong><em>23rd, April 2018</em></strong></td>
                 <td>Next Term Fee: {{  'N' . number_format($student->next_term_charges('second')) }}</td>
             </tr>
         </table>
