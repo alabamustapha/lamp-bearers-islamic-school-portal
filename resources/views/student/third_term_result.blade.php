@@ -63,7 +63,7 @@
 
                                             <tr>
                                                 <td>
-                                                    No. of days School opened: <strong> {{ "108" }} </strong>
+                                                    No. of days School opened: <strong> {{ "116" }} </strong>
                                                 </td>
                                                 <td>
                                                     No. of days present: <strong> {{ "" }} </strong>
